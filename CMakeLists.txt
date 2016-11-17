@@ -10,18 +10,4 @@ cmake_minimum_required (VERSION 2.6)
 project (Steam)
 enable_language (Fortran)
 
-##
-# Common packages
-##
-SET(SUBDIRS_COMMON
-  SteamPolynomials
-  SteamTesting
-)
-
-SET(SUBDIRS
-  ${SUBDIRS_COMMON}
-)
-
-FOREACH(dir ${SUBDIRS})
- ADD_SUBDIRECTORY(${dir})
-ENDFOREACH(dir ${SUBDIRS})
+add_subdirectory (SteamTesting)
