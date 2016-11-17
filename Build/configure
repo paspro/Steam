@@ -1,5 +1,0 @@
-#!/bin/bash
-#
-# Configuration script for Steam
-#
-cmake -G"CodeBlocks - Unix Makefiles" --build"." ../
