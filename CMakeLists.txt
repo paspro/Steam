@@ -7,6 +7,9 @@
 # \copyright Panos Asproulis (2014-2016). All Rights Reserved.
 #
 cmake_minimum_required (VERSION 2.6)
+project (Steam)
+enable_language (Fortran)
+
 ##
 # Common packages
 ##
