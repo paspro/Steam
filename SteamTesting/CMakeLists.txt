@@ -43,8 +43,8 @@ set (SOURCES
 
 # build program
 add_executable (steam-testing ${SOURCES} )
-include_directories (${CMAKE_BINARY_DIR}/../SteamPolynomials/)
-target_link_libraries (steam-testing ${CMAKE_BINARY_DIR}/../SteamPolynomials/libSteamPolynomials.so)
+include_directories (${CMAKE_BINARY_DIR}/SteamPolynomials)
+target_link_libraries (steam-testing ${CMAKE_BINARY_DIR}/SteamPolynomials/libSteamPolynomials.so)
 
 # install executable
 install (TARGETS steam-testing RUNTIME DESTINATION "bin") 
