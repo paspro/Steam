@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Steam" />
+		<Option makefile_is_custom="1" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="CMake Files/;CMake Files/SteamPolynomials/;CMake Files/SteamTesting/;" />
+		<Build>
+			<Target title="all">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 all' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 install/strip' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 install/local' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 edit_cache' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 rebuild_cache' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 list_install_components' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 install' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="SteamPolynomials">
+				<Option output="/home/panos/Development/Steam/Build/SteamPolynomials/libSteamPolynomials.so" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="/home/panos/Development/Steam/Build/SteamPolynomials" />
+				<Option object_output="./" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="/usr/include/c++/6" />
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6" />
+					<Add directory="/usr/include/c++/6/backward" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include" />
+					<Add directory="/usr/local/include" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed" />
+					<Add directory="/usr/include/x86_64-linux-gnu" />
+					<Add directory="/usr/include" />
+				</Compiler>
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 SteamPolynomials' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="SteamPolynomials/fast">
+				<Option output="/home/panos/Development/Steam/Build/SteamPolynomials/libSteamPolynomials.so" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="/home/panos/Development/Steam/Build/SteamPolynomials" />
+				<Option object_output="./" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="/usr/include/c++/6" />
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6" />
+					<Add directory="/usr/include/c++/6/backward" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include" />
+					<Add directory="/usr/local/include" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed" />
+					<Add directory="/usr/include/x86_64-linux-gnu" />
+					<Add directory="/usr/include" />
+				</Compiler>
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 SteamPolynomials/fast' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamPolynomials/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="steam-testing">
+				<Option output="/home/panos/Development/Steam/Build/SteamTesting/steam-testing" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="/home/panos/Development/Steam/Build/SteamTesting" />
+				<Option object_output="./" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="/home/panos/Development/Steam/Build/SteamPolynomials" />
+					<Add directory="/usr/include/c++/6" />
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6" />
+					<Add directory="/usr/include/c++/6/backward" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include" />
+					<Add directory="/usr/local/include" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed" />
+					<Add directory="/usr/include/x86_64-linux-gnu" />
+					<Add directory="/usr/include" />
+				</Compiler>
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 steam-testing' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="steam-testing/fast">
+				<Option output="/home/panos/Development/Steam/Build/SteamTesting/steam-testing" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="/home/panos/Development/Steam/Build/SteamTesting" />
+				<Option object_output="./" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="/home/panos/Development/Steam/Build/SteamPolynomials" />
+					<Add directory="/usr/include/c++/6" />
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6" />
+					<Add directory="/usr/include/c++/6/backward" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include" />
+					<Add directory="/usr/local/include" />
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed" />
+					<Add directory="/usr/include/x86_64-linux-gnu" />
+					<Add directory="/usr/include" />
+				</Compiler>
+				<MakeCommands>
+					<Build command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 steam-testing/fast' />
+					<CompileFile command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 &quot;$file&quot;' />
+					<Clean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 clean' />
+					<DistClean command='/usr/bin/make -j4 -f &quot;/home/panos/Development/Steam/Build/SteamTesting/Makefile&quot;  VERBOSE=1 clean' />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="../CMakeLists.txt">
+			<Option virtualFolder="CMake Files/" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/CMakeLists.txt">
+			<Option virtualFolder="CMake Files/SteamPolynomials/" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/CMakeLists.txt">
+			<Option virtualFolder="CMake Files/SteamPolynomials/" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamBoundaries.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamConductivity.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamConstants.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamNumerics.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamPrecision.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamRegion1.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamRegion2.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamRegion3.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamRegion4.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamRegion5.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamRegions.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamStates.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamTables.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamUnits.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamVersion.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamPolynomials/src/SteamViscosity.f">
+			<Option target="SteamPolynomials" />
+		</Unit>
+		<Unit filename="../SteamTesting/CMakeLists.txt">
+			<Option virtualFolder="CMake Files/SteamTesting/" />
+		</Unit>
+		<Unit filename="../SteamTesting/CMakeLists.txt">
+			<Option virtualFolder="CMake Files/SteamTesting/" />
+		</Unit>
+		<Unit filename="../SteamTesting/src/SteamTablesTesting.f">
+			<Option target="steam-testing" />
+		</Unit>
+		<Unit filename="../SteamTesting/src/SteamTesting.f">
+			<Option target="steam-testing" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
