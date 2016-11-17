@@ -4,6 +4,9 @@ cmake_minimum_required (VERSION 2.6)
 project (SteamTesting)
 enable_language (Fortran)
 
+# add the SteamPolynomials project
+add_subdirectory ("../SteamPolynomials" ${CMAKE_BINARY_DIR})
+
 # make sure that the default is a RELEASE
 if (NOT CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE RELEASE CACHE STRING
@@ -37,7 +40,7 @@ else (Fortran_COMPILER_NAME MATCHES "gfortran.*")
 endif (Fortran_COMPILER_NAME MATCHES "gfortran.*")
 
 # Fortran source files
-set (SOURCES 
+set (SOURCES
 "src/SteamTablesTesting.f"
 "src/SteamTesting.f")
 
@@ -47,4 +50,4 @@ include_directories (${CMAKE_BINARY_DIR}/SteamPolynomials)
 target_link_libraries (steam-testing ${CMAKE_BINARY_DIR}/SteamPolynomials/libSteamPolynomials.so)
 
 # install executable
-install (TARGETS steam-testing RUNTIME DESTINATION "bin") 
+install (TARGETS steam-testing RUNTIME DESTINATION "bin")
