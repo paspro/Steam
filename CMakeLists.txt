@@ -1,7 +1,7 @@
 #
 # \file CMakeLists.txt
 #
-# \brief     Steam Library
+# \brief     Steam Library Builder
 # \author    Dr. Panos Asproulis (panos.asproulis@renuda.com)
 # \date      2016
 # \copyright Panos Asproulis (2014-2016). All Rights Reserved.
