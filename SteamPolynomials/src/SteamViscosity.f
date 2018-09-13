@@ -4,7 +4,7 @@
 !
 !> @details
 !> This module implements the polynomials which compute the viscocity
-!> of steam according to the release on the IAPWS Formulation 2008 for 
+!> of steam according to the release on the IAPWS Formulation 2008 for
 !> the Viscosity of Ordinary Water Substance (September 2008)
 !
 !> @author Panos Asproulis
@@ -40,12 +40,12 @@ CONTAINS
         !> Constant coefficients "I"
         !
         INTEGER(KIND=INT_HIGH), PARAMETER, DIMENSION(1:4) :: I = &
-            (/ 0, 1, 2, 3 /)
+                                                             (/0, 1, 2, 3/)
         !
         !> Constant coefficients "H"
         !
         REAL(KIND=REAL_HIGH), PARAMETER, DIMENSION(1:4) :: H = &
-            (/ 1.67752, 2.20462, 0.6366564, -0.241605 /)
+                                                           (/1.67752, 2.20462, 0.6366564, -0.241605/)
         !
         ! Arguments
         !
@@ -54,12 +54,12 @@ CONTAINS
         !
         ! Compute the viscosity in the dilute-gas limit.
         !
-        mu0 = 100.0D+00/(sqrt(tau)*SUM(H*(tau**I)))
+        mu0 = 100.0D+00 / (sqrt(tau) * SUM(H * (tau**I)))
 
     END FUNCTION mu0
     !-------------------------------------------------------------------------
     !
-    !> This function computes the contribution to viscosity due to finite 
+    !> This function computes the contribution to viscosity due to finite
     !> density.
     !
     !> @param[in] del Dimensionless density parameter
@@ -74,7 +74,7 @@ CONTAINS
         !
         !> Constant coefficients "H"
         !
-        REAL(KIND=REAL_HIGH), DIMENSION(1:6,1:7) :: H
+        REAL(KIND=REAL_HIGH), DIMENSION(1:6, 1:7) :: H
         !
         ! Arguments
         !
@@ -87,24 +87,24 @@ CONTAINS
         REAL(KIND=REAL_HIGH) :: sum, tau1
         !
         ! Compute the contribution to viscosity due to finite density
-        !        
-        sum  = zero
-        H(1,:) = (/ 5.20094D-01, 2.22531D-01, -2.81378D-01, 1.61913D-01, -3.25372D-02, 0.0D+00, 0.0D+00  /)
-        H(2,:) = (/ 8.50895D-02, 9.99115D-01, -9.06851D-01, 2.57399D-01, 0.0D+00, 0.0D+00, 0.0D+00       /)
-        H(3,:) = (/ -1.08374D+00, 1.88797D+00, -7.72479D-01, 0.0D+00, 0.0D+00, 0.0D+00, 0.0D+00          /)
-        H(4,:) = (/ -2.89555D-01, 1.26613D+00, -4.89837D-01, 0.0D+00, 6.98452D-02, 0.0D+00, -4.35673D-03 /)
-        H(5,:) = (/ 0.0D+00, 0.0D+00, -2.57040D-01, 0.0D+00, 0.0D+00, 8.72102D-03, 0.0D+00               /)
-        H(6,:) = (/ 0.0D+00, 1.20573D-01, 0.0D+00, 0.0D+00, 0.0D+00, 0.0D+00, -5.93264D-04               /)
+        !
+        sum = zero
+        H(1, :) = (/5.20094D-01, 2.22531D-01, -2.81378D-01, 1.61913D-01, -3.25372D-02, 0.0D+00, 0.0D+00/)
+        H(2, :) = (/8.50895D-02, 9.99115D-01, -9.06851D-01, 2.57399D-01, 0.0D+00, 0.0D+00, 0.0D+00/)
+        H(3, :) = (/-1.08374D+00, 1.88797D+00, -7.72479D-01, 0.0D+00, 0.0D+00, 0.0D+00, 0.0D+00/)
+        H(4, :) = (/-2.89555D-01, 1.26613D+00, -4.89837D-01, 0.0D+00, 6.98452D-02, 0.0D+00, -4.35673D-03/)
+        H(5, :) = (/0.0D+00, 0.0D+00, -2.57040D-01, 0.0D+00, 0.0D+00, 8.72102D-03, 0.0D+00/)
+        H(6, :) = (/0.0D+00, 1.20573D-01, 0.0D+00, 0.0D+00, 0.0D+00, 0.0D+00, -5.93264D-04/)
 
         DO i = 1, 6
-            tau1 = (tau-one)**(i-1)
+            tau1 = (tau - one)**(i - 1)
             DO j = 1, 7
-                IF (H(i,j) == zero) CYCLE
-                sum = sum + H(i,j)*tau1*((del-one)**(j-1))
+                IF (H(i, j) == zero) CYCLE
+                sum = sum + H(i, j) * tau1 * ((del - one)**(j - 1))
             END DO
         END DO
 
-        mu1 = EXP(del*sum)
+        mu1 = EXP(del * sum)
 
     END FUNCTION mu1
     !-------------------------------------------------------------------------
@@ -140,7 +140,7 @@ CONTAINS
         !
         del = density / IAPWS97_RHOCRIT
         tau = IAPWS97_TCRIT / temperature
-        viscosity = VISCOSITY_MUSTAR*mu0(tau)*mu1(del,tau)
+        viscosity = VISCOSITY_MUSTAR * mu0(tau) * mu1(del, tau)
 
     END FUNCTION viscosity
 

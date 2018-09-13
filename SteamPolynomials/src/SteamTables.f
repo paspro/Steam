@@ -61,11 +61,11 @@ CONTAINS
         !
         LOGICAL :: logging
         REAL(KIND=REAL_HIGH), INTENT(IN) :: xmin, xmax, ymin, ymax, dx, dy, error
-        REAL(KIND=REAL_HIGH), DIMENSION(:,:), ALLOCATABLE, INTENT(OUT) :: val
+        REAL(KIND=REAL_HIGH), DIMENSION(:, :), ALLOCATABLE, INTENT(OUT) :: val
         REAL(KIND=REAL_HIGH), DIMENSION(:), ALLOCATABLE, INTENT(OUT) :: x, y
 
         INTERFACE
-            PURE FUNCTION poly(x,y) RESULT(res)
+            PURE FUNCTION poly(x, y) RESULT(res)
                 USE SteamPrecision
                 REAL(KIND=REAL_HIGH), INTENT(IN) :: x, y
                 REAL(KIND=REAL_HIGH) :: res
@@ -75,62 +75,62 @@ CONTAINS
         ! Variables
         !
         REAL(KIND=REAL_HIGH), DIMENSION(1:2) :: xp, yp
-        REAL(KIND=REAL_HIGH), DIMENSION(1:2,1:2) :: up
+        REAL(KIND=REAL_HIGH), DIMENSION(1:2, 1:2) :: up
         LOGICAL :: check_i, check_j, can_remove_line
         LOGICAL, DIMENSION(:), ALLOCATABLE :: i_used, j_used
         REAL(KIND=REAL_HIGH), DIMENSION(:), ALLOCATABLE :: x_fine, y_fine
-        REAL(KIND=REAL_HIGH), DIMENSION(:,:), ALLOCATABLE :: val_fine
+        REAL(KIND=REAL_HIGH), DIMENSION(:, :), ALLOCATABLE :: val_fine
         REAL(KIND=REAL_HIGH) :: xk, yk, error_estimate, prop_real, prop_int
 
         INTEGER(KIND=INT_HIGH) :: i, j, ik, jk, imax, jmax, imax_new, jmax_new, i_p1, j_p1
         INTEGER(KIND=INT_HIGH) :: icheck, jcheck, icheck_p1, icheck_m1, &
-                                  jcheck_p1, jcheck_m1, i_new, j_new,   &
+                                  jcheck_p1, jcheck_m1, i_new, j_new, &
                                   points, points_new, inum, jnum
         !
         ! Compute the number of points to use for the table given the initial dxi, dyi values
         !
-        imax   = CEILING((xmax-xmin)/dx, kind=INT_HIGH) + 1
-        jmax   = CEILING((ymax-ymin)/dy, kind=INT_HIGH) + 1
-        points = imax*jmax
+        imax = CEILING((xmax - xmin) / dx, kind=INT_HIGH) + 1
+        jmax = CEILING((ymax - ymin) / dy, kind=INT_HIGH) + 1
+        points = imax * jmax
 
         IF (logging) THEN
-            WRITE(*,*)
-            WRITE(*,*) "===================================="
-            WRITE(*,*) "Dynamic Table Generation Algorithm"
-            WRITE(*,*) "===================================="
-            WRITE(*,*) "Generating the initial table."
-            WRITE(*,*) "Number of columns       = ", imax
-            WRITE(*,*) "Number of rows          = ", jmax
-            WRITE(*,*) "Total table data points = ", imax*jmax
-            WRITE(*,*) "===================================="
-            WRITE(*,*)
+            WRITE (*, *)
+            WRITE (*, *) "===================================="
+            WRITE (*, *) "Dynamic Table Generation Algorithm"
+            WRITE (*, *) "===================================="
+            WRITE (*, *) "Generating the initial table."
+            WRITE (*, *) "Number of columns       = ", imax
+            WRITE (*, *) "Number of rows          = ", jmax
+            WRITE (*, *) "Total table data points = ", imax * jmax
+            WRITE (*, *) "===================================="
+            WRITE (*, *)
         END IF
         !
         ! Generate the fine table
         !
-        ALLOCATE(x_fine(1:imax), y_fine(1:jmax), val_fine(1:imax, 1:jmax))
-        ALLOCATE(i_used(1:imax), j_used(1:jmax))
+        ALLOCATE (x_fine(1:imax), y_fine(1:jmax), val_fine(1:imax, 1:jmax))
+        ALLOCATE (i_used(1:imax), j_used(1:jmax))
         !
         ! Fill the fine table with values
         !
         i_used = .TRUE.
         j_used = .TRUE.
 
-        !$omp parallel sections
+!$OMP         parallel sections
 
-        !$omp section
-        FORALL (i = 1:imax)
-            x_fine(i) = xmin + real(i-1, kind=REAL_HIGH)*dx
+!$OMP         section
+        FORALL (i=1:imax)
+        x_fine(i) = xmin + real(i - 1, kind=REAL_HIGH) * dx
         END FORALL
 
-        !$omp section
-        FORALL (j = 1:jmax)
-            y_fine(j) = ymin + real(j-1, kind=REAL_HIGH)*dy
+!$OMP         section
+        FORALL (j=1:jmax)
+        y_fine(j) = ymin + real(j - 1, kind=REAL_HIGH) * dy
         END FORALL
-        !$omp end parallel sections
+!$OMP         end parallel sections
 
-        FORALL (i = 1:imax, j = 1:jmax)
-            val_fine(i,j) = poly(x_fine(i), y_fine(j))
+        FORALL (i=1:imax, j=1:jmax)
+        val_fine(i, j) = poly(x_fine(i), y_fine(j))
         END FORALL
         !
         ! Check the initial table to verify that the interpolation
@@ -138,25 +138,25 @@ CONTAINS
         ! interpolation error. If this is not the case then the
         ! optimisation process makes no sense.
         !
-        WRITE (*,*) "Checking the interpolation error for the initial table..."
+        WRITE (*, *) "Checking the interpolation error for the initial table..."
 
-        DO i = 1, imax-1
+        DO i = 1, imax - 1
             xp(1) = x_fine(i)
-            xp(2) = x_fine(i+1)
+            xp(2) = x_fine(i + 1)
 
-            DO j = 1, jmax-1
+            DO j = 1, jmax - 1
                 yp(1) = y_fine(j)
-                yp(2) = y_fine(j+1)
+                yp(2) = y_fine(j + 1)
 
-                up(1,1) = val_fine(i,   j)
-                up(1,2) = val_fine(i,   j+1)
-                up(2,1) = val_fine(i+1, j)
-                up(2,2) = val_fine(i+1, j+1)
+                up(1, 1) = val_fine(i, j)
+                up(1, 2) = val_fine(i, j + 1)
+                up(2, 1) = val_fine(i + 1, j)
+                up(2, 2) = val_fine(i + 1, j + 1)
 
                 DO ik = 0, 2
-                    xk = xp(1) + half*real(ik, kind=8)*dx
+                    xk = xp(1) + half * real(ik, kind=8) * dx
                     DO jk = 0, 2
-                        yk = yp(1) + half*real(jk, kind=8)*dy
+                        yk = yp(1) + half * real(jk, kind=8) * dy
                         !
                         ! Compute the accurate value of the property
                         !
@@ -168,22 +168,22 @@ CONTAINS
                         !
                         ! Estimate the error and check it
                         !
-                        error_estimate = 100.0D+00*ABS(prop_int-prop_real)/ &
-                                                   ABS(prop_real)
+                        error_estimate = 100.0D+00 * ABS(prop_int - prop_real) / &
+                                         ABS(prop_real)
 
                         IF (error_estimate > error) THEN
-                            WRITE (*,*) "Encountered unacceptable error:"
-                            WRITE (*,*) "Error = ", error_estimate
-                            WRITE (*,*) "Location (i,j) = ", i, j
-                            WRITE (*,*) "and (ik,jk)    = ", ik, jk
-                            WRITE (*,*) "Properties have the values:"
-                            WRITE (*,*) "xp = ", xp(1), xp(2)
-                            WRITE (*,*) "yp = ", yp(1), yp(2)
-                            WRITE (*,*) "up = ", up(1,1), up(1,2), up(2,1), up(2,2)
-                            WRITE (*,*) "xk, yk = ", xk, yk
-                            WRITE (*,*) "Polynomial property   = ", prop_real
-                            WRITE (*,*) "Interpolated property = ", prop_int
-                            WRITE (*,*) "Program terminates"
+                            WRITE (*, *) "Encountered unacceptable error:"
+                            WRITE (*, *) "Error = ", error_estimate
+                            WRITE (*, *) "Location (i,j) = ", i, j
+                            WRITE (*, *) "and (ik,jk)    = ", ik, jk
+                            WRITE (*, *) "Properties have the values:"
+                            WRITE (*, *) "xp = ", xp(1), xp(2)
+                            WRITE (*, *) "yp = ", yp(1), yp(2)
+                            WRITE (*, *) "up = ", up(1, 1), up(1, 2), up(2, 1), up(2, 2)
+                            WRITE (*, *) "xk, yk = ", xk, yk
+                            WRITE (*, *) "Polynomial property   = ", prop_real
+                            WRITE (*, *) "Interpolated property = ", prop_int
+                            WRITE (*, *) "Program terminates"
                             STOP
                         END IF
 
@@ -192,21 +192,21 @@ CONTAINS
             END DO
         END DO
 
-        WRITE (*,*) "Interpolation errors are bounded."
+        WRITE (*, *) "Interpolation errors are bounded."
         !
         ! Check the i and j lines alternatively to see
         ! if they can be removed and still have an interpolation
         ! error within the acceptable limit
         !
         IF (logging) THEN
-            WRITE(*,*) "Performing table optimisation..."
+            WRITE (*, *) "Performing table optimisation..."
         END IF
         !
         ! Start with the initial i and j lines that
         ! can be checked for removal
         !
-        icheck  = 2
-        jcheck  = 2
+        icheck = 2
+        jcheck = 2
         check_i = .TRUE.
         check_j = .TRUE.
         !
@@ -221,14 +221,14 @@ CONTAINS
                 ! Find the previous non-deleted i-line
                 !
                 icheck_m1 = icheck - 1
-                DO WHILE (.NOT. i_used(icheck_m1) )
+                DO WHILE (.NOT. i_used(icheck_m1))
                     icheck_m1 = icheck_m1 - 1
                 END DO
                 !
                 ! Find the next non-deleted i-line
                 !
                 icheck_p1 = icheck + 1
-                DO WHILE (.NOT. i_used(icheck_p1) )
+                DO WHILE (.NOT. i_used(icheck_p1))
                     icheck_p1 = icheck_p1 + 1
                 END DO
                 !
@@ -236,7 +236,7 @@ CONTAINS
                 !
                 xp(1) = x_fine(icheck_m1)
                 xp(2) = x_fine(icheck_p1)
-                inum  = (xp(2)-xp(1))/dx
+                inum = (xp(2) - xp(1)) / dx
                 !
                 ! Iterate the j-lines and find pairs of
                 ! non-deleted successive lines
@@ -256,7 +256,7 @@ CONTAINS
                     ! Find the next non-deleted j-line
                     !
                     j_p1 = j + 1
-                    DO WHILE (.NOT. j_used(j_p1) )
+                    DO WHILE (.NOT. j_used(j_p1))
                         j_p1 = j_p1 + 1
                     END DO
                     !
@@ -265,21 +265,21 @@ CONTAINS
                     !
                     yp(1) = y_fine(j)
                     yp(2) = y_fine(j_p1)
-                    jnum  = (yp(2)-yp(1))/dy
+                    jnum = (yp(2) - yp(1)) / dy
 
-                    up(1,1) = val_fine(icheck_m1, j)
-                    up(1,2) = val_fine(icheck_m1, j_p1)
-                    up(2,1) = val_fine(icheck_p1, j)
-                    up(2,2) = val_fine(icheck_p1, j_p1)
+                    up(1, 1) = val_fine(icheck_m1, j)
+                    up(1, 2) = val_fine(icheck_m1, j_p1)
+                    up(2, 1) = val_fine(icheck_p1, j)
+                    up(2, 2) = val_fine(icheck_p1, j_p1)
 
                     DO i = 0, inum
-                        xk = xp(1) + REAL(i, KIND=REAL_HIGH)*dx
+                        xk = xp(1) + REAL(i, KIND=REAL_HIGH) * dx
                         DO j = 0, jnum
-                            yk = yp(1) + REAL(j, KIND=REAL_HIGH)*dy
+                            yk = yp(1) + REAL(j, KIND=REAL_HIGH) * dy
                             !
                             ! Compute the accurate value of the property
                             !
-                            prop_real = poly(xk,yk)
+                            prop_real = poly(xk, yk)
                             !
                             ! Compute the interpolated value of the property
                             !
@@ -287,7 +287,7 @@ CONTAINS
                             !
                             ! Estimate the error and check it
                             !
-                            error_estimate = 100.0D+00*ABS(prop_int-prop_real)/ABS(prop_real)
+                            error_estimate = 100.0D+00 * ABS(prop_int - prop_real) / ABS(prop_real)
 
                             IF (error_estimate > error) THEN
                                 can_remove_line = .FALSE.
@@ -314,14 +314,14 @@ CONTAINS
                 ! Find the previous non-deleted j-line
                 !
                 jcheck_m1 = jcheck - 1
-                DO WHILE (.NOT. j_used(jcheck_m1) )
+                DO WHILE (.NOT. j_used(jcheck_m1))
                     jcheck_m1 = jcheck_m1 - 1
                 END DO
                 !
                 ! Find the next non-deleted j-line
                 !
                 jcheck_p1 = jcheck + 1
-                DO WHILE (.NOT. j_used(jcheck_p1) )
+                DO WHILE (.NOT. j_used(jcheck_p1))
                     jcheck_p1 = jcheck_p1 + 1
                 END DO
                 !
@@ -329,7 +329,7 @@ CONTAINS
                 !
                 yp(1) = y_fine(jcheck_m1)
                 yp(2) = y_fine(jcheck_p1)
-                jnum  = (yp(2)-yp(1))/dy
+                jnum = (yp(2) - yp(1)) / dy
                 !
                 ! Iterate the i-lines and find pairs of
                 ! non-deleted successive lines
@@ -349,7 +349,7 @@ CONTAINS
                     ! Find the next non-deleted i-line
                     !
                     i_p1 = i + 1
-                    DO WHILE (.NOT. i_used(i_p1) )
+                    DO WHILE (.NOT. i_used(i_p1))
                         i_p1 = i_p1 + 1
                     END DO
                     !
@@ -358,21 +358,21 @@ CONTAINS
                     !
                     xp(1) = x_fine(i)
                     xp(2) = x_fine(i_p1)
-                    inum  = (xp(2)-xp(1))/dx
+                    inum = (xp(2) - xp(1)) / dx
 
-                    up(1,1) = val_fine(i,    jcheck_m1)
-                    up(1,2) = val_fine(i,    jcheck_p1)
-                    up(2,1) = val_fine(i_p1, jcheck_m1)
-                    up(2,2) = val_fine(i_p1, jcheck_p1)
+                    up(1, 1) = val_fine(i, jcheck_m1)
+                    up(1, 2) = val_fine(i, jcheck_p1)
+                    up(2, 1) = val_fine(i_p1, jcheck_m1)
+                    up(2, 2) = val_fine(i_p1, jcheck_p1)
 
                     DO i = 0, inum
-                        xk = xp(1) + REAL(i, KIND=REAL_HIGH)*dx
+                        xk = xp(1) + REAL(i, KIND=REAL_HIGH) * dx
                         DO j = 0, jnum
-                            yk = yp(1) + REAL(j, KIND=REAL_HIGH)*dy
+                            yk = yp(1) + REAL(j, KIND=REAL_HIGH) * dy
                             !
                             ! Compute the accurate value of the property
                             !
-                            prop_real = poly(xk,yk)
+                            prop_real = poly(xk, yk)
                             !
                             ! Compute the interpolated value of the property
                             !
@@ -380,7 +380,7 @@ CONTAINS
                             !
                             ! Estimate the error and check it
                             !
-                            error_estimate = 100.0D+00*ABS(prop_int-prop_real)/ABS(prop_real)
+                            error_estimate = 100.0D+00 * ABS(prop_int - prop_real) / ABS(prop_real)
 
                             IF (error_estimate > error) THEN
                                 can_remove_line = .FALSE.
@@ -404,7 +404,7 @@ CONTAINS
             ! that have not been already removed
             !
             check_i = .FALSE.
-            DO i = icheck+1, imax-1
+            DO i = icheck + 1, imax - 1
                 IF (i_used(i)) THEN
                     icheck = i
                     check_i = .TRUE.
@@ -413,7 +413,7 @@ CONTAINS
             END DO
 
             check_j = .FALSE.
-            DO j = jcheck+1, jmax-1
+            DO j = jcheck + 1, jmax - 1
                 IF (j_used(j)) THEN
                     jcheck = j
                     check_j = .TRUE.
@@ -423,37 +423,37 @@ CONTAINS
 
         END DO
 
-        imax_new   = COUNT(i_used)
-        jmax_new   = COUNT(j_used)
-        points_new = imax_new*jmax_new
+        imax_new = COUNT(i_used)
+        jmax_new = COUNT(j_used)
+        points_new = imax_new * jmax_new
 
         IF (logging) THEN
-            WRITE(*,*)
-            WRITE(*,*) "===================================="
-            WRITE(*,*) "Table Optimisation Results"
-            WRITE(*,*) "===================================="
-            WRITE(*,*) "Eliminated ", imax-imax_new, " columns"
-            WRITE(*,*) "Eliminated ", jmax-jmax_new, " rows"
-            WRITE(*,*) "------------------------------------"
-            WRITE(*,*) "Optimised table has columns = ", imax_new
-            WRITE(*,*) "Optimised table has rows    = ", jmax_new
-            WRITE(*,*) "Total table data points     = ", imax_new*jmax_new
-            WRITE(*,*) "Table size reduction        = ", &
-                        100.0D+00*REAL(points-points_new, KIND=REAL_HIGH) / &
-                                  REAL(points, KIND=REAL_HIGH), " %"
-            WRITE(*,*) "Maximum allowed error       = ", error, " %"
-            WRITE(*,*) "===================================="
-            WRITE(*,*)
+            WRITE (*, *)
+            WRITE (*, *) "===================================="
+            WRITE (*, *) "Table Optimisation Results"
+            WRITE (*, *) "===================================="
+            WRITE (*, *) "Eliminated ", imax - imax_new, " columns"
+            WRITE (*, *) "Eliminated ", jmax - jmax_new, " rows"
+            WRITE (*, *) "------------------------------------"
+            WRITE (*, *) "Optimised table has columns = ", imax_new
+            WRITE (*, *) "Optimised table has rows    = ", jmax_new
+            WRITE (*, *) "Total table data points     = ", imax_new * jmax_new
+            WRITE (*, *) "Table size reduction        = ", &
+                100.0D+00 * REAL(points - points_new, KIND=REAL_HIGH) / &
+                REAL(points, KIND=REAL_HIGH), " %"
+            WRITE (*, *) "Maximum allowed error       = ", error, " %"
+            WRITE (*, *) "===================================="
+            WRITE (*, *)
         END IF
         !
         ! Construct the table data
         !
-        ALLOCATE(x(1:imax_new), y(1:jmax_new), val(1:imax_new, 1:jmax_new))
+        ALLOCATE (x(1:imax_new), y(1:jmax_new), val(1:imax_new, 1:jmax_new))
 
         i_new = 0
         DO i = 1, imax
             IF (i_used(i)) THEN
-                i_new    = i_new + 1
+                i_new = i_new + 1
                 x(i_new) = x_fine(i)
             END IF
         END DO
@@ -461,7 +461,7 @@ CONTAINS
         j_new = 0
         DO j = 1, jmax
             IF (j_used(j)) THEN
-                j_new    = j_new + 1
+                j_new = j_new + 1
                 y(j_new) = y_fine(j)
             END IF
         END DO
@@ -474,13 +474,13 @@ CONTAINS
                 DO j = 1, jmax
                     IF (j_used(j)) THEN
                         j_new = j_new + 1
-                        val(i_new,j_new) = val_fine(i,j)
+                        val(i_new, j_new) = val_fine(i, j)
                     END IF
                 END DO
             END IF
         END DO
 
-        DEALLOCATE(x_fine, y_fine, val_fine)
+        DEALLOCATE (x_fine, y_fine, val_fine)
 
     END SUBROUTINE generate_table
 

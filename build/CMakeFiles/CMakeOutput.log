@@ -1,0 +1,676 @@
+The system is: Linux - 4.18.0-1-amd64 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /opt/intel/compilers_and_libraries/linux/bin/intel64/icc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Intel, found in "/home/panos/Development/Steam/build/CMakeFiles/3.12.1/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /opt/intel/compilers_and_libraries/linux/bin/intel64/icpc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is Intel, found in "/home/panos/Development/Steam/build/CMakeFiles/3.12.1/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4c12b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4c12b.dir/build.make CMakeFiles/cmTC_4c12b.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4c12b.dir/testCCompiler.c.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc    -o CMakeFiles/cmTC_4c12b.dir/testCCompiler.c.o   -c /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_4c12b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4c12b.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc      -rdynamic CMakeFiles/cmTC_4c12b.dir/testCCompiler.c.o  -o cmTC_4c12b 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_98a89/fast"
+/usr/bin/make -f CMakeFiles/cmTC_98a89.dir/build.make CMakeFiles/cmTC_98a89.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc    -o CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.12/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_98a89
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_98a89.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc     -v -rdynamic CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o  -o cmTC_98a89 
+icc version 19.0.0.117 (gcc version 8.2.0 compatibility)
+/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/mcpcom    -mGLOB_em64t=TRUE -mP1OPT_version=19.0-intel64 -mGLOB_diag_file=CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.diag -mGLOB_long_size_64 -mGLOB_routine_pointer_size_64 -mP1OPT_print_version=FALSE -mCG_use_gas_got_workaround=F -mP2OPT_align_option_used=TRUE -mGLOB_gcc_version=820 "-mGLOB_options_string=-v -rdynamic -o cmTC_98a89" -mGLOB_cxx_limited_range=FALSE -mCG_extend_parms=FALSE -mGLOB_compiler_bin_directory=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64 -mGLOB_as_output_backup_file_name=/tmp/iccXVCT68as_.s -mGLOB_dashboard_use_source_name -mIPOPT_activate -mGLOB_product_id_code=0x22006d93 -mP3OPT_use_mspp_call_convention -mP2OPT_subs_out_of_bound=FALSE -mP2OPT_disam_type_based_disam=2 -mP2OPT_disam_assume_ansi_c -mP2OPT_checked_disam_ansi_alias=TRUE -mGLOB_ansi_alias -mPGOPTI_value_profile_use=T -mGLOB_opt_report_use_source_name -mP2OPT_il0_array_sections=TRUE -mGLOB_offload_mode=1 -mP2OPT_offload_unique_var_string=icc16144104089ACjtL -mP2OPT_hlo -mP2OPT_hpo_rtt_control=0 -mIPOPT_args_in_regs=0 -mP2OPT_disam_assume_nonstd_intent_in=FALSE -mGLOB_imf_mapping_library=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/libiml_attr.so -mPGOPTI_gen_threadsafe_level=0 -mIPOPT_link -mIPOPT_ipo_activate -mIPOPT_mo_activate -mIPOPT_source_files_list=/tmp/iccslisvFyE5N -mIPOPT_mo_global_data -mIPOPT_link_script_file=/tmp/iccscriptVp0gBt "-mIPOPT_cmdline_link="/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o" "/usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o" "-export-dynamic" "--eh-frame-hdr" "--build-id" "-dynamic-linker" "/lib64/ld-linux-x86-64.so.2" "-m" "elf_x86_64" "-o" "cmTC_98a89" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/usr/lib/gcc/x86_64-linux-gnu/8/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/" "-L/lib/x86_64-linux-gnu/" "-L/lib/../lib64" "-L/lib/../lib/" "-L/usr/lib/x86_64-linux-gnu/" "-L/usr/lib/../lib/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../" "-L/lib64" "-L/lib/" "-L/usr/lib" "CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o" "-Bdynamic" "-Bstatic" "-limf" "-lsvml" "-lirng" "-Bdynamic" "-lm" "-Bstatic" "-lipgo" "-ldecimal" "--as-needed" "-Bdynamic" "-lcilkrts" "-lstdc++" "--no-as-needed" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc" "-lsvml" "-Bdynamic" "-lc" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc_s" "-Bdynamic" "-ldl" "-lc" "/usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o"" -mIPOPT_il_in_obj -mIPOPT_ipo_activate_warn=FALSE -mIPOPT_obj_output_file_name=/tmp/ipo_iccdemZ1M.o -mIPOPT_whole_archive_fixup_file_name=/tmp/iccwarch8Mvw8t -mGLOB_linker_version=2.31.1 -mGLOB_linker=ld -mGLOB_driver_tempfile_name=/tmp/icctempfilebp8wE9 -mP3OPT_asm_target=P3OPT_ASM_TARGET_GAS -mGLOB_async_unwind_tables=TRUE -mGLOB_obj_output_file=/tmp/ipo_iccdemZ1M.o -mGLOB_source_dialect=GLOB_SOURCE_DIALECT_NONE -mP1OPT_source_file_name=ipo_out.c CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o -mIPOPT_object_files=T -mIPOPT_assembly_files=/tmp/iccalisoNvc37 -mIPOPT_generated_tempfiles=/tmp/iccelisvqlOyN -mIPOPT_embedded_object_base_name=/tmp/icceobjBdjq4s -mIPOPT_cmdline_link_new_name=/tmp/iccllisncn2z8
+ld    /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o -export-dynamic --eh-frame-hdr --build-id -dynamic-linker /lib64/ld-linux-x86-64.so.2 -m elf_x86_64 -o cmTC_98a89 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/usr/lib/gcc/x86_64-linux-gnu/8/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/ -L/lib/x86_64-linux-gnu/ -L/lib/../lib64 -L/lib/../lib/ -L/usr/lib/x86_64-linux-gnu/ -L/usr/lib/../lib/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../ -L/lib64 -L/lib/ -L/usr/lib CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o -Bdynamic -Bstatic -limf -lsvml -lirng -Bdynamic -lm -Bstatic -lipgo -ldecimal --as-needed -Bdynamic -lcilkrts -lstdc++ --no-as-needed -lgcc -lgcc_s -Bstatic -lirc -lsvml -Bdynamic -lc -lgcc -lgcc_s -Bstatic -lirc_s -Bdynamic -ldl -lc /usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_98a89/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_98a89.dir/build.make CMakeFiles/cmTC_98a89.dir/build]
+  ignore line: [make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/opt/intel/compilers_and_libraries/linux/bin/intel64/icc    -o CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.12/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_98a89]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_98a89.dir/link.txt --verbose=1]
+  ignore line: [/opt/intel/compilers_and_libraries/linux/bin/intel64/icc     -v -rdynamic CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o  -o cmTC_98a89 ]
+  ignore line: [icc version 19.0.0.117 (gcc version 8.2.0 compatibility)]
+  ignore line: [/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/mcpcom    -mGLOB_em64t=TRUE -mP1OPT_version=19.0-intel64 -mGLOB_diag_file=CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.diag -mGLOB_long_size_64 -mGLOB_routine_pointer_size_64 -mP1OPT_print_version=FALSE -mCG_use_gas_got_workaround=F -mP2OPT_align_option_used=TRUE -mGLOB_gcc_version=820 "-mGLOB_options_string=-v -rdynamic -o cmTC_98a89" -mGLOB_cxx_limited_range=FALSE -mCG_extend_parms=FALSE -mGLOB_compiler_bin_directory=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64 -mGLOB_as_output_backup_file_name=/tmp/iccXVCT68as_.s -mGLOB_dashboard_use_source_name -mIPOPT_activate -mGLOB_product_id_code=0x22006d93 -mP3OPT_use_mspp_call_convention -mP2OPT_subs_out_of_bound=FALSE -mP2OPT_disam_type_based_disam=2 -mP2OPT_disam_assume_ansi_c -mP2OPT_checked_disam_ansi_alias=TRUE -mGLOB_ansi_alias -mPGOPTI_value_profile_use=T -mGLOB_opt_report_use_source_name -mP2OPT_il0_array_sections=TRUE -mGLOB_offload_mode=1 -mP2OPT_offload_unique_var_string=icc16144104089ACjtL -mP2OPT_hlo -mP2OPT_hpo_rtt_control=0 -mIPOPT_args_in_regs=0 -mP2OPT_disam_assume_nonstd_intent_in=FALSE -mGLOB_imf_mapping_library=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/libiml_attr.so -mPGOPTI_gen_threadsafe_level=0 -mIPOPT_link -mIPOPT_ipo_activate -mIPOPT_mo_activate -mIPOPT_source_files_list=/tmp/iccslisvFyE5N -mIPOPT_mo_global_data -mIPOPT_link_script_file=/tmp/iccscriptVp0gBt "-mIPOPT_cmdline_link="/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o" "/usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o" "-export-dynamic" "--eh-frame-hdr" "--build-id" "-dynamic-linker" "/lib64/ld-linux-x86-64.so.2" "-m" "elf_x86_64" "-o" "cmTC_98a89" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/usr/lib/gcc/x86_64-linux-gnu/8/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/" "-L/lib/x86_64-linux-gnu/" "-L/lib/../lib64" "-L/lib/../lib/" "-L/usr/lib/x86_64-linux-gnu/" "-L/usr/lib/../lib/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../" "-L/lib64" "-L/lib/" "-L/usr/lib" "CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o" "-Bdynamic" "-Bstatic" "-limf" "-lsvml" "-lirng" "-Bdynamic" "-lm" "-Bstatic" "-lipgo" "-ldecimal" "--as-needed" "-Bdynamic" "-lcilkrts" "-lstdc++" "--no-as-needed" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc" "-lsvml" "-Bdynamic" "-lc" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc_s" "-Bdynamic" "-ldl" "-lc" "/usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o"" -mIPOPT_il_in_obj -mIPOPT_ipo_activate_warn=FALSE -mIPOPT_obj_output_file_name=/tmp/ipo_iccdemZ1M.o -mIPOPT_whole_archive_fixup_file_name=/tmp/iccwarch8Mvw8t -mGLOB_linker_version=2.31.1 -mGLOB_linker=ld -mGLOB_driver_tempfile_name=/tmp/icctempfilebp8wE9 -mP3OPT_asm_target=P3OPT_ASM_TARGET_GAS -mGLOB_async_unwind_tables=TRUE -mGLOB_obj_output_file=/tmp/ipo_iccdemZ1M.o -mGLOB_source_dialect=GLOB_SOURCE_DIALECT_NONE -mP1OPT_source_file_name=ipo_out.c CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o -mIPOPT_object_files=T -mIPOPT_assembly_files=/tmp/iccalisoNvc37 -mIPOPT_generated_tempfiles=/tmp/iccelisvqlOyN -mIPOPT_embedded_object_base_name=/tmp/icceobjBdjq4s -mIPOPT_cmdline_link_new_name=/tmp/iccllisncn2z8]
+  link line: [ld    /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o -export-dynamic --eh-frame-hdr --build-id -dynamic-linker /lib64/ld-linux-x86-64.so.2 -m elf_x86_64 -o cmTC_98a89 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/usr/lib/gcc/x86_64-linux-gnu/8/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/ -L/lib/x86_64-linux-gnu/ -L/lib/../lib64 -L/lib/../lib/ -L/usr/lib/x86_64-linux-gnu/ -L/usr/lib/../lib/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../ -L/lib64 -L/lib/ -L/usr/lib CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o -Bdynamic -Bstatic -limf -lsvml -lirng -Bdynamic -lm -Bstatic -lipgo -ldecimal --as-needed -Bdynamic -lcilkrts -lstdc++ --no-as-needed -lgcc -lgcc_s -Bstatic -lirc -lsvml -Bdynamic -lc -lgcc -lgcc_s -Bstatic -lirc_s -Bdynamic -ldl -lc /usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o]
+    arg [ld] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_98a89] ==> ignore
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/]
+    arg [-L/lib/x86_64-linux-gnu/] ==> dir [/lib/x86_64-linux-gnu/]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/lib/../lib/] ==> dir [/lib/../lib/]
+    arg [-L/usr/lib/x86_64-linux-gnu/] ==> dir [/usr/lib/x86_64-linux-gnu/]
+    arg [-L/usr/lib/../lib/] ==> dir [/usr/lib/../lib/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../]
+    arg [-L/lib64] ==> dir [/lib64]
+    arg [-L/lib/] ==> dir [/lib/]
+    arg [-L/usr/lib] ==> dir [/usr/lib]
+    arg [CMakeFiles/cmTC_98a89.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-Bdynamic] ==> ignore
+    arg [-Bstatic] ==> ignore
+    arg [-limf] ==> lib [imf]
+    arg [-lsvml] ==> lib [svml]
+    arg [-lirng] ==> lib [irng]
+    arg [-Bdynamic] ==> ignore
+    arg [-lm] ==> lib [m]
+    arg [-Bstatic] ==> ignore
+    arg [-lipgo] ==> lib [ipgo]
+    arg [-ldecimal] ==> lib [decimal]
+    arg [--as-needed] ==> ignore
+    arg [-Bdynamic] ==> ignore
+    arg [-lcilkrts] ==> lib [cilkrts]
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [--no-as-needed] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-Bstatic] ==> ignore
+    arg [-lirc] ==> lib [irc]
+    arg [-lsvml] ==> lib [svml]
+    arg [-Bdynamic] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-Bstatic] ==> ignore
+    arg [-lirc_s] ==> lib [irc_s]
+    arg [-Bdynamic] ==> ignore
+    arg [-ldl] ==> lib [dl]
+    arg [-lc] ==> lib [c]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o] ==> ignore
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64_lin/gcc4.4]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/] ==> [/usr/lib/gcc/x86_64-linux-gnu/8]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu/] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/lib/../lib/] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu/] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib/] ==> [/usr/lib]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64_lin/gcc4.4]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../] ==> [/usr/lib]
+  collapse library dir [/lib64] ==> [/lib64]
+  collapse library dir [/lib/] ==> [/lib]
+  collapse library dir [/usr/lib] ==> [/usr/lib]
+  implicit libs: [imf;svml;irng;m;ipgo;decimal;cilkrts;stdc++;gcc;gcc_s;irc;svml;c;gcc;gcc_s;irc_s;dl;c]
+  implicit dirs: [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64;/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin;/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin;/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7;/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin;/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64_lin/gcc4.4;/usr/lib/gcc/x86_64-linux-gnu/8;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib64;/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_56855/fast"
+/usr/bin/make -f CMakeFiles/cmTC_56855.dir/build.make CMakeFiles/cmTC_56855.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_56855.dir/feature_tests.c.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc   -std=c11 -o CMakeFiles/cmTC_56855.dir/feature_tests.c.o   -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_56855
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56855.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc      -rdynamic CMakeFiles/cmTC_56855.dir/feature_tests.c.o  -o cmTC_56855 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ff5a1/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ff5a1.dir/build.make CMakeFiles/cmTC_ff5a1.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ff5a1.dir/feature_tests.c.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc   -std=c99 -o CMakeFiles/cmTC_ff5a1.dir/feature_tests.c.o   -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_ff5a1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ff5a1.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc      -rdynamic CMakeFiles/cmTC_ff5a1.dir/feature_tests.c.o  -o cmTC_ff5a1 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c89] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_cf1a5/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cf1a5.dir/build.make CMakeFiles/cmTC_cf1a5.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cf1a5.dir/feature_tests.c.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc   -std=c89 -o CMakeFiles/cmTC_cf1a5.dir/feature_tests.c.o   -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_cf1a5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cf1a5.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icc      -rdynamic CMakeFiles/cmTC_cf1a5.dir/feature_tests.c.o  -o cmTC_cf1a5 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_a2322/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a2322.dir/build.make CMakeFiles/cmTC_a2322.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_a2322.dir/testCXXCompiler.cxx.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc     -o CMakeFiles/cmTC_a2322.dir/testCXXCompiler.cxx.o -c /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_a2322
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a2322.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc       -rdynamic CMakeFiles/cmTC_a2322.dir/testCXXCompiler.cxx.o  -o cmTC_a2322 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_6e4aa/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6e4aa.dir/build.make CMakeFiles/cmTC_6e4aa.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc     -o CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.12/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_6e4aa
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e4aa.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc      -v -rdynamic CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_6e4aa 
+icpc version 19.0.0.117 (gcc version 8.2.0 compatibility)
+/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/mcpcom    -mGLOB_em64t=TRUE -mP1OPT_version=19.0-intel64 -mGLOB_diag_file=CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.diag -mGLOB_long_size_64 -mGLOB_routine_pointer_size_64 -mP1OPT_print_version=FALSE -mCG_use_gas_got_workaround=F -mP2OPT_align_option_used=TRUE -mGLOB_gcc_version=820 "-mGLOB_options_string=-v -rdynamic -o cmTC_6e4aa" -mGLOB_cxx_limited_range=FALSE -mCG_extend_parms=FALSE -mGLOB_compiler_bin_directory=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64 -mGLOB_as_output_backup_file_name=/tmp/icpcpWUDUoas_.s -mGLOB_dashboard_use_source_name -mIPOPT_activate -mGLOB_product_id_code=0x22006d90 -mP3OPT_use_mspp_call_convention -mP2OPT_subs_out_of_bound=FALSE -mP2OPT_disam_type_based_disam=2 -mP2OPT_disam_assume_ansi_c -mP2OPT_checked_disam_ansi_alias=TRUE -mGLOB_ansi_alias -mPGOPTI_value_profile_use=T -mGLOB_opt_report_use_source_name -mP2OPT_il0_array_sections=TRUE -mGLOB_offload_mode=1 -mP2OPT_offload_unique_var_string=icpc1611377165NMU7br -mP2OPT_hlo -mP2OPT_hpo_rtt_control=0 -mIPOPT_args_in_regs=0 -mP2OPT_disam_assume_nonstd_intent_in=FALSE -mGLOB_imf_mapping_library=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/libiml_attr.so -mPGOPTI_gen_threadsafe_level=0 -mIPOPT_link -mIPOPT_ipo_activate -mIPOPT_mo_activate -mIPOPT_source_files_list=/tmp/icpcslisN2ldEZ -mIPOPT_mo_global_data -mIPOPT_link_script_file=/tmp/icpcscriptWtrqhH "-mIPOPT_cmdline_link="/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o" "/usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o" "-export-dynamic" "--eh-frame-hdr" "--build-id" "-dynamic-linker" "/lib64/ld-linux-x86-64.so.2" "-m" "elf_x86_64" "-o" "cmTC_6e4aa" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/usr/lib/gcc/x86_64-linux-gnu/8/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/" "-L/lib/x86_64-linux-gnu/" "-L/lib/../lib64" "-L/lib/../lib/" "-L/usr/lib/x86_64-linux-gnu/" "-L/usr/lib/../lib/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../" "-L/lib64" "-L/lib/" "-L/usr/lib" "CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o" "-Bdynamic" "-Bstatic" "-limf" "-lsvml" "-lirng" "-Bdynamic" "-lstdc++" "-lm" "-Bstatic" "-lipgo" "-ldecimal" "--as-needed" "-Bdynamic" "-lcilkrts" "--no-as-needed" "-lstdc++" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc" "-lsvml" "-Bdynamic" "-lc" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc_s" "-Bdynamic" "-ldl" "-lc" "/usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o"" -mIPOPT_il_in_obj -mIPOPT_ipo_activate_warn=FALSE -mIPOPT_obj_output_file_name=/tmp/ipo_icpcgQG1QL.o -mIPOPT_whole_archive_fixup_file_name=/tmp/icpcwarchn5rtbO -mGLOB_linker_version=2.31.1 -mGLOB_linker=ld -mGLOB_driver_tempfile_name=/tmp/icpctempfileI1u5Ov -mP3OPT_asm_target=P3OPT_ASM_TARGET_GAS -mGLOB_async_unwind_tables=TRUE -mGLOB_obj_output_file=/tmp/ipo_icpcgQG1QL.o -mGLOB_source_dialect=GLOB_SOURCE_DIALECT_NONE -mP1OPT_source_file_name=ipo_out.c CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o -mIPOPT_object_files=T -mIPOPT_assembly_files=/tmp/icpcalisM8ap7a -mIPOPT_generated_tempfiles=/tmp/icpcelisyrlBKS -mIPOPT_embedded_object_base_name=/tmp/icpceobjWmLNnA -mIPOPT_cmdline_link_new_name=/tmp/icpcllis4Jv00h
+ld    /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o -export-dynamic --eh-frame-hdr --build-id -dynamic-linker /lib64/ld-linux-x86-64.so.2 -m elf_x86_64 -o cmTC_6e4aa -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/usr/lib/gcc/x86_64-linux-gnu/8/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/ -L/lib/x86_64-linux-gnu/ -L/lib/../lib64 -L/lib/../lib/ -L/usr/lib/x86_64-linux-gnu/ -L/usr/lib/../lib/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../ -L/lib64 -L/lib/ -L/usr/lib CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o -Bdynamic -Bstatic -limf -lsvml -lirng -Bdynamic -lstdc++ -lm -Bstatic -lipgo -ldecimal --as-needed -Bdynamic -lcilkrts --no-as-needed -lstdc++ -lgcc -lgcc_s -Bstatic -lirc -lsvml -Bdynamic -lc -lgcc -lgcc_s -Bstatic -lirc_s -Bdynamic -ldl -lc /usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_6e4aa/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_6e4aa.dir/build.make CMakeFiles/cmTC_6e4aa.dir/build]
+  ignore line: [make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc     -o CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.12/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_6e4aa]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e4aa.dir/link.txt --verbose=1]
+  ignore line: [/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc      -v -rdynamic CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_6e4aa ]
+  ignore line: [icpc version 19.0.0.117 (gcc version 8.2.0 compatibility)]
+  ignore line: [/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/mcpcom    -mGLOB_em64t=TRUE -mP1OPT_version=19.0-intel64 -mGLOB_diag_file=CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.diag -mGLOB_long_size_64 -mGLOB_routine_pointer_size_64 -mP1OPT_print_version=FALSE -mCG_use_gas_got_workaround=F -mP2OPT_align_option_used=TRUE -mGLOB_gcc_version=820 "-mGLOB_options_string=-v -rdynamic -o cmTC_6e4aa" -mGLOB_cxx_limited_range=FALSE -mCG_extend_parms=FALSE -mGLOB_compiler_bin_directory=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64 -mGLOB_as_output_backup_file_name=/tmp/icpcpWUDUoas_.s -mGLOB_dashboard_use_source_name -mIPOPT_activate -mGLOB_product_id_code=0x22006d90 -mP3OPT_use_mspp_call_convention -mP2OPT_subs_out_of_bound=FALSE -mP2OPT_disam_type_based_disam=2 -mP2OPT_disam_assume_ansi_c -mP2OPT_checked_disam_ansi_alias=TRUE -mGLOB_ansi_alias -mPGOPTI_value_profile_use=T -mGLOB_opt_report_use_source_name -mP2OPT_il0_array_sections=TRUE -mGLOB_offload_mode=1 -mP2OPT_offload_unique_var_string=icpc1611377165NMU7br -mP2OPT_hlo -mP2OPT_hpo_rtt_control=0 -mIPOPT_args_in_regs=0 -mP2OPT_disam_assume_nonstd_intent_in=FALSE -mGLOB_imf_mapping_library=/opt/intel/compilers_and_libraries_2019.0.117/linux/bin/intel64/libiml_attr.so -mPGOPTI_gen_threadsafe_level=0 -mIPOPT_link -mIPOPT_ipo_activate -mIPOPT_mo_activate -mIPOPT_source_files_list=/tmp/icpcslisN2ldEZ -mIPOPT_mo_global_data -mIPOPT_link_script_file=/tmp/icpcscriptWtrqhH "-mIPOPT_cmdline_link="/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o" "/usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o" "-export-dynamic" "--eh-frame-hdr" "--build-id" "-dynamic-linker" "/lib64/ld-linux-x86-64.so.2" "-m" "elf_x86_64" "-o" "cmTC_6e4aa" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin" "-L/usr/lib/gcc/x86_64-linux-gnu/8/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/" "-L/lib/x86_64-linux-gnu/" "-L/lib/../lib64" "-L/lib/../lib/" "-L/usr/lib/x86_64-linux-gnu/" "-L/usr/lib/../lib/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/" "-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/" "-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../" "-L/lib64" "-L/lib/" "-L/usr/lib" "CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o" "-Bdynamic" "-Bstatic" "-limf" "-lsvml" "-lirng" "-Bdynamic" "-lstdc++" "-lm" "-Bstatic" "-lipgo" "-ldecimal" "--as-needed" "-Bdynamic" "-lcilkrts" "--no-as-needed" "-lstdc++" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc" "-lsvml" "-Bdynamic" "-lc" "-lgcc" "-lgcc_s" "-Bstatic" "-lirc_s" "-Bdynamic" "-ldl" "-lc" "/usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o" "/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o"" -mIPOPT_il_in_obj -mIPOPT_ipo_activate_warn=FALSE -mIPOPT_obj_output_file_name=/tmp/ipo_icpcgQG1QL.o -mIPOPT_whole_archive_fixup_file_name=/tmp/icpcwarchn5rtbO -mGLOB_linker_version=2.31.1 -mGLOB_linker=ld -mGLOB_driver_tempfile_name=/tmp/icpctempfileI1u5Ov -mP3OPT_asm_target=P3OPT_ASM_TARGET_GAS -mGLOB_async_unwind_tables=TRUE -mGLOB_obj_output_file=/tmp/ipo_icpcgQG1QL.o -mGLOB_source_dialect=GLOB_SOURCE_DIALECT_NONE -mP1OPT_source_file_name=ipo_out.c CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o -mIPOPT_object_files=T -mIPOPT_assembly_files=/tmp/icpcalisM8ap7a -mIPOPT_generated_tempfiles=/tmp/icpcelisyrlBKS -mIPOPT_embedded_object_base_name=/tmp/icpceobjWmLNnA -mIPOPT_cmdline_link_new_name=/tmp/icpcllis4Jv00h]
+  link line: [ld    /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o -export-dynamic --eh-frame-hdr --build-id -dynamic-linker /lib64/ld-linux-x86-64.so.2 -m elf_x86_64 -o cmTC_6e4aa -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4 -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin -L/usr/lib/gcc/x86_64-linux-gnu/8/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/ -L/lib/x86_64-linux-gnu/ -L/lib/../lib64 -L/lib/../lib/ -L/usr/lib/x86_64-linux-gnu/ -L/usr/lib/../lib/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/ -L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/ -L/usr/lib/gcc/x86_64-linux-gnu/8/../../../ -L/lib64 -L/lib/ -L/usr/lib CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o -Bdynamic -Bstatic -limf -lsvml -lirng -Bdynamic -lstdc++ -lm -Bstatic -lipgo -ldecimal --as-needed -Bdynamic -lcilkrts --no-as-needed -lstdc++ -lgcc -lgcc_s -Bstatic -lirc -lsvml -Bdynamic -lc -lgcc -lgcc_s -Bstatic -lirc_s -Bdynamic -ldl -lc /usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o]
+    arg [ld] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/crtbeginS.o] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_6e4aa] ==> ignore
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/]
+    arg [-L/lib/x86_64-linux-gnu/] ==> dir [/lib/x86_64-linux-gnu/]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/lib/../lib/] ==> dir [/lib/../lib/]
+    arg [-L/usr/lib/x86_64-linux-gnu/] ==> dir [/usr/lib/x86_64-linux-gnu/]
+    arg [-L/usr/lib/../lib/] ==> dir [/usr/lib/../lib/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/]
+    arg [-L/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/] ==> dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/8/../../../] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../]
+    arg [-L/lib64] ==> dir [/lib64]
+    arg [-L/lib/] ==> dir [/lib/]
+    arg [-L/usr/lib] ==> dir [/usr/lib]
+    arg [CMakeFiles/cmTC_6e4aa.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-Bdynamic] ==> ignore
+    arg [-Bstatic] ==> ignore
+    arg [-limf] ==> lib [imf]
+    arg [-lsvml] ==> lib [svml]
+    arg [-lirng] ==> lib [irng]
+    arg [-Bdynamic] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-Bstatic] ==> ignore
+    arg [-lipgo] ==> lib [ipgo]
+    arg [-ldecimal] ==> lib [decimal]
+    arg [--as-needed] ==> ignore
+    arg [-Bdynamic] ==> ignore
+    arg [-lcilkrts] ==> lib [cilkrts]
+    arg [--no-as-needed] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-Bstatic] ==> ignore
+    arg [-lirc] ==> lib [irc]
+    arg [-lsvml] ==> lib [svml]
+    arg [-Bdynamic] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-Bstatic] ==> ignore
+    arg [-lirc_s] ==> lib [irc_s]
+    arg [-Bdynamic] ==> ignore
+    arg [-ldl] ==> lib [dl]
+    arg [-lc] ==> lib [c]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/crtn.o] ==> ignore
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64_lin/gcc4.4]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/] ==> [/usr/lib/gcc/x86_64-linux-gnu/8]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../x86_64-linux-gnu/] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../../lib/] ==> [/usr/lib]
+  collapse library dir [/lib/x86_64-linux-gnu/] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/lib/../lib/] ==> [/lib]
+  collapse library dir [/usr/lib/x86_64-linux-gnu/] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib/] ==> [/usr/lib]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/../tbb/lib/intel64_lin/gcc4.4/] ==> [/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64_lin/gcc4.4]
+  collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/8/../../../] ==> [/usr/lib]
+  collapse library dir [/lib64] ==> [/lib64]
+  collapse library dir [/lib/] ==> [/lib]
+  collapse library dir [/usr/lib] ==> [/usr/lib]
+  implicit libs: [imf;svml;irng;stdc++;m;ipgo;decimal;cilkrts;stdc++;gcc;gcc_s;irc;svml;c;gcc;gcc_s;irc_s;dl;c]
+  implicit dirs: [/opt/intel/compilers_and_libraries_2019.0.117/linux/ipp/lib/intel64;/opt/intel/compilers_and_libraries_2019.0.117/linux/compiler/lib/intel64_lin;/opt/intel/compilers_and_libraries_2019.0.117/linux/mkl/lib/intel64_lin;/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64/gcc4.7;/opt/intel/compilers_and_libraries_2019.0.117/linux/daal/lib/intel64_lin;/opt/intel/compilers_and_libraries_2019.0.117/linux/tbb/lib/intel64_lin/gcc4.4;/usr/lib/gcc/x86_64-linux-gnu/8;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib64;/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++17] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_47e50/fast"
+/usr/bin/make -f CMakeFiles/cmTC_47e50.dir/build.make CMakeFiles/cmTC_47e50.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_47e50.dir/feature_tests.cxx.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc    -std=c++17 -o CMakeFiles/cmTC_47e50.dir/feature_tests.cxx.o -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_47e50
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_47e50.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc       -rdynamic CMakeFiles/cmTC_47e50.dir/feature_tests.cxx.o  -o cmTC_47e50 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ef5b7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ef5b7.dir/build.make CMakeFiles/cmTC_ef5b7.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ef5b7.dir/feature_tests.cxx.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc    -std=c++14 -o CMakeFiles/cmTC_ef5b7.dir/feature_tests.cxx.o -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_ef5b7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef5b7.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc       -rdynamic CMakeFiles/cmTC_ef5b7.dir/feature_tests.cxx.o  -o cmTC_ef5b7 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7ed9e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7ed9e.dir/build.make CMakeFiles/cmTC_7ed9e.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7ed9e.dir/feature_tests.cxx.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc    -std=c++11 -o CMakeFiles/cmTC_7ed9e.dir/feature_tests.cxx.o -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_7ed9e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ed9e.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc       -rdynamic CMakeFiles/cmTC_7ed9e.dir/feature_tests.cxx.o  -o cmTC_7ed9e 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /home/panos/Development/Steam/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_bb56f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_bb56f.dir/build.make CMakeFiles/cmTC_bb56f.dir/build
+make[1]: Entering directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bb56f.dir/feature_tests.cxx.o
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc    -std=c++98 -o CMakeFiles/cmTC_bb56f.dir/feature_tests.cxx.o -c /home/panos/Development/Steam/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_bb56f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bb56f.dir/link.txt --verbose=1
+/opt/intel/compilers_and_libraries/linux/bin/intel64/icpc       -rdynamic CMakeFiles/cmTC_bb56f.dir/feature_tests.cxx.o  -o cmTC_bb56f 
+make[1]: Leaving directory '/home/panos/Development/Steam/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:0cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates

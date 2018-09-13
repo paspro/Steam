@@ -41,7 +41,7 @@ MODULE SteamStates
     !
     !-------------------------------------------------------------------------
     TYPE, PUBLIC :: SteamState
-        
+
         PRIVATE
         !
         !> The region the steam state is located
@@ -125,8 +125,8 @@ CONTAINS
     SUBROUTINE set_primary_properties(this, region, prop1, prop2, valid)
 
         USE SteamRegions
-        USE SteamRegion3, ONLY : p3 => pressure
-        USE SteamRegion4, ONLY : p4 => saturation_pressure
+        USE SteamRegion3, ONLY: p3 => pressure
+        USE SteamRegion4, ONLY: p4 => saturation_pressure
 
         IMPLICIT NONE
         !
@@ -141,70 +141,70 @@ CONTAINS
         REAL(KIND=REAL_HIGH) :: p
         LOGICAL, OPTIONAL, INTENT(OUT) :: valid
 
-        this%region = region
+        this % region = region
 
         SELECT CASE (region)
 
-            CASE (1)
+        CASE (1)
 
-                this%pressure    = prop1
-                this%temperature = prop2
+            this % pressure = prop1
+            this % temperature = prop2
 
-                IF (present(valid)) THEN
-                    valid = in_region1(prop1, prop2)
-                END IF
+            IF (present(valid)) THEN
+                valid = in_region1(prop1, prop2)
+            END IF
 
-            CASE (2)
+        CASE (2)
 
-                this%pressure    = prop1
-                this%temperature = prop2
+            this % pressure = prop1
+            this % temperature = prop2
 
-                IF (present(valid)) THEN
-                    valid = in_region2(prop1, prop2)
-                END IF
+            IF (present(valid)) THEN
+                valid = in_region2(prop1, prop2)
+            END IF
 
-            CASE (3)
+        CASE (3)
 
-                this%density     = prop1
-                this%temperature = prop2
+            this % density = prop1
+            this % temperature = prop2
 
-                IF (present(valid)) THEN
-                    p = p3(prop1, prop2)
-                    valid = in_region3(p, prop2)
-                END IF
+            IF (present(valid)) THEN
+                p = p3(prop1, prop2)
+                valid = in_region3(p, prop2)
+            END IF
 
-            CASE (4)
+        CASE (4)
 
-                this%temperature = prop1
-                this%quality     = prop2
+            this % temperature = prop1
+            this % quality = prop2
 
-                IF (present(valid)) THEN
-                    p = p4(prop1)
-                    valid = in_region4(p, prop1, 1.0D-04)
-                END IF
+            IF (present(valid)) THEN
+                p = p4(prop1)
+                valid = in_region4(p, prop1, 1.0D-04)
+            END IF
 
-            CASE (5)
+        CASE (5)
 
-                this%pressure    = prop1
-                this%temperature = prop2
+            this % pressure = prop1
+            this % temperature = prop2
 
-                IF (present(valid)) THEN
-                    valid = in_region5(prop1, prop2)
-                END IF
+            IF (present(valid)) THEN
+                valid = in_region5(prop1, prop2)
+            END IF
 
         END SELECT
         !
         ! Set the other thermodynamic properties to invalid values
         !
-        this%v           = -1.0D+00
-        this%u           = -1.0D+00
-        this%h           = -1.0D+00
-        this%s           = -1.0D+00
-        this%cp          = -1.0D+00
-        this%cv          = -1.0D+00
-        this%ratio_cp_cv = -1.0D+00
-        this%mu          = -1.0D+00
-        this%tk          = -1.0D+00
+        this % v = -1.0D+00
+        this % u = -1.0D+00
+        this % h = -1.0D+00
+        this % s = -1.0D+00
+        this % cp = -1.0D+00
+        this % cv = -1.0D+00
+        this % ratio_cp_cv = -1.0D+00
+        this % mu = -1.0D+00
+        this % tk = -1.0D+00
 
     END SUBROUTINE set_primary_properties
     !-----------------------------------------------------------------------
@@ -217,10 +217,10 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_specific_volume(this)
 
-        USE SteamRegion1, ONLY : v1 => specific_volume
-        USE SteamRegion2, ONLY : v2 => specific_volume
-        USE SteamRegion4, ONLY : v4 => specific_volume
-        USE SteamRegion5, ONLY : v5 => specific_volume
+        USE SteamRegion1, ONLY: v1 => specific_volume
+        USE SteamRegion2, ONLY: v2 => specific_volume
+        USE SteamRegion4, ONLY: v4 => specific_volume
+        USE SteamRegion5, ONLY: v5 => specific_volume
 
         IMPLICIT NONE
         !
@@ -232,32 +232,32 @@ CONTAINS
         ! Compute the specific volume if not already computed
         !
         get_specific_volume = zero
-    
-        IF (this%v > zero) THEN
-            get_specific_volume = this%v
+
+        IF (this % v > zero) THEN
+            get_specific_volume = this % v
             RETURN
         END IF
 
-        SELECT CASE (this%region)
+        SELECT CASE (this % region)
 
-            CASE (1)
-                this%v = v1(this%pressure, this%temperature)
+        CASE (1)
+            this % v = v1(this % pressure, this % temperature)
 
-            CASE (2)
-                this%v = v2(this%pressure, this%temperature)
+        CASE (2)
+            this % v = v2(this % pressure, this % temperature)
 
-            CASE (3)
-                this%v = one / this%density
+        CASE (3)
+            this % v = one / this % density
 
-            CASE (4)
-                this%v = v4(this%temperature, this%quality)
+        CASE (4)
+            this % v = v4(this % temperature, this % quality)
 
-            CASE (5)
-                this%v = v5(this%pressure, this%temperature)
+        CASE (5)
+            this % v = v5(this % pressure, this % temperature)
 
         END SELECT
 
-        get_specific_volume = this%v
+        get_specific_volume = this % v
 
     END FUNCTION get_specific_volume
     !-----------------------------------------------------------------------
@@ -270,8 +270,8 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_pressure(this)
 
-        USE SteamRegion3, ONLY : p3 => pressure
-        USE SteamRegion4, ONLY : p4 => saturation_pressure
+        USE SteamRegion3, ONLY: p3 => pressure
+        USE SteamRegion4, ONLY: p4 => saturation_pressure
 
         IMPLICIT NONE
         !
@@ -283,25 +283,25 @@ CONTAINS
         ! Compute pressure if not already known
         !
         get_pressure = zero
-    
-        SELECT CASE (this%region)
 
-            CASE (1)
-                get_pressure = this%pressure
+        SELECT CASE (this % region)
 
-            CASE (2)
-                get_pressure = this%pressure
+        CASE (1)
+            get_pressure = this % pressure
 
-            CASE (3)
-                this%pressure = p3(this%density, this%temperature)
-                get_pressure = this%pressure
-        
-            CASE (4)
-                this%pressure = p4(this%temperature)
-                get_pressure = this%pressure
+        CASE (2)
+            get_pressure = this % pressure
 
-            CASE (5)
-                get_pressure = this%pressure
+        CASE (3)
+            this % pressure = p3(this % density, this % temperature)
+            get_pressure = this % pressure
+
+        CASE (4)
+            this % pressure = p4(this % temperature)
+            get_pressure = this % pressure
+
+        CASE (5)
+            get_pressure = this % pressure
 
         END SELECT
 
@@ -323,7 +323,7 @@ CONTAINS
         CLASS(SteamState), INTENT(INOUT) :: this
         REAL(KIND=REAL_HIGH) :: get_density
 
-        get_density = one/get_specific_volume(this)
+        get_density = one / get_specific_volume(this)
 
     END FUNCTION get_density
     !-----------------------------------------------------------------------
@@ -343,7 +343,7 @@ CONTAINS
         CLASS(SteamState), INTENT(INOUT) :: this
         REAL(KIND=REAL_HIGH) :: get_temperature
 
-        get_temperature = this%temperature
+        get_temperature = this % temperature
 
     END FUNCTION get_temperature
     !-----------------------------------------------------------------------
@@ -356,11 +356,11 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_specific_internal_energy(this)
 
-        USE SteamRegion1, ONLY : u1 => specific_internal_energy
-        USE SteamRegion2, ONLY : u2 => specific_internal_energy
-        USE SteamRegion3, ONLY : u3 => specific_internal_energy
-        USE SteamRegion4, ONLY : u4 => specific_internal_energy
-        USE SteamRegion5, ONLY : u5 => specific_internal_energy
+        USE SteamRegion1, ONLY: u1 => specific_internal_energy
+        USE SteamRegion2, ONLY: u2 => specific_internal_energy
+        USE SteamRegion3, ONLY: u3 => specific_internal_energy
+        USE SteamRegion4, ONLY: u4 => specific_internal_energy
+        USE SteamRegion5, ONLY: u5 => specific_internal_energy
 
         IMPLICIT NONE
         !
@@ -373,31 +373,31 @@ CONTAINS
         !
         get_specific_internal_energy = zero
 
-        IF (this%u > zero) THEN
-            get_specific_internal_energy = this%u
+        IF (this % u > zero) THEN
+            get_specific_internal_energy = this % u
             RETURN
         END IF
 
-        SELECT CASE (this%region)
+        SELECT CASE (this % region)
 
-            CASE (1)
-                this%u = u1(this%pressure, this%temperature)
+        CASE (1)
+            this % u = u1(this % pressure, this % temperature)
 
-            CASE (2)
-                this%u = u2(this%pressure, this%temperature)
+        CASE (2)
+            this % u = u2(this % pressure, this % temperature)
 
-            CASE (3)
-                this%u = u3(this%density, this%temperature)
+        CASE (3)
+            this % u = u3(this % density, this % temperature)
 
-            CASE (4)
-                this%u = u4(this%temperature, this%quality)
+        CASE (4)
+            this % u = u4(this % temperature, this % quality)
 
-            CASE (5)
-                this%u = u5(this%pressure, this%temperature)
+        CASE (5)
+            this % u = u5(this % pressure, this % temperature)
 
         END SELECT
 
-        get_specific_internal_energy = this%u
+        get_specific_internal_energy = this % u
 
     END FUNCTION get_specific_internal_energy
     !-----------------------------------------------------------------------
@@ -410,11 +410,11 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_specific_enthalpy(this)
 
-        USE SteamRegion1, ONLY : h1 => specific_enthalpy
-        USE SteamRegion2, ONLY : h2 => specific_enthalpy
-        USE SteamRegion3, ONLY : h3 => specific_enthalpy
-        USE SteamRegion4, ONLY : h4 => specific_enthalpy
-        USE SteamRegion5, ONLY : h5 => specific_enthalpy
+        USE SteamRegion1, ONLY: h1 => specific_enthalpy
+        USE SteamRegion2, ONLY: h2 => specific_enthalpy
+        USE SteamRegion3, ONLY: h3 => specific_enthalpy
+        USE SteamRegion4, ONLY: h4 => specific_enthalpy
+        USE SteamRegion5, ONLY: h5 => specific_enthalpy
 
         IMPLICIT NONE
         !
@@ -427,31 +427,31 @@ CONTAINS
         !
         get_specific_enthalpy = zero
 
-        IF (this%h > zero) THEN
-            get_specific_enthalpy = this%h
+        IF (this % h > zero) THEN
+            get_specific_enthalpy = this % h
             RETURN
         END IF
 
-        SELECT CASE (this%region)
+        SELECT CASE (this % region)
 
-            CASE (1)
-                this%h = h1(this%pressure, this%temperature)
+        CASE (1)
+            this % h = h1(this % pressure, this % temperature)
 
-            CASE (2)
-                this%h = h2(this%pressure, this%temperature)
+        CASE (2)
+            this % h = h2(this % pressure, this % temperature)
 
-            CASE (3)
-                this%h = h3(this%density, this%temperature)
+        CASE (3)
+            this % h = h3(this % density, this % temperature)
 
-            CASE (4)
-                this%h = h4(this%temperature, this%quality)
+        CASE (4)
+            this % h = h4(this % temperature, this % quality)
 
-            CASE (5)
-                this%h = h5(this%pressure, this%temperature)
+        CASE (5)
+            this % h = h5(this % pressure, this % temperature)
 
         END SELECT
 
-        get_specific_enthalpy = this%h
+        get_specific_enthalpy = this % h
 
     END FUNCTION get_specific_enthalpy
     !-----------------------------------------------------------------------
@@ -464,11 +464,11 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_specific_entropy(this)
 
-        USE SteamRegion1, ONLY : s1 => specific_entropy
-        USE SteamRegion2, ONLY : s2 => specific_entropy
-        USE SteamRegion3, ONLY : s3 => specific_entropy
-        USE SteamRegion4, ONLY : s4 => specific_entropy
-        USE SteamRegion5, ONLY : s5 => specific_entropy
+        USE SteamRegion1, ONLY: s1 => specific_entropy
+        USE SteamRegion2, ONLY: s2 => specific_entropy
+        USE SteamRegion3, ONLY: s3 => specific_entropy
+        USE SteamRegion4, ONLY: s4 => specific_entropy
+        USE SteamRegion5, ONLY: s5 => specific_entropy
 
         IMPLICIT NONE
         !
@@ -481,31 +481,31 @@ CONTAINS
         !
         get_specific_entropy = zero
 
-        IF (this%s > zero) THEN
-            get_specific_entropy = this%s
+        IF (this % s > zero) THEN
+            get_specific_entropy = this % s
             RETURN
         END IF
 
-        SELECT CASE (this%region)
+        SELECT CASE (this % region)
 
-            CASE (1)
-                this%s = s1(this%pressure, this%temperature)
+        CASE (1)
+            this % s = s1(this % pressure, this % temperature)
 
-            CASE (2)
-                this%s = s2(this%pressure, this%temperature)
+        CASE (2)
+            this % s = s2(this % pressure, this % temperature)
 
-            CASE (3)
-                this%s = s3(this%density, this%temperature)
+        CASE (3)
+            this % s = s3(this % density, this % temperature)
 
-            CASE (4)
-                this%s = s4(this%temperature, this%quality)
+        CASE (4)
+            this % s = s4(this % temperature, this % quality)
 
-            CASE (5)
-                this%s = s5(this%pressure, this%temperature)
+        CASE (5)
+            this % s = s5(this % pressure, this % temperature)
 
         END SELECT
 
-        get_specific_entropy = this%s
+        get_specific_entropy = this % s
 
     END FUNCTION get_specific_entropy
     !-----------------------------------------------------------------------
@@ -519,11 +519,11 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_specific_isobaric_heat_capacity(this)
 
-        USE SteamRegion1, ONLY : cp1 => specific_isobaric_heat_capacity
-        USE SteamRegion2, ONLY : cp2 => specific_isobaric_heat_capacity
-        USE SteamRegion3, ONLY : cp3 => specific_isobaric_heat_capacity
-        USE SteamRegion4, ONLY : cp4 => specific_isobaric_heat_capacity
-        USE SteamRegion5, ONLY : cp5 => specific_isobaric_heat_capacity
+        USE SteamRegion1, ONLY: cp1 => specific_isobaric_heat_capacity
+        USE SteamRegion2, ONLY: cp2 => specific_isobaric_heat_capacity
+        USE SteamRegion3, ONLY: cp3 => specific_isobaric_heat_capacity
+        USE SteamRegion4, ONLY: cp4 => specific_isobaric_heat_capacity
+        USE SteamRegion5, ONLY: cp5 => specific_isobaric_heat_capacity
 
         IMPLICIT NONE
         !
@@ -536,31 +536,31 @@ CONTAINS
         !
         get_specific_isobaric_heat_capacity = zero
 
-        IF (this%cp > zero) THEN
-            get_specific_isobaric_heat_capacity = this%cp
+        IF (this % cp > zero) THEN
+            get_specific_isobaric_heat_capacity = this % cp
             RETURN
         END IF
 
-        SELECT CASE (this%region)
+        SELECT CASE (this % region)
 
-            CASE (1)
-                this%cp = cp1(this%pressure, this%temperature)
+        CASE (1)
+            this % cp = cp1(this % pressure, this % temperature)
 
-            CASE (2)
-                this%cp = cp2(this%pressure, this%temperature)
+        CASE (2)
+            this % cp = cp2(this % pressure, this % temperature)
 
-            CASE (3)
-                this%cp = cp3(this%density, this%temperature)
+        CASE (3)
+            this % cp = cp3(this % density, this % temperature)
 
-            CASE (4)
-                this%cp = cp4(this%temperature, this%quality)
+        CASE (4)
+            this % cp = cp4(this % temperature, this % quality)
 
-            CASE (5)
-                this%cp = cp5(this%pressure, this%temperature)
+        CASE (5)
+            this % cp = cp5(this % pressure, this % temperature)
 
         END SELECT
 
-        get_specific_isobaric_heat_capacity = this%cp
+        get_specific_isobaric_heat_capacity = this % cp
 
     END FUNCTION get_specific_isobaric_heat_capacity
     !-----------------------------------------------------------------------
@@ -574,11 +574,11 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION get_specific_isochoric_heat_capacity(this)
 
-        USE SteamRegion1, ONLY : cv1 => specific_isochoric_heat_capacity
-        USE SteamRegion2, ONLY : cv2 => specific_isochoric_heat_capacity
-        USE SteamRegion3, ONLY : cv3 => specific_isochoric_heat_capacity
-        USE SteamRegion4, ONLY : cv4 => specific_isochoric_heat_capacity
-        USE SteamRegion5, ONLY : cv5 => specific_isochoric_heat_capacity
+        USE SteamRegion1, ONLY: cv1 => specific_isochoric_heat_capacity
+        USE SteamRegion2, ONLY: cv2 => specific_isochoric_heat_capacity
+        USE SteamRegion3, ONLY: cv3 => specific_isochoric_heat_capacity
+        USE SteamRegion4, ONLY: cv4 => specific_isochoric_heat_capacity
+        USE SteamRegion5, ONLY: cv5 => specific_isochoric_heat_capacity
 
         IMPLICIT NONE
         !
@@ -591,31 +591,31 @@ CONTAINS
         !
         get_specific_isochoric_heat_capacity = zero
 
-        IF (this%cv > zero) THEN
-            get_specific_isochoric_heat_capacity = this%cv
+        IF (this % cv > zero) THEN
+            get_specific_isochoric_heat_capacity = this % cv
             RETURN
         END IF
 
-        SELECT CASE (this%region)
+        SELECT CASE (this % region)
 
-            CASE (1)
-                this%cv = cv1(this%pressure, this%temperature)
+        CASE (1)
+            this % cv = cv1(this % pressure, this % temperature)
 
-            CASE (2)
-                this%cv = cv2(this%pressure, this%temperature)
+        CASE (2)
+            this % cv = cv2(this % pressure, this % temperature)
 
-            CASE (3)
-                this%cv = cv3(this%density, this%temperature)
+        CASE (3)
+            this % cv = cv3(this % density, this % temperature)
 
-            CASE (4)
-                this%cv = cv4(this%temperature, this%quality)
+        CASE (4)
+            this % cv = cv4(this % temperature, this % quality)
 
-            CASE (5)
-                this%cv = cv5(this%pressure, this%temperature)
+        CASE (5)
+            this % cv = cv5(this % pressure, this % temperature)
 
         END SELECT
 
-        get_specific_isochoric_heat_capacity = this%cv
+        get_specific_isochoric_heat_capacity = this % cv
 
     END FUNCTION get_specific_isochoric_heat_capacity
     !-----------------------------------------------------------------------
@@ -638,10 +638,10 @@ CONTAINS
         !
         ! Compute the ratio of specific heats if not already computed
         !
-        this%ratio_cp_cv = get_specific_isobaric_heat_capacity(this) / &
-            get_specific_isochoric_heat_capacity(this)
+        this % ratio_cp_cv = get_specific_isobaric_heat_capacity(this) / &
+                             get_specific_isochoric_heat_capacity(this)
 
-        get_ratio_of_specific_heats = this%ratio_cp_cv
+        get_ratio_of_specific_heats = this % ratio_cp_cv
 
     END FUNCTION get_ratio_of_specific_heats
     !-----------------------------------------------------------------------
@@ -667,13 +667,13 @@ CONTAINS
         !
         get_viscosity = zero
 
-        IF (this%mu > zero) THEN
-             get_viscosity = this%mu
+        IF (this % mu > zero) THEN
+            get_viscosity = this % mu
             RETURN
         END IF
 
-        this%mu = viscosity(get_density(this), this%temperature)
-        get_viscosity = this%mu
+        this % mu = viscosity(get_density(this), this % temperature)
+        get_viscosity = this % mu
 
     END FUNCTION get_viscosity
     !-----------------------------------------------------------------------
@@ -699,13 +699,13 @@ CONTAINS
         !
         get_thermal_conductivity = zero
 
-        IF (this%tk > zero) THEN
-             get_thermal_conductivity = this%tk
+        IF (this % tk > zero) THEN
+            get_thermal_conductivity = this % tk
             RETURN
         END IF
 
-        this%tk = thermal_conductivity(get_density(this), this%temperature)
-        get_thermal_conductivity = this%tk
+        this % tk = thermal_conductivity(get_density(this), this % temperature)
+        get_thermal_conductivity = this % tk
 
     END FUNCTION get_thermal_conductivity
     !-----------------------------------------------------------------------
@@ -724,51 +724,51 @@ CONTAINS
         !
         ! Print the state
         !
-        WRITE(*,*)
-        WRITE(*,*) "Steam State - Thermodynamic Properties"
-        WRITE(*,*) "======================================"
+        WRITE (*, *)
+        WRITE (*, *) "Steam State - Thermodynamic Properties"
+        WRITE (*, *) "======================================"
 
-        WRITE(*,*)
-        WRITE(*,*) "Steam Region                     = ", &
-            this%region
+        WRITE (*, *)
+        WRITE (*, *) "Steam Region                     = ", &
+            this % region
 
-        WRITE(*,*) "Pressure                         = ", &
+        WRITE (*, *) "Pressure                         = ", &
             get_pressure(this), " [MPa]"
-    
-        WRITE(*,*) "Density                          = ", &
+
+        WRITE (*, *) "Density                          = ", &
             get_density(this), " [Kg/m3]"
 
-        WRITE(*,*) "Temperature                      = ", &
+        WRITE (*, *) "Temperature                      = ", &
             get_temperature(this), " [K]"
 
-        WRITE(*,*) "Specific Volume                  = ", &
+        WRITE (*, *) "Specific Volume                  = ", &
             get_specific_volume(this), " [m3/Kg]"
 
-        WRITE(*,*) "Specific Internal Energy         = ", &
+        WRITE (*, *) "Specific Internal Energy         = ", &
             get_specific_internal_energy(this), " [J/Kg]"
 
-        WRITE(*,*) "Specific Enthalpy                = ", &
+        WRITE (*, *) "Specific Enthalpy                = ", &
             get_specific_enthalpy(this), " [J/Kg]"
 
-        WRITE(*,*) "Specific Entropy                 = ", &
+        WRITE (*, *) "Specific Entropy                 = ", &
             get_specific_entropy(this), " [J/Kg.K]"
 
-        WRITE(*,*) "Specific Isobaric Heat Capacity  = ", &
+        WRITE (*, *) "Specific Isobaric Heat Capacity  = ", &
             get_specific_isobaric_heat_capacity(this), " [J/Kg.K]"
 
-        WRITE(*,*) "Specific Isochoric Heat Capacity = ", &
+        WRITE (*, *) "Specific Isochoric Heat Capacity = ", &
             get_specific_isochoric_heat_capacity(this), " [J/Kg.K]"
 
-        WRITE(*,*) "Ratio of Specific Heats          = ", &
+        WRITE (*, *) "Ratio of Specific Heats          = ", &
             get_ratio_of_specific_heats(this)
 
-        WRITE(*,*) "Viscosity                        = ", &
+        WRITE (*, *) "Viscosity                        = ", &
             get_viscosity(this), " [Pa.sec]"
 
-        WRITE(*,*) "Thermal Conductivity             = ", &
+        WRITE (*, *) "Thermal Conductivity             = ", &
             get_thermal_conductivity(this), " [W/K.m]"
 
-        WRITE(*,*)
+        WRITE (*, *)
 
     END SUBROUTINE print_state
 

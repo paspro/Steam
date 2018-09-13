@@ -32,30 +32,29 @@ MODULE SteamPrecision
     !> Integer precision, requesting 32-bits
     !
     INTEGER, PARAMETER :: INT_HIGH = INT32
-    
+
     !-----------------------------------------------------------------------
     !
     !> Numerical constants in the specified precision
     !
     !-----------------------------------------------------------------------
-    
+
     REAL(KIND=REAL_HIGH), PARAMETER :: &
-        zero     = 0.0D+00,            &
-        onesixth = 1.0D+00/6.0D+00,    &
-        quarter  = 0.25D+00,           &
-        onethird = 1.0D+00/3.0D+00,    &
-        half     = 0.5D+00,            &
-        one      = 1.0D+00,            &
-        two      = 2.0D+00,            &
-        three    = 3.0D+00,            &
-        four     = 4.0D+00,            &
-        five     = 5.0D+00,            &
-        six      = 6.0D+00,            &
-        seven    = 7.0D+00,            &
-        eight    = 8.0D+00,            &
-        nine     = 9.0D+00,            &
-        ten      = 10.0D+00
+        zero = 0.0D+00, &
+        onesixth = 1.0D+00 / 6.0D+00, &
+        quarter = 0.25D+00, &
+        onethird = 1.0D+00 / 3.0D+00, &
+        half = 0.5D+00, &
+        one = 1.0D+00, &
+        two = 2.0D+00, &
+        three = 3.0D+00, &
+        four = 4.0D+00, &
+        five = 5.0D+00, &
+        six = 6.0D+00, &
+        seven = 7.0D+00, &
+        eight = 8.0D+00, &
+        nine = 9.0D+00, &
+        ten = 10.0D+00
 
 END MODULE SteamPrecision
-
 

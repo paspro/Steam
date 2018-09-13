@@ -80,33 +80,33 @@ CONTAINS
         ! Accelerated Secant Algorithm
         !
         IF (n_order < 0) THEN
-            WRITE(*,*)
-            WRITE(*,*) "Error in Function: function_inverter"
-            WRITE(*,*) "The order of interpolation must be a positive integer."
-            WRITE(*,*) 
+            WRITE (*, *)
+            WRITE (*, *) "Error in Function: function_inverter"
+            WRITE (*, *) "The order of interpolation must be a positive integer."
+            WRITE (*, *)
         END IF
-            
+
         IF (logging) THEN
-            WRITE(*,*)
-            WRITE(*,*) "========================================="
-            WRITE(*,*) "Function f(x) Inverter Algorithm for x"
-            WRITE(*,*) "========================================="
+            WRITE (*, *)
+            WRITE (*, *) "========================================="
+            WRITE (*, *) "Function f(x) Inverter Algorithm for x"
+            WRITE (*, *) "========================================="
         END IF
 
         s_old = guess2
 
-        DO iter = n_order+1, maxiter
+        DO iter = n_order + 1, maxiter
             !
             ! Compute the new value
             !
-            s = solution(iter,n_order)
-            error = ABS(s_old-s)/ABS(s)
+            s = solution(iter, n_order)
+            error = ABS(s_old - s) / ABS(s)
             s_old = s
 
             IF (logging) THEN
-                   WRITE(*,"(' Iteration = ', i5, ' X = ', d12.5, &
-                           & ' Error = ', d12.5)") &
-                         iter, s, error
+                WRITE (*, "(' Iteration = ', i5, ' X = ', d12.5, &
+                        & ' Error = ', d12.5)") &
+                      iter, s, error
             END IF
             !
             ! Check for convergence
@@ -117,8 +117,8 @@ CONTAINS
         END DO
 
         IF (logging) THEN
-            WRITE(*,*) "========================================="
-            WRITE(*,*)
+            WRITE (*, *) "========================================="
+            WRITE (*, *)
         END IF
 
         function_inverter = s
@@ -132,14 +132,14 @@ CONTAINS
             IMPLICIT NONE
             !
             ! Arguments
-            !           
+            !
             INTEGER(KIND=INT_HIGH) :: imax
             INTEGER(KIND=INT_HIGH), INTENT(IN) :: p
 
             IF ((p == -1) .OR. (p == 0)) THEN
                 imax = 0
             ELSE IF (p <= n_order) THEN
-                imax = p-1
+                imax = p - 1
             ELSE
                 imax = n_order
             END IF
@@ -155,7 +155,7 @@ CONTAINS
             ! Arguments
             !
             REAL(KIND=REAL_HIGH) :: res
-            INTEGER(KIND=INT_HIGH), INTENT(IN) :: p,i
+            INTEGER(KIND=INT_HIGH), INTENT(IN) :: p, i
             !
             ! Variables
             !
@@ -170,26 +170,26 @@ CONTAINS
                     !
                     ! Secant step
                     !
-                    x1 = solution(p-1, imax(p-1))
-                    x2 = solution(p-2, imax(p-2))
-                    f1 = f(x1)-f0
-                    f2 = f(x2)-f0
-                    res = x1 - f1*(x1-x2)/(f1-f2)
+                    x1 = solution(p - 1, imax(p - 1))
+                    x2 = solution(p - 2, imax(p - 2))
+                    f1 = f(x1) - f0
+                    f2 = f(x2) - f0
+                    res = x1 - f1 * (x1 - x2) / (f1 - f2)
                 ELSE
                     !
                     ! i-th order approximation
                     !
-                    x1 = solution(p-1, i-1)
-                    x2 = solution(p-1, imax(p-1))
-                    x3 = solution(p, i-1)
-                    x4 = solution(p-i-2, imax(p-i-2))
-                    res = x3 + (x2-x3)*(x1-x3)/(x1+x2-x3-x4)
+                    x1 = solution(p - 1, i - 1)
+                    x2 = solution(p - 1, imax(p - 1))
+                    x3 = solution(p, i - 1)
+                    x4 = solution(p - i - 2, imax(p - i - 2))
+                    res = x3 + (x2 - x3) * (x1 - x3) / (x1 + x2 - x3 - x4)
                 END IF
             END IF
 
         END FUNCTION solution
 
-    END FUNCTION function_inverter    
+    END FUNCTION function_inverter
     !-------------------------------------------------------------------------
     !
     !> This function reverses a generic equation f(x,y) by computing the value
@@ -224,7 +224,7 @@ CONTAINS
                                             tolerance
 
         INTERFACE
-            PURE FUNCTION f(x,y)
+            PURE FUNCTION f(x, y)
                 USE SteamPrecision
                 IMPLICIT NONE
                 REAL(KIND=REAL_HIGH) :: f
@@ -240,33 +240,33 @@ CONTAINS
         ! Accelerated Secant Algorithm
         !
         IF (n_order < 0) THEN
-            WRITE(*,*)
-            WRITE(*,*) "Error in Function: function_inverter_x"
-            WRITE(*,*) "The order of interpolation must be a positive integer."
-            WRITE(*,*) 
+            WRITE (*, *)
+            WRITE (*, *) "Error in Function: function_inverter_x"
+            WRITE (*, *) "The order of interpolation must be a positive integer."
+            WRITE (*, *)
         END IF
-            
+
         IF (logging) THEN
-            WRITE(*,*)
-            WRITE(*,*) "========================================="
-            WRITE(*,*) "Function f(x,y0) Inverter Algorithm for x"
-            WRITE(*,*) "========================================="
+            WRITE (*, *)
+            WRITE (*, *) "========================================="
+            WRITE (*, *) "Function f(x,y0) Inverter Algorithm for x"
+            WRITE (*, *) "========================================="
         END IF
 
         s_old = guess2
 
-        DO iter = n_order+1, maxiter
+        DO iter = n_order + 1, maxiter
             !
             ! Compute the new value
             !
-            s = solution(iter,n_order)
-            error = ABS(s_old-s)/ABS(s)
+            s = solution(iter, n_order)
+            error = ABS(s_old - s) / ABS(s)
             s_old = s
 
             IF (logging) THEN
-                   WRITE(*,"(' Iteration = ', i5, ' X = ', d12.5, &
-                           & ' Error = ', d12.5)") &
-                         iter, s, error
+                WRITE (*, "(' Iteration = ', i5, ' X = ', d12.5, &
+                        & ' Error = ', d12.5)") &
+                      iter, s, error
             END IF
             !
             ! Check for convergence
@@ -277,8 +277,8 @@ CONTAINS
         END DO
 
         IF (logging) THEN
-            WRITE(*,*) "========================================="
-            WRITE(*,*)
+            WRITE (*, *) "========================================="
+            WRITE (*, *)
         END IF
 
         function_inverter_x = s
@@ -292,14 +292,14 @@ CONTAINS
             IMPLICIT NONE
             !
             ! Arguments
-            !           
+            !
             INTEGER(KIND=INT_HIGH) :: imax
             INTEGER(KIND=INT_HIGH), INTENT(IN) :: p
 
             IF ((p == -1) .OR. (p == 0)) THEN
                 imax = 0
             ELSE IF (p <= n_order) THEN
-                imax = p-1
+                imax = p - 1
             ELSE
                 imax = n_order
             END IF
@@ -315,7 +315,7 @@ CONTAINS
             ! Arguments
             !
             REAL(KIND=REAL_HIGH) :: res
-            INTEGER(KIND=INT_HIGH), INTENT(IN) :: p,i
+            INTEGER(KIND=INT_HIGH), INTENT(IN) :: p, i
             !
             ! Variables
             !
@@ -330,26 +330,26 @@ CONTAINS
                     !
                     ! Secant step
                     !
-                    x1 = solution(p-1, imax(p-1))
-                    x2 = solution(p-2, imax(p-2))
-                    f1 = f(x1,y0)-f0
-                    f2 = f(x2,y0)-f0
-                    res = x1 - f1*(x1-x2)/(f1-f2)
+                    x1 = solution(p - 1, imax(p - 1))
+                    x2 = solution(p - 2, imax(p - 2))
+                    f1 = f(x1, y0) - f0
+                    f2 = f(x2, y0) - f0
+                    res = x1 - f1 * (x1 - x2) / (f1 - f2)
                 ELSE
                     !
                     ! i-th order approximation
                     !
-                    x1 = solution(p-1, i-1)
-                    x2 = solution(p-1, imax(p-1))
-                    x3 = solution(p, i-1)
-                    x4 = solution(p-i-2, imax(p-i-2))
-                    res = x3 + (x2-x3)*(x1-x3)/(x1+x2-x3-x4)
+                    x1 = solution(p - 1, i - 1)
+                    x2 = solution(p - 1, imax(p - 1))
+                    x3 = solution(p, i - 1)
+                    x4 = solution(p - i - 2, imax(p - i - 2))
+                    res = x3 + (x2 - x3) * (x1 - x3) / (x1 + x2 - x3 - x4)
                 END IF
             END IF
 
         END FUNCTION solution
 
-    END FUNCTION function_inverter_x    
+    END FUNCTION function_inverter_x
     !-------------------------------------------------------------------------
     !
     !> This function reverses a generic equation f(x,y) by computing the value
@@ -382,9 +382,9 @@ CONTAINS
         INTEGER(KIND=INT_HIGH), INTENT(IN) :: maxiter, n_order
         REAL(KIND=REAL_HIGH), INTENT(IN) :: f0, x0, guess1, guess2, &
                                             tolerance
-                                                 
+
         INTERFACE
-            PURE FUNCTION f(x,y)
+            PURE FUNCTION f(x, y)
                 USE SteamPrecision
                 IMPLICIT NONE
                 REAL(KIND=REAL_HIGH) :: f
@@ -400,33 +400,33 @@ CONTAINS
         ! Accelerated Secant Algorithm
         !
         IF (n_order < 0) THEN
-            WRITE(*,*)
-            WRITE(*,*) "Error in Function: function_inverter_y"
-            WRITE(*,*) "The order of interpolation must be a positive integer."
-            WRITE(*,*) 
+            WRITE (*, *)
+            WRITE (*, *) "Error in Function: function_inverter_y"
+            WRITE (*, *) "The order of interpolation must be a positive integer."
+            WRITE (*, *)
         END IF
 
         IF (logging) THEN
-            WRITE(*,*)
-            WRITE(*,*) "========================================="
-            WRITE(*,*) "Function f(x0,y) Inverter Algorithm for y"
-            WRITE(*,*) "========================================="
+            WRITE (*, *)
+            WRITE (*, *) "========================================="
+            WRITE (*, *) "Function f(x0,y) Inverter Algorithm for y"
+            WRITE (*, *) "========================================="
         END IF
 
         s_old = guess2
 
-        DO iter = n_order+1, maxiter
+        DO iter = n_order + 1, maxiter
             !
             ! Compute the new value
             !
-            s = solution(iter,n_order)
-            error = ABS(s_old-s)/ABS(s)
+            s = solution(iter, n_order)
+            error = ABS(s_old - s) / ABS(s)
             s_old = s
 
             IF (logging) THEN
-                   WRITE(*,"(' Iteration = ', i5, ' Y = ', d12.5, &
-                           & ' Error = ', d12.5)") &
-                         iter, s, error
+                WRITE (*, "(' Iteration = ', i5, ' Y = ', d12.5, &
+                        & ' Error = ', d12.5)") &
+                      iter, s, error
             END IF
             !
             ! Check for convergence
@@ -437,8 +437,8 @@ CONTAINS
         END DO
 
         IF (logging) THEN
-            WRITE(*,*) "========================================="
-            WRITE(*,*)
+            WRITE (*, *) "========================================="
+            WRITE (*, *)
         END IF
 
         function_inverter_y = s
@@ -452,14 +452,14 @@ CONTAINS
             IMPLICIT NONE
             !
             ! Arguments
-            !           
+            !
             INTEGER(KIND=INT_HIGH) :: imax
             INTEGER(KIND=INT_HIGH), INTENT(IN) :: p
 
             IF ((p == -1) .OR. (p == 0)) THEN
                 imax = 0
             ELSE IF (p <= n_order) THEN
-                imax = p-1
+                imax = p - 1
             ELSE
                 imax = n_order
             END IF
@@ -475,7 +475,7 @@ CONTAINS
             ! Arguments
             !
             REAL(KIND=REAL_HIGH) :: res
-            INTEGER(KIND=INT_HIGH), INTENT(IN) :: p,i
+            INTEGER(KIND=INT_HIGH), INTENT(IN) :: p, i
             !
             ! Variables
             !
@@ -490,20 +490,20 @@ CONTAINS
                     !
                     ! Secant step
                     !
-                    y1 = solution(p-1, imax(p-1))
-                    y2 = solution(p-2, imax(p-2))
-                    f1 = f(x0,y1)-f0
-                    f2 = f(x0,y2)-f0
-                    res = y1 - f1*(y1-y2)/(f1-f2)
+                    y1 = solution(p - 1, imax(p - 1))
+                    y2 = solution(p - 2, imax(p - 2))
+                    f1 = f(x0, y1) - f0
+                    f2 = f(x0, y2) - f0
+                    res = y1 - f1 * (y1 - y2) / (f1 - f2)
                 ELSE
                     !
                     ! i-th order approximation
                     !
-                    y1 = solution(p-1, i-1)
-                    y2 = solution(p-1, imax(p-1))
-                    y3 = solution(p, i-1)
-                    y4 = solution(p-i-2, imax(p-i-2))
-                    res = y3 + (y2-y3)*(y1-y3)/(y1+y2-y3-y4)
+                    y1 = solution(p - 1, i - 1)
+                    y2 = solution(p - 1, imax(p - 1))
+                    y3 = solution(p, i - 1)
+                    y4 = solution(p - i - 2, imax(p - i - 2))
+                    res = y3 + (y2 - y3) * (y1 - y3) / (y1 + y2 - y3 - y4)
                 END IF
             END IF
 
@@ -541,7 +541,7 @@ CONTAINS
         !
         ! Constants
         !
-        INTEGER(KIND=INT_HIGH), DIMENSION(0:3), PARAMETER :: m = (/ 0, 1, 2, 3 /)
+        INTEGER(KIND=INT_HIGH), DIMENSION(0:3), PARAMETER :: m = (/0, 1, 2, 3/)
         !
         ! Variables
         !
@@ -550,19 +550,19 @@ CONTAINS
         !
         ! Compute the interpolation coefficients
         !
-        dx       = x(2) - x(1)
-        du       = u(2) - u(1)
-        dx2      = dx*dx
-        dx3      = dx2*dx
+        dx = x(2) - x(1)
+        du = u(2) - u(1)
+        dx2 = dx * dx
+        dx3 = dx2 * dx
 
         coeff(0) = u(1)
         coeff(1) = uprime(1)
-        coeff(2) = three*du/dx2 - (uprime(2)+two*uprime(1))/dx
-        coeff(3) = -two*du/dx3 + (uprime(2)+uprime(1))/dx2
+        coeff(2) = three * du / dx2 - (uprime(2) + two * uprime(1)) / dx
+        coeff(3) = -two * du / dx3 + (uprime(2) + uprime(1)) / dx2
         !
         ! Perform the interpolation
         !
-        interpolate_cubic = SUM(coeff*((xi-x(1))**m))
+        interpolate_cubic = SUM(coeff * ((xi - x(1))**m))
 
     END FUNCTION interpolate_cubic
     !-------------------------------------------------------------------------
@@ -594,19 +594,19 @@ CONTAINS
         !
         ! Compute the interpolation coefficients
         !
-        dx(1:4)  = (xi-x(1:4))
-        div(1)   = (x(1)-x(2))*(x(1)-x(3))*(x(1)-x(4))
-        coeff(1) = dx(2)*dx(3)*dx(4)/div(1)
-        div(2)   = (x(2)-x(1))*(x(2)-x(3))*(x(2)-x(4))
-        coeff(2) = dx(1)*dx(3)*dx(4)/div(2)
-        div(3)   = (x(3)-x(1))*(x(3)-x(2))*(x(3)-x(4))
-        coeff(3) = dx(1)*dx(2)*dx(4)/div(3)
-        div(4)   = (x(4)-x(1))*(x(4)-x(2))*(x(4)-x(3))
-        coeff(4) = dx(1)*dx(2)*dx(3)/div(4)
+        dx(1:4) = (xi - x(1:4))
+        div(1) = (x(1) - x(2)) * (x(1) - x(3)) * (x(1) - x(4))
+        coeff(1) = dx(2) * dx(3) * dx(4) / div(1)
+        div(2) = (x(2) - x(1)) * (x(2) - x(3)) * (x(2) - x(4))
+        coeff(2) = dx(1) * dx(3) * dx(4) / div(2)
+        div(3) = (x(3) - x(1)) * (x(3) - x(2)) * (x(3) - x(4))
+        coeff(3) = dx(1) * dx(2) * dx(4) / div(3)
+        div(4) = (x(4) - x(1)) * (x(4) - x(2)) * (x(4) - x(3))
+        coeff(4) = dx(1) * dx(2) * dx(3) / div(4)
         !
         ! Perform the interpolation
         !
-        interpolate_cubic_numerical = SUM(u*coeff)
+        interpolate_cubic_numerical = SUM(u * coeff)
 
     END FUNCTION interpolate_cubic_numerical
     !-------------------------------------------------------------------------
@@ -640,7 +640,7 @@ CONTAINS
         REAL(KIND=REAL_HIGH) :: interpolate_bilinear
         REAL(KIND=REAL_HIGH), INTENT(IN) :: xi, yi
         REAL(KIND=REAL_HIGH), DIMENSION(1:2), INTENT(IN) :: x, y
-        REAL(KIND=REAL_HIGH), DIMENSION(1:2,1:2), INTENT(IN) :: u
+        REAL(KIND=REAL_HIGH), DIMENSION(1:2, 1:2), INTENT(IN) :: u
         !
         ! Variables
         !
@@ -648,18 +648,18 @@ CONTAINS
         !
         ! Compute the interpolation coefficients
         !
-        dx21 = x(2)-x(1)
-        dy21 = y(2)-y(1)
-        dx2i = x(2)-xi
-        dy2i = y(2)-yi
-        dxi1 = xi-x(1)
-        dyi1 = yi-y(1)
+        dx21 = x(2) - x(1)
+        dy21 = y(2) - y(1)
+        dx2i = x(2) - xi
+        dy2i = y(2) - yi
+        dxi1 = xi - x(1)
+        dyi1 = yi - y(1)
         !
         ! Perform the interpolation
         !
-        u1d = (u(1,1)*dx2i + u(2,1)*dxi1)*dy2i
-        u2d = (u(1,2)*dx2i + u(2,2)*dxi1)*dyi1
-        interpolate_bilinear = (u1d + u2d)/(dx21*dy21)
+        u1d = (u(1, 1) * dx2i + u(2, 1) * dxi1) * dy2i
+        u2d = (u(1, 2) * dx2i + u(2, 2) * dxi1) * dyi1
+        interpolate_bilinear = (u1d+u2d) / (dx21 * dy21)
 
     END FUNCTION interpolate_bilinear
     !-------------------------------------------------------------------------
@@ -687,7 +687,7 @@ CONTAINS
         REAL(KIND=REAL_HIGH) :: interpolate_bicubic
         REAL(KIND=REAL_HIGH), INTENT(IN) :: xi, yi
         REAL(KIND=REAL_HIGH), DIMENSION(1:4), INTENT(IN) :: x, y
-        REAL(KIND=REAL_HIGH), DIMENSION(1:4,1:4), INTENT(IN) :: u
+        REAL(KIND=REAL_HIGH), DIMENSION(1:4, 1:4), INTENT(IN) :: u
         !
         ! Variables
         !
@@ -695,10 +695,10 @@ CONTAINS
         !
         ! Perform a cubic interpolation for each column
         !
-        uv(1) = interpolate_cubic_numerical(y, u(1,1:4), yi)
-        uv(2) = interpolate_cubic_numerical(y, u(2,1:4), yi)
-        uv(3) = interpolate_cubic_numerical(y, u(3,1:4), yi)
-        uv(4) = interpolate_cubic_numerical(y, u(4,1:4), yi)
+        uv(1) = interpolate_cubic_numerical(y, u(1, 1:4), yi)
+        uv(2) = interpolate_cubic_numerical(y, u(2, 1:4), yi)
+        uv(3) = interpolate_cubic_numerical(y, u(3, 1:4), yi)
+        uv(4) = interpolate_cubic_numerical(y, u(4, 1:4), yi)
         !
         ! Perform a horizontal interpolation
         !
@@ -740,10 +740,10 @@ CONTAINS
         ! Search
         !
         high = imax
-        low  = imin
-        med  = imin + (imax-imin)/2
+        low = imin
+        med = imin + (imax - imin) / 2
 
-        DO WHILE (high .NE. (low+1))
+        DO WHILE (high .NE. (low + 1))
 
             vmed = vec(med)
 
@@ -753,7 +753,7 @@ CONTAINS
                 high = med
             END IF
 
-            med = low + (high-low)/2
+            med = low + (high - low) / 2
 
         END DO
 
@@ -783,7 +783,7 @@ CONTAINS
         !
         ! Arguments
         !
-        REAL(KIND=REAL_HIGH), DIMENSION(:,:), INTENT(IN) :: mat
+        REAL(KIND=REAL_HIGH), DIMENSION(:, :), INTENT(IN) :: mat
         REAL(KIND=REAL_HIGH), INTENT(IN) :: value
         INTEGER(KIND=INT_HIGH), INTENT(IN) :: imin, imax, jmin, jmax
         INTEGER(KIND=INT_HIGH), INTENT(OUT) :: i, j
@@ -795,18 +795,18 @@ CONTAINS
         !
         ! Search
         !
-        j_index        = binary_search_vector(mat(imin,:), value, jmin, jmax)
-        value_found    = mat(imin,j_index)
-        error_previous = (value-value_found)/ABS(value_found)
+        j_index = binary_search_vector(mat(imin, :), value, jmin, jmax)
+        value_found = mat(imin, j_index)
+        error_previous = (value - value_found) / ABS(value_found)
 
         i = imin
         j = j_index
 
-        DO i_index = imin+1, imax
+        DO i_index = imin + 1, imax
 
-            j_index = binary_search_vector(mat(i,:), value, jmin, jmax)
-            value_found = mat(i,j)
-            error_new = (value-value_found)/ABS(value_found)
+            j_index = binary_search_vector(mat(i, :), value, jmin, jmax)
+            value_found = mat(i, j)
+            error_new = (value - value_found) / ABS(value_found)
 
             IF ((error_new >= zero) .AND. (error_new < error_previous)) THEN
                 i = i_index
@@ -846,11 +846,11 @@ CONTAINS
 
             IF (present(indx)) THEN
                 CALL partition(vec, indx, iq)
-                CALL quicksort(vec(:iq-1), indx(:iq-1))
+                CALL quicksort(vec(:iq - 1), indx(:iq - 1))
                 CALL quicksort(vec(iq:), indx(iq:))
             ELSE
                 CALL partition(vec, marker=iq)
-                CALL quicksort(vec(:iq-1))
+                CALL quicksort(vec(:iq - 1))
                 CALL quicksort(vec(iq:))
             END IF
 
@@ -888,32 +888,32 @@ CONTAINS
         j = size(vec) + 1
 
         DO
-            j = j-1
+            j = j - 1
             DO
                 IF (vec(j) <= x) EXIT
-                j = j-1
+                j = j - 1
             END DO
 
-            i = i+1
+            i = i + 1
             DO
                 IF (vec(i) >= x) EXIT
-                i = i+1
+                i = i + 1
             END DO
 
             IF (i < j) THEN
 
-                rtemp  = vec(i)
+                rtemp = vec(i)
                 vec(i) = vec(j)
                 vec(j) = rtemp
 
                 IF (present(indx)) THEN
-                    itemp   = indx(i)
+                    itemp = indx(i)
                     indx(i) = indx(j)
                     indx(j) = itemp
                 END IF
 
             ELSE IF (i == j) THEN
-                marker = i+1
+                marker = i + 1
                 RETURN
             ELSE
                 marker = i

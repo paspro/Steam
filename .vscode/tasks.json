@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [{
+            "label": "Format Fortran File",
+            "type": "shell",
+            "command": "fprettify",
+            "args": [
+                "--silent",
+                "-w 4",
+                "-i 4",
+                "'${file}'"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Format All Fortran Files",
+            "type": "shell",
+            "command": "fprettify",
+            "args": [
+                "--silent",
+                "-w 4",
+                "-i 4",
+                "-r",
+                "'${workspaceFolder}/'"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

@@ -47,7 +47,7 @@ CONTAINS
     !-------------------------------------------------------------------------
     ELEMENTAL FUNCTION in_region1(pressure, temperature)
 
-        USE SteamRegion4, ONLY : psat => saturation_pressure
+        USE SteamRegion4, ONLY: psat => saturation_pressure
 
         IMPLICIT NONE
         !
@@ -88,8 +88,8 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION in_region2(pressure, temperature)
 
-        USE SteamRegion4,    ONLY : psat => saturation_pressure
-        USE SteamBoundaries, ONLY : pbnd => boundary23_pressure
+        USE SteamRegion4, ONLY: psat => saturation_pressure
+        USE SteamBoundaries, ONLY: pbnd => boundary23_pressure
 
         IMPLICIT NONE
         !
@@ -111,7 +111,7 @@ CONTAINS
             END IF
 
         ELSE IF ((temperature > REGION_1_TMAX) .AND. &
-            (temperature <= REGION_2_4_T)) THEN
+                 (temperature <= REGION_2_4_T)) THEN
 
             IF ((pressure > 0.0) .AND. &
                 (pressure <= pbnd(temperature))) THEN
@@ -119,7 +119,7 @@ CONTAINS
             END IF
 
         ELSE IF ((temperature > REGION_2_4_T) .AND. &
-            (temperature <= REGION_2_TMAX)) THEN
+                 (temperature <= REGION_2_TMAX)) THEN
 
             IF ((pressure > 0.0) .AND. &
                 (pressure <= IAPWS97_PMAX)) THEN
@@ -154,7 +154,7 @@ CONTAINS
         in_region2a = .FALSE.
 
         IF (pressure <= REGION_2A_2B_P) THEN
-            in_region2a = in_region2(pressure,temperature)
+            in_region2a = in_region2(pressure, temperature)
         END IF
 
     END FUNCTION in_region2a
@@ -171,8 +171,8 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION in_region2b(pressure, temperature)
 
-        USE SteamBoundaries, ONLY : p2bc => boundary2bc_pressure
-        USE SteamRegion2,    ONLY : h2 => specific_enthalpy
+        USE SteamBoundaries, ONLY: p2bc => boundary2bc_pressure
+        USE SteamRegion2, ONLY: h2 => specific_enthalpy
 
         IMPLICIT NONE
         !
@@ -190,10 +190,10 @@ CONTAINS
         in_region2b = .FALSE.
 
         h = h2(pressure, temperature)
-    
+
         IF (pressure > REGION_2A_2B_P) THEN
             IF (pressure <= p2bc(h)) THEN
-                in_region2b = in_region2(pressure,temperature)
+                in_region2b = in_region2(pressure, temperature)
             END IF
         END IF
 
@@ -211,8 +211,8 @@ CONTAINS
     !-------------------------------------------------------------------------
     FUNCTION in_region2c(pressure, temperature)
 
-        USE SteamBoundaries, ONLY : p2bc => boundary2bc_pressure
-        USE SteamRegion2,    ONLY : h2 => specific_enthalpy
+        USE SteamBoundaries, ONLY: p2bc => boundary2bc_pressure
+        USE SteamRegion2, ONLY: h2 => specific_enthalpy
 
         IMPLICIT NONE
         !
@@ -232,7 +232,7 @@ CONTAINS
         h = h2(pressure, temperature)
 
         IF (pressure > p2bc(h)) THEN
-            in_region2c = in_region2(pressure,temperature)
+            in_region2c = in_region2(pressure, temperature)
         END IF
 
     END FUNCTION in_region2c
@@ -292,7 +292,7 @@ CONTAINS
 
         USE SteamRegion3
         USE SteamBoundaries
- 
+
         IMPLICIT NONE
         !
         ! Arguments
@@ -371,8 +371,8 @@ CONTAINS
     !-------------------------------------------------------------------------
     ELEMENTAL FUNCTION in_region4(pressure, temperature, error)
 
-        USE SteamRegion4, ONLY : tsat => saturation_temperature, &
-                                 psat => saturation_pressure
+        USE SteamRegion4, ONLY: tsat => saturation_temperature, &
+            psat => saturation_pressure
 
         IMPLICIT NONE
         !
@@ -396,8 +396,8 @@ CONTAINS
             pressure_estimate = psat(temperature)
             temperature_estimate = tsat(pressure)
 
-            p_error = ABS(pressure-pressure_estimate)/pressure
-            t_error = ABS(temperature-temperature_estimate)/temperature
+            p_error = ABS(pressure - pressure_estimate) / pressure
+            t_error = ABS(temperature - temperature_estimate) / temperature
 
             IF ((p_error <= error) .AND. (t_error <= error)) THEN
                 in_region4 = .TRUE.
