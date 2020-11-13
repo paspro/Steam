@@ -1,7 +1,0 @@
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/install/strip.dir
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/edit_cache.dir
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/steam-testing.dir
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/rebuild_cache.dir
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/list_install_components.dir
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/install/local.dir
-/home/panos/Development/Steam/build/SteamTesting/CMakeFiles/install.dir

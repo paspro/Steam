@@ -1,1 +1,0 @@
-/opt/intel/compilers_and_libraries/linux/bin/intel64/ifort   -O2 CMakeFiles/steam-testing.dir/src/SteamTablesTesting.f.o CMakeFiles/steam-testing.dir/src/SteamTesting.f.o  -o steam-testing  -L/home/panos/Development/Steam/build/SteamTesting/../SteamPolynomials -Wl,-rpath,/home/panos/Development/Steam/build/SteamTesting/../SteamPolynomials: -lSteamPolynomials 

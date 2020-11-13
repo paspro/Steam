@@ -1,7 +1,0 @@
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/install/strip.dir
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/edit_cache.dir
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/SteamPolynomials.dir
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/rebuild_cache.dir
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/list_install_components.dir
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/install/local.dir
-/home/panos/Development/Steam/build/SteamPolynomials/CMakeFiles/install.dir
