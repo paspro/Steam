@@ -684,7 +684,7 @@ pub fn function_inverter_y(
 ///   - `u`: The vector with the property values (size=2).
 ///   - `uprime`: The vector with the gradient of the property.
 ///   - `xi`: The x-value to be used for computing the interpolated
-///           property value which lies between x[0] and x[1].
+///           property value which lies between x0 and x1.
 ///
 /// - Returns:
 ///   - The interpolated value at location xi.
@@ -719,7 +719,7 @@ pub fn interpolate_cubic(x: &[f64; 2], u: &[f64; 2], uprime: &[f64; 2], xi: f64)
 ///   - `x`: The vector with the x-values (size=4).
 ///   - `u`: The vector with the property values (size=4).
 ///   - `xi`: The x-value to be used for computing the interpolated
-///           property value which lies between x[1] and x[2].
+///           property value which lies between x1 and x2.
 ///
 /// - Returns:
 ///   - The interpolated value at location xi.

@@ -115,16 +115,16 @@ fn mu1(del: f64, tau: f64) -> f64 {
 /// temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The viscosity in [Pa.sec].
+///   - The viscosity in (Pa.sec).
 ///
 pub fn viscosity(density: f64, temperature: f64) -> f64 {
     //
     // Star viscosity for the computation of viscosity(density,temperature)
-    // in [Pa.sec].
+    // in (Pa.sec).
     //
     const VISCOSITY_MUSTAR: f64 = 1.0e-6;
     //

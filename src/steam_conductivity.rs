@@ -23,26 +23,26 @@ use crate::steam_constants::*;
 /// of density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The thermal conductivity in [W/K.m].
+///   - The thermal conductivity in (W/K.m).
 ///
 pub fn thermal_conductivity(density: f64, temperature: f64) -> f64 {
     //
     // Star temperature for the computation of thermal
-    // conductivity(density,temperature) in [K].
+    // conductivity(density,temperature) in (K).
     //
     const THCOND_TSTAR: f64 = 647.26;
     //
     // Star density for the computation of thermal
-    // conductivity(density,temperature) in [Kg/m3].
+    // conductivity(density,temperature) in (Kg/m3).
     //
     const THCOND_RHOSTAR: f64 = 317.7;
     //
     // Star thermal conductivity for the computation of thermal
-    // conductivity(density,temperature) in [W/K.m].
+    // conductivity(density,temperature) in (W/K.m).
     //
     const THCOND_KSTAR: f64 = 1.0;
     //

@@ -86,12 +86,12 @@ const N: [f64; 39] = [
 const N1: f64 = 0.10658070028513e1;
 
 ///
-/// Star density for region 3 in [MPa].
+/// Star density for region 3 in (MPa).
 ///
 const REGION_3_RHOSTAR: f64 = IAPWS97_RHOCRIT;
 
 ///
-/// Star temperature for region 3 in [K].
+/// Star temperature for region 3 in (K).
 ///
 const REGION_3_TSTAR: f64 = IAPWS97_TCRIT;
 
@@ -235,11 +235,11 @@ fn helmholtz_grad2_delta_tau(delta: f64, tau: f64) -> f64 {
 /// This function computes pressure with respect to density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - Pressure in [MPa].
+///   - Pressure in (MPa).
 ///
 pub fn pressure(density: f64, temperature: f64) -> f64 {
     //
@@ -258,11 +258,11 @@ pub fn pressure(density: f64, temperature: f64) -> f64 {
 /// density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific internal energy [J/Kg].
+///   - The specific internal energy (J/Kg).
 ///
 pub fn specific_internal_energy(density: f64, temperature: f64) -> f64 {
     //
@@ -281,11 +281,11 @@ pub fn specific_internal_energy(density: f64, temperature: f64) -> f64 {
 /// density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific entropy [J/Kg.K].
+///   - The specific entropy (J/Kg.K).
 ///
 pub fn specific_entropy(density: f64, temperature: f64) -> f64 {
     //
@@ -304,11 +304,11 @@ pub fn specific_entropy(density: f64, temperature: f64) -> f64 {
 /// density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific enthalpy [J/Kg].
+///   - The specific enthalpy (J/Kg).
 ///
 pub fn specific_enthalpy(density: f64, temperature: f64) -> f64 {
     //
@@ -329,11 +329,11 @@ pub fn specific_enthalpy(density: f64, temperature: f64) -> f64 {
 /// to density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific isobaric heat capacity [J/Kg.K].
+///   - The specific isobaric heat capacity (J/Kg.K).
 ///
 pub fn specific_isobaric_heat_capacity(density: f64, temperature: f64) -> f64 {
     //
@@ -357,11 +357,11 @@ pub fn specific_isobaric_heat_capacity(density: f64, temperature: f64) -> f64 {
 /// to density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific isochoric heat capacity [J/Kg.K].
+///   - The specific isochoric heat capacity (J/Kg.K).
 ///
 pub fn specific_isochoric_heat_capacity(density: f64, temperature: f64) -> f64 {
     //
@@ -380,8 +380,8 @@ pub fn specific_isochoric_heat_capacity(density: f64, temperature: f64) -> f64 {
 /// to density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - The ratio of specific heats.
@@ -399,11 +399,11 @@ pub fn ratio_of_specific_heats(density: f64, temperature: f64) -> f64 {
 /// to density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The speed of sound [m/sec].
+///   - The speed of sound (m/sec).
 ///
 pub fn speed_of_sound(density: f64, temperature: f64) -> f64 {
     //
@@ -429,11 +429,11 @@ pub fn speed_of_sound(density: f64, temperature: f64) -> f64 {
 /// to density and temperature.
 ///
 /// - Arguments:
-///   - `density`: The steam density [Kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (Kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific Helmoltz free energy [J/kg].
+///   - The specific Helmoltz free energy (J/kg).
 ///
 pub fn specific_helmoltz_free_energy(density: f64, temperature: f64) -> f64 {
     //
@@ -452,11 +452,11 @@ pub fn specific_helmoltz_free_energy(density: f64, temperature: f64) -> f64 {
 /// and enthalpy (backward equation) for the sub-region 3a.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `enthalpy`: The steam enthalpy [J/Kg].
+///   - `pressure`: The steam pressure (MPa).
+///   - `enthalpy`: The steam enthalpy (J/Kg).
 ///
 /// - Returns:
-///   - The temperature [K].
+///   - The temperature (K).
 ///
 pub fn temperature_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     //
@@ -507,17 +507,17 @@ pub fn temperature_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward temperature(pressure, enthalpy)
-    // equation in sub-region 3a in [MPa].
+    // equation in sub-region 3a in (MPa).
     //
     const REGION_3A_PH_PSTAR: f64 = 100.0;
     //
     // Star enthalpy for the backward temperature(pressure, enthalpy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PH_HSTAR: f64 = 2300.0e3;
     //
     // Star temperature for the backward temperature(pressure, enthalpy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PH_TSTAR: f64 = 760.0;
     //
@@ -543,11 +543,11 @@ pub fn temperature_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
 /// and enthalpy (backward equation) for the sub-region 3b.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `enthalpy`: The steam enthalpy [J/Kg].
+///   - `pressure`: The steam pressure (MPa).
+///   - `enthalpy`: The steam enthalpy (J/Kg).
 ///
 /// - Returns:
-///   - The temperature [K].
+///   - The temperature (K).
 ///
 pub fn temperature_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     //
@@ -600,17 +600,17 @@ pub fn temperature_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward temperature(pressure, enthalpy)
-    // equation in sub-region 3b in [MPa].
+    // equation in sub-region 3b in (MPa).
     //
     const REGION_3B_PH_PSTAR: f64 = 100.0;
     //
     // Star enthalpy for the backward temperature(pressure, enthalpy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PH_HSTAR: f64 = 2800.0e3;
     //
     // Star temperature for the backward temperature(pressure, enthalpy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PH_TSTAR: f64 = 860.0;
     //
@@ -636,11 +636,11 @@ pub fn temperature_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
 /// and enthalpy (backward equation) for the sub-region 3a.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `enthalpy`: The steam enthalpy [J/Kg].
+///   - `pressure`: The steam pressure (MPa).
+///   - `enthalpy`: The steam enthalpy (J/Kg).
 ///
 /// - Returns:
-///   - The specific volume [m3/Kg].
+///   - The specific volume (m3/Kg).
 ///
 pub fn specific_volume_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     //
@@ -692,17 +692,17 @@ pub fn specific_volume_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward specific volume(pressure, enthalpy)
-    // equation in sub-region 3a in [MPa].
+    // equation in sub-region 3a in (MPa).
     //
     const REGION_3A_PH_PSTAR: f64 = 100.0;
     //
     // Star enthalpy for the backward specific volume(pressure, enthalpy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PH_HSTAR: f64 = 2100.0e3;
     //
     // Star specific volume for the backward specific volume(pressure, enthalpy)
-    // equation in sub-region 3a in [m3/Kg].
+    // equation in sub-region 3a in (m3/Kg).
     //
     const REGION_3A_PH_VSTAR: f64 = 0.0028;
     //
@@ -728,11 +728,11 @@ pub fn specific_volume_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
 /// and enthalpy (backward equation) for the sub-region 3b.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `enthalpy`: The steam enthalpy [J/Kg].
+///   - `pressure`: The steam pressure (MPa).
+///   - `enthalpy`: The steam enthalpy (J/Kg).
 ///
 /// - Returns:
-///   - The specific volume [m3/Kg].
+///   - The specific volume (m3/Kg).
 ///
 pub fn specific_volume_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     //
@@ -781,17 +781,17 @@ pub fn specific_volume_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward specific volume(pressure, enthalpy)
-    // equation in sub-region 3b in [MPa].
+    // equation in sub-region 3b in (MPa).
     //
     const REGION_3B_PH_PSTAR: f64 = 100.0;
     //
     // Star enthalpy for the backward specific volume(pressure, enthalpy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PH_HSTAR: f64 = 2800.0e3;
     //
     // Star specific volume for the backward specific volume(pressure, enthalpy)
-    // equation in sub-region 3b in [m3/Kg].
+    // equation in sub-region 3b in (m3/Kg).
     //
     const REGION_3B_PH_VSTAR: f64 = 0.0088;
     //
@@ -817,11 +817,11 @@ pub fn specific_volume_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
 /// and entropy (backward equation) for the sub-region 3a.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `entropy`: The steam entropy [J/Kg.K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `entropy`: The steam entropy (J/Kg.K).
 ///
 /// - Returns:
-///   - The temperature [K].
+///   - The temperature (K).
 ///
 pub fn temperature_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     //
@@ -874,17 +874,17 @@ pub fn temperature_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward temperature(pressure, entropy)
-    // equation in sub-region 3a in [MPa].
+    // equation in sub-region 3a in (MPa).
     //
     const REGION_3A_PS_PSTAR: f64 = 100.0;
     //
     // Star entropy for the backward temperature(pressure, entropy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PS_SSTAR: f64 = 4.4e3;
     //
     // Star temperature for the backward temperature(pressure, entropy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PS_TSTAR: f64 = 760.0;
     //
@@ -910,11 +910,11 @@ pub fn temperature_ps_region3a(pressure: f64, entropy: f64) -> f64 {
 /// and entropy (backward equation) for the sub-region 3b.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `entropy`: The steam entropy [J/Kg.K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `entropy`: The steam entropy (J/Kg.K).
 ///
 /// - Returns:
-///   - The temperature [K].
+///   - The temperature (K).
 ///
 pub fn temperature_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     //
@@ -961,17 +961,17 @@ pub fn temperature_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward temperature(pressure, entropy)
-    // equation in sub-region 3b in [MPa].
+    // equation in sub-region 3b in (MPa).
     //
     const REGION_3B_PS_PSTAR: f64 = 100.0;
     //
     // Star entropy for the backward temperature(pressure, entropy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PS_SSTAR: f64 = 5.3e3;
     //
     // Star temperature for the backward temperature(pressure, entropy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PS_TSTAR: f64 = 860.0;
     //
@@ -997,11 +997,11 @@ pub fn temperature_ps_region3b(pressure: f64, entropy: f64) -> f64 {
 /// and entropy (backward equation) for the sub-region 3a
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `entropy`: The steam entropy [J/Kg.K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `entropy`: The steam entropy (J/Kg.K).
 ///
 /// - Returns:
-///   - The specific volume [m3/Kg].
+///   - The specific volume (m3/Kg).
 ///
 pub fn specific_volume_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     //
@@ -1048,17 +1048,17 @@ pub fn specific_volume_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward specific volume(pressure, entropy)
-    // equation in sub-region 3a in [MPa].
+    // equation in sub-region 3a in (MPa).
     //
     const REGION_3A_PS_PSTAR: f64 = 100.0;
     //
     // Star entropy for the backward specific volume(pressure, entropy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PS_SSTAR: f64 = 4.4e3;
     //
     // Star specific volume for the backward specific volume(pressure, entropy)
-    // equation in sub-region 3a in [J/Kg].
+    // equation in sub-region 3a in (J/Kg).
     //
     const REGION_3A_PS_VSTAR: f64 = 0.0028;
     //
@@ -1084,11 +1084,11 @@ pub fn specific_volume_ps_region3a(pressure: f64, entropy: f64) -> f64 {
 /// and entropy (backward equation) for the sub-region 3b.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `entropy`: The steam entropy [J/Kg.K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `entropy`: The steam entropy (J/Kg.K).
 ///
 /// - Returns:
-///   - The specific volume [m3/Kg].
+///   - The specific volume (m3/Kg).
 ///
 pub fn specific_volume_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     //
@@ -1139,17 +1139,17 @@ pub fn specific_volume_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     ];
     //
     // Star pressure for the backward specific volume(pressure, entropy)
-    // equation in sub-region 3b in [MPa].
+    // equation in sub-region 3b in (MPa).
     //
     const REGION_3B_PS_PSTAR: f64 = 100.0;
     //
     // Star entropy for the backward specific volume(pressure, entropy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PS_SSTAR: f64 = 5.3e3;
     //
     // Star specific volume for the backward specific volume(pressure, entropy)
-    // equation in sub-region 3b in [J/Kg].
+    // equation in sub-region 3b in (J/Kg).
     //
     const REGION_3B_PS_VSTAR: f64 = 0.0088;
     //

@@ -37,43 +37,43 @@ pub struct SteamState {
     ///
     region: usize,
     ///
-    /// The steam pressure in [MPa].
+    /// The steam pressure in (MPa).
     ///
     pressure: f64,
     ///
-    /// The steam temperature in [K].
+    /// The steam temperature in (K).
     ///
     temperature: f64,
     ///
-    /// The steam density in [kg/m3].
+    /// The steam density in (kg/m3).
     ///
     density: f64,
     ///
-    /// The steam quality in [%].
+    /// The steam quality in (%).
     ///
     quality: f64,
     ///
-    /// The specific volume of the steam state in [m3/kg].
+    /// The specific volume of the steam state in (m3/kg).
     ///
     v: f64,
     ///
-    /// The specific internal energy of the steam state in [J/kg].
+    /// The specific internal energy of the steam state in (J/kg).
     ///
     u: f64,
     ///
-    /// The specific enthalpy of the steam state in [J/kg].
+    /// The specific enthalpy of the steam state in (J/kg).
     ///
     h: f64,
     ///
-    /// The specific entropy of the steam state in [J/Kg.k].
+    /// The specific entropy of the steam state in (J/Kg.k).
     ///
     s: f64,
     ///
-    /// The specific isobaric heat capacity of the steam state in [J/Kg.K].
+    /// The specific isobaric heat capacity of the steam state in (J/Kg.K).
     ///
     cp: f64,
     ///
-    /// The specific isochoric heat capacity of the steam state in [J/Kg.K].
+    /// The specific isochoric heat capacity of the steam state in (J/Kg.K).
     ///
     cv: f64,
     ///
@@ -81,11 +81,11 @@ pub struct SteamState {
     ///
     ratio_cp_cv: f64,
     ///
-    /// Viscosity in [Pa.sec].
+    /// Viscosity in (Pa.sec).
     ///
     mu: f64,
     ///
-    /// Thermal Conductivity in [W/K.m].
+    /// Thermal Conductivity in (W/K.m).
     ///
     tk: f64,
 }
@@ -203,7 +203,7 @@ impl SteamState {
     /// Returns the specific volume of the steam state.
     ///
     /// - Returns:
-    ///   - The specific volume [m3/kg].
+    ///   - The specific volume (m3/kg).
     ///
     pub fn get_specific_volume(&mut self) -> f64 {
         if self.v > ZERO {
@@ -226,7 +226,7 @@ impl SteamState {
     /// Returns the pressure of the steam state.
     ///
     /// - Returns
-    ///   - The pressure [MPa].
+    ///   - The pressure (MPa).
     ///
     pub fn get_pressure(&mut self) -> f64 {
         match self.region {
@@ -247,7 +247,7 @@ impl SteamState {
     /// Returns the density of the steam state.
     ///
     /// - Returns:
-    ///   - The density [Kg/m3].
+    ///   - The density (Kg/m3).
     ///
     pub fn get_density(&mut self) -> f64 {
         ONE / self.get_specific_volume()
@@ -257,7 +257,7 @@ impl SteamState {
     /// Returns the temperature of the steam state.
     ///
     /// - Returns:
-    ///   - The temperature [K].
+    ///   - The temperature (K).
     ///
     pub fn get_temperature(&self) -> f64 {
         self.temperature
@@ -267,7 +267,7 @@ impl SteamState {
     /// Returns the specific internal energy of the steam state.
     ///
     /// - Returns:
-    ///   - The specific internal energy [J/kg].
+    ///   - The specific internal energy (J/kg).
     ///
     pub fn get_specific_internal_energy(&mut self) -> f64 {
         if self.u > ZERO {
@@ -290,7 +290,7 @@ impl SteamState {
     /// Returns the specific enthalpy of the steam state.
     ///
     /// - Returns:
-    ///   - The specific enthalpy [J/kg].
+    ///   - The specific enthalpy (J/kg).
     ///
     pub fn get_specific_enthalpy(&mut self) -> f64 {
         if self.h > ZERO {
@@ -313,7 +313,7 @@ impl SteamState {
     /// Returns the specific entropy of the steam state.
     ///
     /// - Returns:
-    ///   - The specific entropy [J/kg.K].
+    ///   - The specific entropy (J/kg.K).
     ///
     pub fn get_specific_entropy(&mut self) -> f64 {
         if self.s > ZERO {
@@ -336,7 +336,7 @@ impl SteamState {
     /// Returns the specific isobaric heat capacity of the steam state.
     ///
     /// - Returns:
-    ///   - The specific isobaric heat capacity [J/kg.K].
+    ///   - The specific isobaric heat capacity (J/kg.K).
     ///
     pub fn get_specific_isobaric_heat_capacity(&mut self) -> f64 {
         if self.cp > ZERO {
@@ -359,7 +359,7 @@ impl SteamState {
     /// Returns the specific isochoric heat capacity of the steam state.
     ///
     /// - Returns:
-    ///   - The specific isochoric heat capacity [J/kg.K].
+    ///   - The specific isochoric heat capacity (J/kg.K).
     ///
     pub fn get_specific_isochoric_heat_capacity(&mut self) -> f64 {
         if self.cv > ZERO {
@@ -395,7 +395,7 @@ impl SteamState {
     /// Returns the viscosity of the steam state.
     ///
     /// - Returns:
-    ///   - The viscosity [Pa.sec].
+    ///   - The viscosity (Pa.sec).
     ///
     pub fn get_viscosity(&mut self) -> f64 {
         if self.mu > ZERO {
@@ -409,7 +409,7 @@ impl SteamState {
     /// Returns the thermal conductivity of the steam state.
     ///
     /// - Returns:
-    ///   - The thermal conductivity [W/K.m].
+    ///   - The thermal conductivity (W/K.m).
     ///
     pub fn get_thermal_conductivity(&mut self) -> f64 {
         if self.tk > ZERO {

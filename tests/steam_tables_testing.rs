@@ -790,19 +790,19 @@ pub fn test_viscosity() {
     println!("Viscosity Test - Computational Errors");
     println!("==========================================");
     //
-    // Reference temperature values [K].
+    // Reference temperature values (K).
     //
     let t: [f64; 11] = [
         298.15, 298.15, 373.15, 433.15, 433.15, 873.15, 873.15, 873.15, 1173.15, 1173.15, 1173.15,
     ];
     //
-    // Reference density values [kg/m³].
+    // Reference density values (kg/m³).
     //
     let rho: [f64; 11] = [
         998.0, 1200.0, 1000.0, 1.0, 1000.0, 1.0, 100.0, 600.0, 1.0, 100.0, 400.0,
     ];
     //
-    // Reference viscosity values [Pa·s].
+    // Reference viscosity values (Pa·s).
     //
     let mu: [f64; 11] = [
         889.735100e-06,
@@ -832,15 +832,15 @@ pub fn test_viscosity() {
 fn test_thermal_conductivity() {
     use steam::steam_conductivity::*;
     //
-    // Reference temperature values [K].
+    // Reference temperature values (K).
     //
     const T: [f64; 4] = [298.15, 298.15, 298.15, 873.15];
     //
-    // Reference density values [kg/m³].
+    // Reference density values (kg/m³).
     //
     const RHO: [f64; 4] = [0.0, 998.0, 1200.0, 0.0];
     //
-    // Reference thermal conductivity values [W/m·K].
+    // Reference thermal conductivity values (W/m·K).
     //
     const K: [f64; 4] = [
         18.4341883e-03,

@@ -59,12 +59,12 @@ const NR: [f64; 6] = [
 ];
 
 ///
-/// Star pressure for region 5 in [MPa].
+/// Star pressure for region 5 in (MPa).
 ///
 const REGION_5_PSTAR: f64 = 1.0;
 
 ///
-/// Star temperature for region 5 in [K].
+/// Star temperature for region 5 in (K).
 ///
 const REGION_5_TSTAR: f64 = 1000.0;
 
@@ -272,11 +272,11 @@ fn gibbs_residual_grad2_pi_tau(pi: f64, tau: f64) -> f64 {
 /// pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific internal energy [J/Kg].
+///   - The specific internal energy (J/Kg).
 ///
 pub fn specific_internal_energy(pressure: f64, temperature: f64) -> f64 {
     //
@@ -296,11 +296,11 @@ pub fn specific_internal_energy(pressure: f64, temperature: f64) -> f64 {
 /// pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific volume [m3/Kg].
+///   - The specific volume (m3/Kg).
 ///
 pub fn specific_volume(pressure: f64, temperature: f64) -> f64 {
     //
@@ -320,11 +320,11 @@ pub fn specific_volume(pressure: f64, temperature: f64) -> f64 {
 /// pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific entropy [J/kg.K].
+///   - The specific entropy (J/kg.K).
 ///
 pub fn specific_entropy(pressure: f64, temperature: f64) -> f64 {
     //
@@ -345,11 +345,11 @@ pub fn specific_entropy(pressure: f64, temperature: f64) -> f64 {
 /// pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific enthalpy [J/Kg].
+///   - The specific enthalpy (J/Kg).
 ///
 pub fn specific_enthalpy(pressure: f64, temperature: f64) -> f64 {
     //
@@ -369,11 +369,11 @@ pub fn specific_enthalpy(pressure: f64, temperature: f64) -> f64 {
 /// to pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The speed of sound [m/sec].
+///   - The speed of sound (m/sec).
 ///
 pub fn speed_of_sound(pressure: f64, temperature: f64) -> f64 {
     //
@@ -398,11 +398,11 @@ pub fn speed_of_sound(pressure: f64, temperature: f64) -> f64 {
 /// to pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific isobaric heat capacity [J/Kg.K].
+///   - The specific isobaric heat capacity (J/Kg.K).
 ///
 pub fn specific_isobaric_heat_capacity(pressure: f64, temperature: f64) -> f64 {
     //
@@ -421,11 +421,11 @@ pub fn specific_isobaric_heat_capacity(pressure: f64, temperature: f64) -> f64 {
 /// to pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific isochoric heat capacity [J/Kg.K].
+///   - The specific isochoric heat capacity (J/Kg.K).
 ///
 pub fn specific_isochoric_heat_capacity(pressure: f64, temperature: f64) -> f64 {
     //
@@ -450,8 +450,8 @@ pub fn specific_isochoric_heat_capacity(pressure: f64, temperature: f64) -> f64 
 /// to pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - The ratio of specific heats.
@@ -469,11 +469,11 @@ pub fn ratio_of_specific_heats(pressure: f64, temperature: f64) -> f64 {
 /// to pressure and temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The specific Gibbs free energy [J/kg].
+///   - The specific Gibbs free energy (J/kg).
 ///
 pub fn specific_gibbs_free_energy(pressure: f64, temperature: f64) -> f64 {
     //

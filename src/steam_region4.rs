@@ -79,12 +79,12 @@ const L: [f64; 6] = [
 ];
 
 ///
-/// Star pressure for region 4 in [MPa].
+/// Star pressure for region 4 in (MPa).
 ///
 const REGION_4_PSTAR: f64 = 1.0;
 
 ///
-/// Star temperature for region 4 in [K].
+/// Star temperature for region 4 in (K).
 ///
 const REGION_4_TSTAR: f64 = 1.0;
 
@@ -93,10 +93,10 @@ const REGION_4_TSTAR: f64 = 1.0;
 /// temperature.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The pressure [MPa].
+///   - The pressure (MPa).
 ///
 pub fn saturation_pressure(temperature: f64) -> f64 {
     //
@@ -118,10 +118,10 @@ pub fn saturation_pressure(temperature: f64) -> f64 {
 /// to temperature.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The pressure gradient [MPa/K].
+///   - The pressure gradient (MPa/K).
 ///
 pub fn saturation_pressure_gradient(temperature: f64) -> f64 {
     //
@@ -149,10 +149,10 @@ pub fn saturation_pressure_gradient(temperature: f64) -> f64 {
 /// pressure.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 /// - Returns:
-///   - The temperature [K].
+///   - The temperature (K).
 ///
 pub fn saturation_temperature(pressure: f64) -> f64 {
     //
@@ -174,10 +174,10 @@ pub fn saturation_temperature(pressure: f64) -> f64 {
 /// temperature.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The saturation water density [Kg/m3].
+///   - The saturation water density (Kg/m3).
 ///
 pub fn saturation_water_density(temperature: f64) -> f64 {
     //
@@ -206,10 +206,10 @@ pub fn saturation_water_density(temperature: f64) -> f64 {
 /// temperature.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The saturation steam density [Kg/m3].
+///   - The saturation steam density (Kg/m3).
 ///
 pub fn saturation_steam_density(temperature: f64) -> f64 {
     //
@@ -239,11 +239,11 @@ pub fn saturation_steam_density(temperature: f64) -> f64 {
 /// temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
-///   - The specific internal energy [J/Kg].
+///   - The specific internal energy (J/Kg).
 ///
 pub fn specific_internal_energy(temperature: f64, quality: f64) -> f64 {
     //
@@ -266,11 +266,11 @@ pub fn specific_internal_energy(temperature: f64, quality: f64) -> f64 {
 /// temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
-///   - The specific volume [m3/kg].
+///   - The specific volume (m3/kg).
 ///
 pub fn specific_volume(temperature: f64, quality: f64) -> f64 {
     //
@@ -294,11 +294,11 @@ pub fn specific_volume(temperature: f64, quality: f64) -> f64 {
 /// temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
-///   - The specific enthalpy [J/Kg].
+///   - The specific enthalpy (J/Kg).
 ///
 pub fn specific_enthalpy(temperature: f64, quality: f64) -> f64 {
     //
@@ -321,11 +321,11 @@ pub fn specific_enthalpy(temperature: f64, quality: f64) -> f64 {
 /// temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
-///   - The specific entropy [J/Kg.K].
+///   - The specific entropy (J/Kg.K).
 ///
 pub fn specific_entropy(temperature: f64, quality: f64) -> f64 {
     //
@@ -348,11 +348,11 @@ pub fn specific_entropy(temperature: f64, quality: f64) -> f64 {
 /// to temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
-///   - The specific isobaric heat capacity [J/Kg.K].
+///   - The specific isobaric heat capacity (J/Kg.K).
 ///
 pub fn specific_isobaric_heat_capacity(temperature: f64, quality: f64) -> f64 {
     //
@@ -375,11 +375,11 @@ pub fn specific_isobaric_heat_capacity(temperature: f64, quality: f64) -> f64 {
 /// to temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
-///   - The specific isochoric heat capacity [J/Kg.K].
+///   - The specific isochoric heat capacity (J/Kg.K).
 ///
 pub fn specific_isochoric_heat_capacity(temperature: f64, quality: f64) -> f64 {
     //
@@ -402,8 +402,8 @@ pub fn specific_isochoric_heat_capacity(temperature: f64, quality: f64) -> f64 {
 /// to temperature and steam quality.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
-///   - `quality`: The steam quality [%].
+///   - `temperature`: The steam temperature (K).
+///   - `quality`: The steam quality (%).
 ///
 /// - Returns:
 ///   - The ratio of specific heats.

@@ -47,20 +47,20 @@ const M: [f64; 5] = [
 /// 2 and 3 with respect to temperature.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
-///   - The pressure [MPa]
+///   - The pressure (MPa)
 ///
 pub fn boundary23_pressure(temperature: f64) -> f64 {
     //
     // Star pressure for the computations on the boundary line between
-    // regions 2 and 3 in [MPa].
+    // regions 2 and 3 in (MPa).
     //
     const REGION_2_3_PSTAR: f64 = 1.0;
     //
     // Star temperature for the computations on the boundary line between
-    // regions 2 and 3 in [J/Kg].
+    // regions 2 and 3 in (J/Kg).
     //
     const REGION_2_3_TSTAR: f64 = 1.0;
     //
@@ -74,7 +74,7 @@ pub fn boundary23_pressure(temperature: f64) -> f64 {
 /// Checks if the temperature is valid for boundary23_pressure.
 ///
 /// - Arguments:
-///   - `temperature`: The steam temperature [K].
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - `bool`: True if the temperature is within valid range.
@@ -88,20 +88,20 @@ pub fn is_valid_boundary23_pressure(temperature: f64) -> bool {
 /// 2 and 3 with respect to pressure.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 /// - Returns:
-///   - The temperature [K].
+///   - The temperature (K).
 ///
 pub fn boundary23_temperature(pressure: f64) -> f64 {
     //
     // Star pressure for the computations on the boundary line between
-    // regions 2 and 3 in [MPa].
+    // regions 2 and 3 in (MPa).
     //
     const REGION_2_3_PSTAR: f64 = 1.0;
     //
     // Star temperature for the computations on the boundary line between
-    // regions 2 and 3 in [J/Kg].
+    // regions 2 and 3 in (J/Kg).
     //
     const REGION_2_3_TSTAR: f64 = 1.0;
     //
@@ -115,7 +115,7 @@ pub fn boundary23_temperature(pressure: f64) -> f64 {
 /// Checks if the pressure is valid for boundary23_temperature.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 /// - Returns:
 ///   - `bool`: True if the pressure is within valid range.
@@ -129,10 +129,10 @@ pub fn is_valid_boundary23_temperature(pressure: f64) -> bool {
 /// 2a and 2b with respect to the specific entropy.
 ///
 /// - Arguments:
-///   - `entropy`: The steam specific entropy [J/Kg.K].
+///   - `entropy`: The steam specific entropy (J/Kg.K).
 ///
 /// - Returns:
-///   - The enthalpy [J/Kg].
+///   - The enthalpy (J/Kg).
 ///
 pub fn boundary2ab_enthalpy(entropy: f64) -> f64 {
     //
@@ -146,12 +146,12 @@ pub fn boundary2ab_enthalpy(entropy: f64) -> f64 {
     ];
     //
     // Star enthalpy for the computations on the boundary line between
-    // sub-regions 2a and 2b in [J/Kg].
+    // sub-regions 2a and 2b in (J/Kg).
     //
     const REGION_2A_2B_HSTAR: f64 = 1000.0;
     //
     // Star entropy for the computations on the boundary line between
-    // sub-regions 2a and 2b in [J/Kg.K].
+    // sub-regions 2a and 2b in (J/Kg.K).
     //
     const REGION_2A_2B_SSTAR: f64 = 1000.0;
     //
@@ -165,7 +165,7 @@ pub fn boundary2ab_enthalpy(entropy: f64) -> f64 {
 /// Checks if the entropy is valid for boundary2ab_enthalpy.
 ///
 /// - Arguments:
-///   - `entropy`: The steam specific entropy [J/Kg.K].
+///   - `entropy`: The steam specific entropy (J/Kg.K).
 ///
 /// - Returns:
 ///   - `bool`: True if the entropy is within valid range.
@@ -185,20 +185,20 @@ pub fn is_valid_boundary2ab_enthalpy(entropy: f64) -> bool {
 /// 2b and 2c with respect to the specific enthalpy.
 ///
 /// - Arguments:
-///   - `enthalpy`: The steam specific enthalpy [J/Kg].
+///   - `enthalpy`: The steam specific enthalpy (J/Kg).
 ///
 /// - Returns:
-///   - The pressure [MPa].
+///   - The pressure (MPa).
 ///
 pub fn boundary2bc_pressure(enthalpy: f64) -> f64 {
     //
     // Star pressure for the computations on the boundary line between
-    // sub-regions 2b and 2c in [MPa].
+    // sub-regions 2b and 2c in (MPa).
     //
     const REGION_2B_2C_PSTAR: f64 = 1.0;
     //
     // Star enthalpy for the computations on the boundary line between
-    // sub-regions 2b and 2c in [J/Kg].
+    // sub-regions 2b and 2c in (J/Kg).
     //
     const REGION_2B_2C_HSTAR: f64 = 1000.0;
     //
@@ -212,7 +212,7 @@ pub fn boundary2bc_pressure(enthalpy: f64) -> f64 {
 /// Checks if the enthalpy is valid for boundary2bc_pressure.
 ///
 /// - Arguments:
-///   - `enthalpy`: The steam specific enthalpy [J/Kg].
+///   - `enthalpy`: The steam specific enthalpy (J/Kg).
 ///
 /// - Returns:
 ///   - `bool`: True if the enthalpy is within valid range.
@@ -229,20 +229,20 @@ pub fn is_valid_boundary2bc_pressure(enthalpy: f64) -> bool {
 /// 2b and 2c with respect to pressure.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 /// - Returns:
-///   - The enthalpy [J/Kg].
+///   - The enthalpy (J/Kg).
 ///
 pub fn boundary2bc_enthalpy(pressure: f64) -> f64 {
     //
     // Star pressure for the computations on the boundary line between
-    // sub-regions 2b and 2c in [MPa].
+    // sub-regions 2b and 2c in (MPa).
     //
     const REGION_2B_2C_PSTAR: f64 = 1.0;
     //
     // Star enthalpy for the computations on the boundary line between
-    // sub-regions 2b and 2c in [J/Kg].
+    // sub-regions 2b and 2c in (J/Kg).
     //
     const REGION_2B_2C_HSTAR: f64 = 1000.0;
     //
@@ -256,7 +256,7 @@ pub fn boundary2bc_enthalpy(pressure: f64) -> f64 {
 /// Checks if the pressure is valid for boundary2bc_enthalpy.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 pub fn is_valid_boundary2bc_enthalpy(pressure: f64) -> bool {
     (REGION_2B_2C_PMIN..=IAPWS97_PMAX).contains(&pressure)
@@ -267,10 +267,10 @@ pub fn is_valid_boundary2bc_enthalpy(pressure: f64) -> bool {
 /// 3a and 3b with respect to pressure.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 /// - Returns:
-///   - The enthalpy [J/Kg].
+///   - The enthalpy (J/Kg).
 ///
 pub fn boundary3ab_enthalpy(pressure: f64) -> f64 {
     //
@@ -284,12 +284,12 @@ pub fn boundary3ab_enthalpy(pressure: f64) -> f64 {
     ];
     //
     // Star pressure for the computations on the boundary line between
-    // sub-regions 3a and 3b in [MPa].
+    // sub-regions 3a and 3b in (MPa).
     //
     const REGION_3A_3B_PSTAR: f64 = 1.0;
     //
     // Star enthalpy for the computations on the boundary line between
-    // sub-regions 3a and 3b in [J/Kg].
+    // sub-regions 3a and 3b in (J/Kg).
     //
     const REGION_3A_3B_HSTAR: f64 = 1000.0;
     //
@@ -303,7 +303,7 @@ pub fn boundary3ab_enthalpy(pressure: f64) -> f64 {
 /// Checks if the pressure is valid for boundary3ab_enthalpy.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
+///   - `pressure`: The steam pressure (MPa).
 ///
 pub fn is_valid_boundary3ab_enthalpy(pressure: f64) -> bool {
     (IAPWS97_PCRIT..=IAPWS97_PMAX).contains(&pressure)
@@ -314,10 +314,10 @@ pub fn is_valid_boundary3ab_enthalpy(pressure: f64) -> bool {
 /// 3 and 4 with respect to enthalpy.
 ///
 /// - Arguments:
-///   - `enthalpy`: The steam enthalpy [J/Kg].
+///   - `enthalpy`: The steam enthalpy (J/Kg).
 ///
 /// - Returns:
-///   - The pressure [MPa].
+///   - The pressure (MPa).
 ///
 pub fn boundary34_pressure_h(enthalpy: f64) -> f64 {
     //
@@ -343,12 +343,12 @@ pub fn boundary34_pressure_h(enthalpy: f64) -> f64 {
     ];
     //
     // Star pressure for the computations on the boundary line between
-    // regions 3 and 4 in [MPa].
+    // regions 3 and 4 in (MPa).
     //
     const REGION_3_4_PSTAR: f64 = 22.0;
     //
     // Star enthalpy for the computations on the boundary line between
-    // regions 3 and 4 in [J/Kg].
+    // regions 3 and 4 in (J/Kg).
     //
     const REGION_3_4_HSTAR: f64 = 2600.0e3;
     //
@@ -370,7 +370,7 @@ pub fn boundary34_pressure_h(enthalpy: f64) -> f64 {
 /// Checks if the enthalpy is valid for boundary34_pressure_h.
 ///
 /// - Arguments:
-///   - `enthalpy`: The steam enthalpy [J/Kg].
+///   - `enthalpy`: The steam enthalpy (J/Kg).
 ///
 pub fn is_valid_boundary34_pressure_h(enthalpy: f64) -> bool {
     (REGION_3_4_HMIN..=REGION_3_4_HMAX).contains(&enthalpy)
@@ -381,10 +381,10 @@ pub fn is_valid_boundary34_pressure_h(enthalpy: f64) -> bool {
 /// 3 and 4 with respect to entropy.
 ///
 /// - Arguments:
-///   - `entropy`: The steam entropy [J/Kg.K].
+///   - `entropy`: The steam entropy (J/Kg.K).
 ///
 /// - Returns:
-///   - The pressure [MPa].
+///   - The pressure (MPa).
 ///
 pub fn boundary34_pressure_s(entropy: f64) -> f64 {
     //
@@ -406,12 +406,12 @@ pub fn boundary34_pressure_s(entropy: f64) -> f64 {
     ];
     //
     // Star pressure for the computations on the boundary line between
-    // regions 3 and 4 in [MPa].
+    // regions 3 and 4 in (MPa).
     //
     const REGION_3_4_PSTAR: f64 = 22.0;
     //
     // Star entropy for the computations on the boundary line between
-    // regions 3 and 4 in [J/Kg.K].
+    // regions 3 and 4 in (J/Kg.K).
     //
     const REGION_3_4_SSTAR: f64 = 5.2e3;
     //
@@ -433,7 +433,7 @@ pub fn boundary34_pressure_s(entropy: f64) -> f64 {
 /// Checks if the entropy is valid for boundary34_pressure_s.
 ///
 /// - Arguments:
-///   - `entropy`: The steam entropy [J/Kg.K].
+///   - `entropy`: The steam entropy (J/Kg.K).
 ///
 pub fn is_valid_boundary34_pressure_s(entropy: f64) -> bool {
     (REGION_3_4_SMIN..=REGION_3_4_SMAX).contains(&entropy)

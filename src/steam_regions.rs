@@ -27,8 +27,8 @@ use crate::steam_region4;
 /// region 1 or not.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 1.
@@ -49,8 +49,8 @@ pub fn in_region1(pressure: f64, temperature: f64) -> bool {
 /// region 2 or not.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 2.
@@ -83,8 +83,8 @@ pub fn in_region2(pressure: f64, temperature: f64) -> bool {
 /// region 2, sub-region 2a.
 ///
 /// - Arguments:
-///   - `pressure` - The steam pressure [MPa].
-///   - `temperature` - The steam temperature [K].
+///   - `pressure` - The steam pressure (MPa).
+///   - `temperature` - The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 2, sub-region 2a.
@@ -105,8 +105,8 @@ pub fn in_region2a(pressure: f64, temperature: f64) -> bool {
 /// region 2, sub-region 2b.
 ///
 /// - Arguments:
-///   - `pressure` - The steam pressure [MPa].
-///   - `temperature` - The steam temperature [K].
+///   - `pressure` - The steam pressure (MPa).
+///   - `temperature` - The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 2, sub-region 2b.
@@ -129,8 +129,8 @@ pub fn in_region2b(pressure: f64, temperature: f64) -> bool {
 /// region 2, sub-region 2c.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 2, sub-region 2c.
@@ -153,8 +153,8 @@ pub fn in_region2c(pressure: f64, temperature: f64) -> bool {
 /// region 3 or not.
 ///
 /// - Arguments:
-///   - `pressure`: The steam pressure [MPa].
-///   - `temperature`: The steam temperature [K].
+///   - `pressure`: The steam pressure (MPa).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 3.
@@ -177,8 +177,8 @@ pub fn in_region3(pressure: f64, temperature: f64) -> bool {
 /// region 3a or not.
 ///
 /// - Arguments:
-///   - `density`: The steam density [kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 3a.
@@ -203,8 +203,8 @@ pub fn in_region3a(density: f64, temperature: f64) -> bool {
 /// region 3b or not.
 ///
 /// - Arguments:
-///   - `density`: The steam density [kg/m3].
-///   - `temperature`: The steam temperature [K].
+///   - `density`: The steam density (kg/m3).
+///   - `temperature`: The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 3b.
@@ -231,9 +231,9 @@ pub fn in_region3b(density: f64, temperature: f64) -> bool {
 /// error percentage is required for this function to work.
 ///
 /// - Arguments:
-///   - `pressure` - The steam pressure [MPa].
-///   - `temperature` - The steam temperature [K].
-///   - `error` - The acceptable error [%].
+///   - `pressure` - The steam pressure (MPa).
+///   - `temperature` - The steam temperature (K).
+///   - `error` - The acceptable error (%).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 4.
@@ -262,8 +262,8 @@ pub fn in_region4(pressure: f64, temperature: f64, error: f64) -> bool {
 /// region 5 or not.
 ///
 /// - Arguments:
-///   - `pressure` - The steam pressure [MPa].
-///   - `temperature` - The steam temperature [K].
+///   - `pressure` - The steam pressure (MPa).
+///   - `temperature` - The steam temperature (K).
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 5.
