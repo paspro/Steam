@@ -32,5 +32,4 @@ pub mod steam_regions;
 pub mod steam_states;
 pub mod steam_tables;
 pub mod steam_units;
-pub mod steam_version;
 pub mod steam_viscosity;
