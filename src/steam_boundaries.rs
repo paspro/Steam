@@ -80,12 +80,12 @@ pub fn boundary23_pressure(temperature: f64) -> f64 {
 ///   - `bool`: True if the temperature is within valid range.
 ///
 pub fn is_valid_boundary23_pressure(temperature: f64) -> bool {
-    (temperature >= REGION_1_TMAX) && (temperature <= REGION_2_4_T)
+    (REGION_1_TMAX..=REGION_2_4_T).contains(&temperature)
 }
 
 ///
 /// This function computes temperature on the boundary line between regions
-/// 2 and 3 with respect to pressure
+/// 2 and 3 with respect to pressure.
 ///
 /// - Arguments:
 ///   - `pressure`: The steam pressure [MPa].
@@ -121,7 +121,7 @@ pub fn boundary23_temperature(pressure: f64) -> f64 {
 ///   - `bool`: True if the pressure is within valid range.
 ///
 pub fn is_valid_boundary23_temperature(pressure: f64) -> bool {
-    (pressure >= REGION_1_4_TMAX_P) && (pressure <= IAPWS97_PMAX)
+    (REGION_1_4_TMAX_P..=IAPWS97_PMAX).contains(&pressure)
 }
 
 ///
@@ -136,7 +136,7 @@ pub fn is_valid_boundary23_temperature(pressure: f64) -> bool {
 ///
 pub fn boundary2ab_enthalpy(entropy: f64) -> f64 {
     //
-    // Constant coefficients "l"
+    // Constant coefficients "L".
     //
     const L: [f64; 4] = [
         -0.349898083432139e4,
@@ -175,8 +175,9 @@ pub fn is_valid_boundary2ab_enthalpy(entropy: f64) -> bool {
         REGION_2A_2B_P,
         steam_region4::saturation_temperature(REGION_2A_2B_P),
     );
+    let smax = steam_region2::specific_entropy(REGION_2A_2B_P, REGION_2_TMAX);
 
-    (entropy >= smin) && (entropy <= steam_region2::specific_entropy(REGION_2A_2B_P, REGION_2_TMAX))
+    (smin..=smax).contains(&entropy)
 }
 
 ///
@@ -217,8 +218,10 @@ pub fn boundary2bc_pressure(enthalpy: f64) -> f64 {
 ///   - `bool`: True if the enthalpy is within valid range.
 ///
 pub fn is_valid_boundary2bc_pressure(enthalpy: f64) -> bool {
-    (enthalpy >= boundary2bc_enthalpy(REGION_2B_2C_PMIN))
-        && (enthalpy <= boundary2bc_enthalpy(IAPWS97_PMAX))
+    let emin = boundary2bc_enthalpy(REGION_2B_2C_PMIN);
+    let emax = boundary2bc_enthalpy(IAPWS97_PMAX);
+
+    (emin..=emax).contains(&enthalpy)
 }
 
 ///
@@ -255,11 +258,8 @@ pub fn boundary2bc_enthalpy(pressure: f64) -> f64 {
 /// - Arguments:
 ///   - `pressure`: The steam pressure [MPa].
 ///
-/// - Returns:
-///   - `bool`: True if the pressure is within valid range.
-///
 pub fn is_valid_boundary2bc_enthalpy(pressure: f64) -> bool {
-    (pressure >= REGION_2B_2C_PMIN) && (pressure <= IAPWS97_PMAX)
+    (REGION_2B_2C_PMIN..=IAPWS97_PMAX).contains(&pressure)
 }
 
 ///
@@ -274,7 +274,7 @@ pub fn is_valid_boundary2bc_enthalpy(pressure: f64) -> bool {
 ///
 pub fn boundary3ab_enthalpy(pressure: f64) -> f64 {
     //
-    // Constant coefficients "l".
+    // Constant coefficients "L".
     //
     const L: [f64; 4] = [
         0.201464004206875e4,
@@ -305,11 +305,8 @@ pub fn boundary3ab_enthalpy(pressure: f64) -> f64 {
 /// - Arguments:
 ///   - `pressure`: The steam pressure [MPa].
 ///
-/// - Returns:
-///   - `bool`: True if the pressure is within valid range.
-///
 pub fn is_valid_boundary3ab_enthalpy(pressure: f64) -> bool {
-    (pressure >= IAPWS97_PCRIT) && (pressure <= IAPWS97_PMAX)
+    (IAPWS97_PCRIT..=IAPWS97_PMAX).contains(&pressure)
 }
 
 ///
@@ -375,11 +372,8 @@ pub fn boundary34_pressure_h(enthalpy: f64) -> f64 {
 /// - Arguments:
 ///   - `enthalpy`: The steam enthalpy [J/Kg].
 ///
-/// - Returns:
-///   - `bool`: True if the enthalpy is within valid range.
-///
 pub fn is_valid_boundary34_pressure_h(enthalpy: f64) -> bool {
-    (enthalpy >= REGION_3_4_HMIN) && (enthalpy <= REGION_3_4_HMAX)
+    (REGION_3_4_HMIN..=REGION_3_4_HMAX).contains(&enthalpy)
 }
 
 ///
@@ -441,9 +435,6 @@ pub fn boundary34_pressure_s(entropy: f64) -> f64 {
 /// - Arguments:
 ///   - `entropy`: The steam entropy [J/Kg.K].
 ///
-/// - Returns:
-///   - `bool`: True if the entropy is within valid range.
-///
 pub fn is_valid_boundary34_pressure_s(entropy: f64) -> bool {
-    (entropy >= REGION_3_4_SMIN) && (entropy <= REGION_3_4_SMAX)
+    (REGION_3_4_SMIN..=REGION_3_4_SMAX).contains(&entropy)
 }

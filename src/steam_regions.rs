@@ -32,12 +32,12 @@ use crate::steam_region4;
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 1.
-/// 
+///
 pub fn in_region1(pressure: f64, temperature: f64) -> bool {
     //
     // Determine whether the steam state belongs in region 1
     //
-    let tflag = (temperature >= IAPWS97_TMIN) && (temperature <= REGION_1_TMAX);
+    let tflag = (IAPWS97_TMIN..=REGION_1_TMAX).contains(&temperature);
     let pflag =
         (pressure >= steam_region4::saturation_pressure(temperature)) && (pressure <= IAPWS97_PMAX);
 
@@ -47,19 +47,19 @@ pub fn in_region1(pressure: f64, temperature: f64) -> bool {
 ///
 /// This function determines whether the specified steam state resides in
 /// region 2 or not.
-/// 
+///
 /// - Arguments:
 ///   - `pressure`: The steam pressure [MPa].
 ///   - `temperature`: The steam temperature [K].
-/// 
+///
 /// - Returns:
 ///   - True if the steam state resides in region 2.
 ///
 pub fn in_region2(pressure: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 2
+    // Determine whether the steam state belongs in region 2.
     //
-    if (temperature >= IAPWS97_TMIN) && (temperature <= REGION_1_TMAX) {
+    if (IAPWS97_TMIN..=REGION_1_TMAX).contains(&temperature) {
         if (pressure > 0.0) && (pressure <= steam_region4::saturation_pressure(temperature)) {
             return true;
         }
@@ -67,10 +67,12 @@ pub fn in_region2(pressure: f64, temperature: f64) -> bool {
         if (pressure > 0.0) && (pressure <= steam_boundaries::boundary23_pressure(temperature)) {
             return true;
         }
-    } else if (temperature > REGION_2_4_T) && (temperature <= REGION_2_TMAX) {
-        if (pressure > 0.0) && (pressure <= IAPWS97_PMAX) {
-            return true;
-        }
+    } else if (temperature > REGION_2_4_T)
+        && (temperature <= REGION_2_TMAX)
+        && (pressure > 0.0)
+        && (pressure <= IAPWS97_PMAX)
+    {
+        return true;
     }
 
     false
@@ -86,10 +88,10 @@ pub fn in_region2(pressure: f64, temperature: f64) -> bool {
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 2, sub-region 2a.
-/// 
+///
 pub fn in_region2a(pressure: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 2, sub-region 2a
+    // Determine whether the steam state belongs in region 2, sub-region 2a.
     //
     if pressure <= REGION_2A_2B_P {
         return in_region2(pressure, temperature);
@@ -106,19 +108,17 @@ pub fn in_region2a(pressure: f64, temperature: f64) -> bool {
 ///   - `pressure` - The steam pressure [MPa].
 ///   - `temperature` - The steam temperature [K].
 ///
-/// # Returns
+/// - Returns:
 ///   - True if the steam state resides in region 2, sub-region 2b.
 ///
 pub fn in_region2b(pressure: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 2, sub-region 2b
+    // Determine whether the steam state belongs in region 2, sub-region 2b.
     //
     let h = steam_region2::specific_enthalpy(pressure, temperature);
 
-    if pressure > REGION_2A_2B_P {
-        if pressure <= steam_boundaries::boundary2bc_pressure(h) {
-            return in_region2(pressure, temperature);
-        }
+    if pressure > REGION_2A_2B_P && pressure <= steam_boundaries::boundary2bc_pressure(h) {
+        return in_region2(pressure, temperature);
     }
 
     false
@@ -136,7 +136,9 @@ pub fn in_region2b(pressure: f64, temperature: f64) -> bool {
 ///   - True if the steam state resides in region 2, sub-region 2c.
 ///
 pub fn in_region2c(pressure: f64, temperature: f64) -> bool {
-    // Determine whether the steam state belongs in region 2, sub-region 2c
+    //
+    // Determine whether the steam state belongs in region 2, sub-region 2c.
+    //
     let h = steam_region2::specific_enthalpy(pressure, temperature);
 
     if pressure > steam_boundaries::boundary2bc_pressure(h) {
@@ -156,10 +158,10 @@ pub fn in_region2c(pressure: f64, temperature: f64) -> bool {
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 3.
-/// 
+///
 pub fn in_region3(pressure: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 3
+    // Determine whether the steam state belongs in region 3.
     //
     let tflag = (temperature >= REGION_1_TMAX)
         && (temperature <= steam_boundaries::boundary23_temperature(pressure));
@@ -183,7 +185,7 @@ pub fn in_region3(pressure: f64, temperature: f64) -> bool {
 ///
 pub fn in_region3a(density: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 3a
+    // Determine whether the steam state belongs in region 3a.
     //
     let enthalpy = steam_region3::specific_enthalpy(density, temperature);
     let press = steam_region3::pressure(density, temperature);
@@ -204,12 +206,12 @@ pub fn in_region3a(density: f64, temperature: f64) -> bool {
 ///   - `density`: The steam density [kg/m3].
 ///   - `temperature`: The steam temperature [K].
 ///
-/// # Returns
+/// - Returns:
 ///   - True if the steam state resides in region 3b.
 ///
 pub fn in_region3b(density: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 3b
+    // Determine whether the steam state belongs in region 3b.
     //
     let enthalpy = steam_region3::specific_enthalpy(density, temperature);
     let press = steam_region3::pressure(density, temperature);
@@ -235,12 +237,12 @@ pub fn in_region3b(density: f64, temperature: f64) -> bool {
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 4.
-/// 
+///
 pub fn in_region4(pressure: f64, temperature: f64, error: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 4
+    // Determine whether the steam state belongs in region 4.
     //
-    if (temperature >= IAPWS97_TMIN) && (temperature <= REGION_4_TMAX) {
+    if (IAPWS97_TMIN..=REGION_4_TMAX).contains(&temperature) {
         let pressure_estimate = steam_region4::saturation_pressure(temperature);
         let temperature_estimate = steam_region4::saturation_temperature(pressure);
 
@@ -265,12 +267,12 @@ pub fn in_region4(pressure: f64, temperature: f64, error: f64) -> bool {
 ///
 /// - Returns:
 ///   - True if the steam state resides in region 5.
-/// 
+///
 pub fn in_region5(pressure: f64, temperature: f64) -> bool {
     //
-    // Determine whether the steam state belongs in region 5
+    // Determine whether the steam state belongs in region 5.
     //
-    let tflag = (temperature >= REGION_2_TMAX) && (temperature <= IAPWS97_TMAX);
+    let tflag = (REGION_2_TMAX..=IAPWS97_TMAX).contains(&temperature);
     let pflag = (pressure > 0.0) && (pressure <= REGION_5_PMAX);
 
     pflag && tflag

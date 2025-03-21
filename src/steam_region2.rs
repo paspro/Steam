@@ -16,8 +16,8 @@
 //! IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of
 //! Water and Steam, August 2007 (IAPWS-IF97)
 
-use crate::steam_units::*;
 use crate::steam_constants::*;
+use crate::steam_units::*;
 use std::f64;
 
 ///
@@ -41,7 +41,7 @@ const N: [f64; 9] = [
 ];
 
 ///
-/// Constant coefficients "Ir" for the residual part.
+/// Constant coefficients "IR" for the residual part.
 ///
 const IR: [i32; 43] = [
     1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 5, 6, 6, 6, 7, 7, 7, 8, 8, 9, 10, 10, 10,
@@ -49,7 +49,7 @@ const IR: [i32; 43] = [
 ];
 
 ///
-/// Constant coefficients "Jr" for the residual part.
+/// Constant coefficients "JR" for the residual part.
 ///
 const JR: [i32; 43] = [
     0, 1, 2, 3, 6, 1, 2, 4, 7, 36, 0, 1, 3, 6, 35, 1, 2, 3, 7, 3, 16, 35, 0, 11, 25, 8, 36, 13, 4,
@@ -57,7 +57,7 @@ const JR: [i32; 43] = [
 ];
 
 ///
-/// Constant coefficients "nr" for the residual part.
+/// Constant coefficients "NR" for the residual part.
 ///
 const NR: [f64; 43] = [
     -0.17731742473213e-2,
@@ -126,14 +126,11 @@ const REGION_2_TSTAR: f64 = 540.0;
 /// - Returns:
 ///   - The dimensionless specific Gibbs free energy.
 ///
-fn gam0(pi: f64, tau: f64) -> f64 {
+fn gibbs_ideal(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..9 {
-        sum += N[i] * tau.powi(J[i]);
-    }
+    let sum: f64 = (0..9).map(|i| N[i] * tau.powi(J[i])).sum();
     f64::ln(pi) + sum
 }
 
@@ -147,16 +144,15 @@ fn gam0(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(tau).
 ///
-fn gam0tau(tau: f64) -> f64 {
+fn gibbs_ideal_grad_tau(tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..9 {
-        if J[i] != 0 {
-            sum += N[i] * J[i] as f64 * tau.powi(J[i] - 1);
-        }
-    }
+    let sum: f64 = (0..9)
+        .filter(|&i| J[i] != 0)
+        .map(|i| N[i] * J[i] as f64 * tau.powi(J[i] - 1))
+        .sum();
+
     sum
 }
 
@@ -170,16 +166,15 @@ fn gam0tau(tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(tau)2.
 ///
-fn gam0tautau(tau: f64) -> f64 {
+fn gibbs_ideal_grad2_tau(tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..9 {
-        if J[i] != 0 && J[i] != 1 {
-            sum += N[i] * J[i] as f64 * (J[i] - 1) as f64 * tau.powi(J[i] - 2);
-        }
-    }
+    let sum: f64 = (0..9)
+        .filter(|&i| J[i] != 0 && J[i] != 1)
+        .map(|i| N[i] * J[i] as f64 * (J[i] - 1) as f64 * tau.powi(J[i] - 2))
+        .sum();
+
     sum
 }
 
@@ -194,7 +189,7 @@ fn gam0tautau(tau: f64) -> f64 {
 /// - Returns:
 ///   - The dimensionless specific Gibbs free energy.
 ///
-fn gamr(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -203,10 +198,10 @@ fn gamr(pi: f64, tau: f64) -> f64 {
     // Polynomial expression.
     //
     let taub = tau - B;
-    let mut sum = 0.0;
-    for i in 0..43 {
-        sum += NR[i] * pi.powi(IR[i]) * taub.powi(JR[i]);
-    }
+    let sum: f64 = (0..43)
+        .map(|i| NR[i] * pi.powi(IR[i]) * taub.powi(JR[i]))
+        .sum();
+
     sum
 }
 
@@ -221,7 +216,7 @@ fn gamr(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(pi).
 ///
-fn gamrpi(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad_pi(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -230,12 +225,11 @@ fn gamrpi(pi: f64, tau: f64) -> f64 {
     // Polynomial expression.
     //
     let taub = tau - B;
-    let mut sum = 0.0;
-    for i in 0..43 {
-        if IR[i] != 0 {
-            sum += NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * taub.powi(JR[i]);
-        }
-    }
+    let sum: f64 = (0..43)
+        .filter(|&i| IR[i] != 0)
+        .map(|i| NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * taub.powi(JR[i]))
+        .sum();
+
     sum
 }
 
@@ -250,7 +244,7 @@ fn gamrpi(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(pi)2.
 ///
-fn gamrpipi(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad2_pi(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -259,13 +253,11 @@ fn gamrpipi(pi: f64, tau: f64) -> f64 {
     // Polynomial expression.
     //
     let taub = tau - B;
-    let mut sum = 0.0;
-    for i in 0..43 {
-        if IR[i] > 1 {
-            sum +=
-                NR[i] * IR[i] as f64 * (IR[i] - 1) as f64 * pi.powi(IR[i] - 2) * taub.powi(JR[i]);
-        }
-    }
+    let sum: f64 = (0..43)
+        .filter(|&i| IR[i] > 1)
+        .map(|i| NR[i] * IR[i] as f64 * (IR[i] - 1) as f64 * pi.powi(IR[i] - 2) * taub.powi(JR[i]))
+        .sum();
+
     sum
 }
 
@@ -280,7 +272,7 @@ fn gamrpipi(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(tau).
 ///
-fn gamrtau(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad_tau(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -289,12 +281,10 @@ fn gamrtau(pi: f64, tau: f64) -> f64 {
     // Polynomial expression.
     //
     let taub = tau - B;
-    let mut sum = 0.0;
-    for i in 0..43 {
-        if JR[i] != 0 {
-            sum += NR[i] * pi.powi(IR[i]) * JR[i] as f64 * taub.powi(JR[i] - 1);
-        }
-    }
+    let sum: f64 = (0..43)
+        .filter(|&i| JR[i] != 0)
+        .map(|i| NR[i] * pi.powi(IR[i]) * JR[i] as f64 * taub.powi(JR[i] - 1))
+        .sum();
     sum
 }
 
@@ -309,7 +299,7 @@ fn gamrtau(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(tau)2.
 ///
-fn gamrtautau(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad2_tau(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -318,13 +308,10 @@ fn gamrtautau(pi: f64, tau: f64) -> f64 {
     // Polynomial expression.
     //
     let taub = tau - B;
-    let mut sum = 0.0;
-    for i in 0..43 {
-        if JR[i] > 1 {
-            sum +=
-                NR[i] * pi.powi(IR[i]) * JR[i] as f64 * (JR[i] - 1) as f64 * taub.powi(JR[i] - 2);
-        }
-    }
+    let sum: f64 = (0..43)
+        .filter(|&i| JR[i] > 1)
+        .map(|i| NR[i] * pi.powi(IR[i]) * JR[i] as f64 * (JR[i] - 1) as f64 * taub.powi(JR[i] - 2))
+        .sum();
     sum
 }
 
@@ -340,7 +327,7 @@ fn gamrtautau(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(pi)d(tau).
 ///
-fn gamrpitau(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad2_pi_tau(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -349,13 +336,11 @@ fn gamrpitau(pi: f64, tau: f64) -> f64 {
     // Polynomial expression.
     //
     let taub = tau - B;
-    let mut sum = 0.0;
-    for i in 0..43 {
-        if IR[i] != 0 && JR[i] != 0 {
-            sum +=
-                NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * JR[i] as f64 * taub.powi(JR[i] - 1);
-        }
-    }
+    let sum: f64 = (0..43)
+        .filter(|&i| IR[i] != 0 && JR[i] != 0)
+        .map(|i| NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * JR[i] as f64 * taub.powi(JR[i] - 1))
+        .sum();
+
     sum
 }
 
@@ -379,8 +364,8 @@ pub fn specific_internal_energy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific internal energy.
     //
-    let gamtau = gam0tau(tau) + gamrtau(pi, tau);
-    IAPWS97_R * temperature * (tau * gamtau - ONE - pi * gamrpi(pi, tau))
+    let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
+    IAPWS97_R * temperature * (tau * gamtau - ONE - pi * gibbs_residual_grad_pi(pi, tau))
 }
 
 ///
@@ -403,7 +388,7 @@ pub fn specific_volume(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific volume.
     //
-    let res1 = ONE + gamrpi(pi, tau) * pi;
+    let res1 = ONE + gibbs_residual_grad_pi(pi, tau) * pi;
     IAPWS97_R * temperature * res1 / (pressure * MEGA)
 }
 
@@ -427,8 +412,8 @@ pub fn specific_entropy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific entropy.
     //
-    let gam = gam0(pi, tau) + gamr(pi, tau);
-    let gamtau = gam0tau(tau) + gamrtau(pi, tau);
+    let gam = gibbs_ideal(pi, tau) + gibbs_residual(pi, tau);
+    let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
     IAPWS97_R * (tau * gamtau - gam)
 }
 
@@ -452,7 +437,7 @@ pub fn specific_enthalpy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific enthalpy.
     //
-    let gamtau = gam0tau(tau) + gamrtau(pi, tau);
+    let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
     IAPWS97_R * temperature * tau * gamtau
 }
 
@@ -476,11 +461,11 @@ pub fn speed_of_sound(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the speed of sound.
     //
-    let gp = gamrpi(pi, tau);
+    let gp = gibbs_residual_grad_pi(pi, tau);
     let res1 = IAPWS97_R * temperature * (ONE + (2.0 + pi * gp) * pi * gp);
-    let res2 = ONE - pi * pi * gamrpipi(pi, tau);
-    let res3 = (ONE + pi * gp - tau * pi * gamrpitau(pi, tau)).powi(2);
-    let res4 = tau * tau * (gam0tautau(tau) + gamrtautau(pi, tau));
+    let res2 = ONE - pi * pi * gibbs_residual_grad2_pi(pi, tau);
+    let res3 = (ONE + pi * gp - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau)).powi(2);
+    let res4 = tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau));
     (res1 / (res2 + res3 / res4)).sqrt()
 }
 
@@ -504,7 +489,7 @@ pub fn specific_isobaric_heat_capacity(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific isobaric heat capacity
     //
-    -IAPWS97_R * tau * tau * (gam0tautau(tau) + gamrtautau(pi, tau))
+    -IAPWS97_R * tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau))
 }
 
 ///
@@ -527,9 +512,11 @@ pub fn specific_isochoric_heat_capacity(pressure: f64, temperature: f64) -> f64 
     //
     // Compute the specific isochoric heat capacity
     //
-    let res1 = -tau * tau * (gam0tautau(tau) + gamrtautau(pi, tau));
-    let res2 = (ONE + pi * gamrpi(pi, tau) - tau * pi * gamrpitau(pi, tau)).powi(2);
-    let res3 = ONE - pi * pi * gamrpipi(pi, tau);
+    let res1 = -tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau));
+    let res2 = (ONE + pi * gibbs_residual_grad_pi(pi, tau)
+        - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau))
+    .powi(2);
+    let res3 = ONE - pi * pi * gibbs_residual_grad2_pi(pi, tau);
     IAPWS97_R * (res1 - res2 / res3)
 }
 
@@ -572,10 +559,10 @@ pub fn specific_gibbs_free_energy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific Gibbs free energy
     //
-    IAPWS97_R * temperature * (gam0(pi, tau) + gamr(pi, tau))
+    IAPWS97_R * temperature * (gibbs_ideal(pi, tau) + gibbs_residual(pi, tau))
 }
 ///
-/// Computes the temperature with respect to pressure and enthalpy (backward equation) 
+/// Computes the temperature with respect to pressure and enthalpy (backward equation)
 /// for the sub-region 2a of IAPWS97.
 ///
 /// - Arguments:
@@ -584,35 +571,56 @@ pub fn specific_gibbs_free_energy(pressure: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature in K.
-/// 
+///
 pub fn temperature_ph_region2a(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
     //
     const II: [i32; 34] = [
-        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
-        2, 2, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7
+        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 5, 5,
+        5, 6, 6, 7,
     ];
 
     const JJ: [i32; 34] = [
-        0, 1, 2, 3, 7, 20, 0, 1, 2, 3, 7, 9, 11, 18, 44, 0, 2, 7,
-        36, 38, 40, 42, 44, 24, 44, 12, 32, 44, 32, 36, 42, 34,
-        44, 28
+        0, 1, 2, 3, 7, 20, 0, 1, 2, 3, 7, 9, 11, 18, 44, 0, 2, 7, 36, 38, 40, 42, 44, 24, 44, 12,
+        32, 44, 32, 36, 42, 34, 44, 28,
     ];
 
     const NN: [f64; 34] = [
-        1089.8952318288, 849.51654495535, -107.81748091826,
-        33.153654801263, -7.4232016790248, 11.765048724356,
-        1.844574935579, -4.1792700549624, 6.2478196935812,
-        -17.344563108114, -200.58176862096, 271.96065473796,
-        -455.11318285818, 3091.9688604755, 252266.40357872,
-        -6.1707422868339e-3, -0.31078046629583, 11.670873077107,
-        128127984.04046, -985549096.23276, 2822454697.3002,
-        -3594897141.0703, 1722734991.3197, -13551.334240775,
-        12848734.66465, 1.3865724283226, 235988.32556514,
-        -13105236.545054, 7399.9835474766, -551966.9703006,
-        3715408.5996233, 19127.72923966, -415351.64835634,
-        -62.459855192507
+        1089.8952318288,
+        849.51654495535,
+        -107.81748091826,
+        33.153654801263,
+        -7.4232016790248,
+        11.765048724356,
+        1.844574935579,
+        -4.1792700549624,
+        6.2478196935812,
+        -17.344563108114,
+        -200.58176862096,
+        271.96065473796,
+        -455.11318285818,
+        3091.9688604755,
+        252266.40357872,
+        -6.1707422868339e-3,
+        -0.31078046629583,
+        11.670873077107,
+        128127984.04046,
+        -985549096.23276,
+        2822454697.3002,
+        -3594897141.0703,
+        1722734991.3197,
+        -13551.334240775,
+        12848734.66465,
+        1.3865724283226,
+        235988.32556514,
+        -13105236.545054,
+        7399.9835474766,
+        -551966.9703006,
+        3715408.5996233,
+        19127.72923966,
+        -415351.64835634,
+        -62.459855192507,
     ];
     //
     // Constants.
@@ -628,16 +636,15 @@ pub fn temperature_ph_region2a(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Calculate temperature using the polynomial equation.
     //
-    let mut temperature = 0.0;
-    for i in 0..II.len() {
-        temperature += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let temperature: f64 = (0..II.len())
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     temperature
 }
 
 ///
-/// Computes the temperature with respect to pressure and enthalpy (backward equation) 
+/// Computes the temperature with respect to pressure and enthalpy (backward equation)
 /// for the sub-region 2b of IAPWS97.
 ///
 /// - Arguments:
@@ -646,36 +653,60 @@ pub fn temperature_ph_region2a(pressure: f64, enthalpy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature in K.
-/// 
+///
 pub fn temperature_ph_region2b(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
     //
     const II: [i32; 38] = [
-        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2,
-        2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 6, 7, 7, 9, 9
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4,
+        5, 5, 5, 6, 7, 7, 9, 9,
     ];
 
     const JJ: [i32; 38] = [
-        0, 1, 2, 12, 18, 24, 28, 40, 0, 2, 6, 12, 18, 24, 28, 40,
-        2, 8, 18, 40, 1, 2, 12, 24, 2, 12, 18, 24, 28, 40, 18, 24,
-        40, 28, 2, 28, 1, 40
+        0, 1, 2, 12, 18, 24, 28, 40, 0, 2, 6, 12, 18, 24, 28, 40, 2, 8, 18, 40, 1, 2, 12, 24, 2,
+        12, 18, 24, 28, 40, 18, 24, 40, 28, 2, 28, 1, 40,
     ];
 
     const NN: [f64; 38] = [
-        1489.5041079516, 743.07798314034, -97.708318797837,
-        2.4742464705674, -0.63281320016026, 1.1385952129658,
-        -0.47811863648625, 8.5208123431544e-03, 0.93747147377932,
-        3.3593118604916, 3.3809355601454, 0.16844539671904,
-        0.73875745236695, -0.47128737436186, 0.15020273139707,
-        -0.002176411421975, -0.021810755324761, -0.10829784403677,
-        -0.046333324635812, 7.1280351959551e-05, 1.1032831789999e-04,
-        1.8955248387902e-04, 3.0891541160537e-03, 1.3555504554949e-03,
-        2.8640237477456e-07, -1.0779857357512e-05, -7.6462712454814e-05,
-        1.4052392818316e-05, -3.1083814331434e-05, -1.0302738212103e-06,
-        2.821728163504e-07, 1.2704902271945e-06, 7.3803353468292e-08,
-        -1.1030139238909e-08, -8.1456365207833e-14, -2.5180545682962e-11,
-        -1.7565233969407e-18, 8.6934156344163e-15
+        1489.5041079516,
+        743.07798314034,
+        -97.708318797837,
+        2.4742464705674,
+        -0.63281320016026,
+        1.1385952129658,
+        -0.47811863648625,
+        8.5208123431544e-03,
+        0.93747147377932,
+        3.3593118604916,
+        3.3809355601454,
+        0.16844539671904,
+        0.73875745236695,
+        -0.47128737436186,
+        0.15020273139707,
+        -0.002176411421975,
+        -0.021810755324761,
+        -0.10829784403677,
+        -0.046333324635812,
+        7.1280351959551e-05,
+        1.1032831789999e-04,
+        1.8955248387902e-04,
+        3.0891541160537e-03,
+        1.3555504554949e-03,
+        2.8640237477456e-07,
+        -1.0779857357512e-05,
+        -7.6462712454814e-05,
+        1.4052392818316e-05,
+        -3.1083814331434e-05,
+        -1.0302738212103e-06,
+        2.821728163504e-07,
+        1.2704902271945e-06,
+        7.3803353468292e-08,
+        -1.1030139238909e-08,
+        -8.1456365207833e-14,
+        -2.5180545682962e-11,
+        -1.7565233969407e-18,
+        8.6934156344163e-15,
     ];
     //
     // Constants.
@@ -692,16 +723,15 @@ pub fn temperature_ph_region2b(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Calculate temperature using the polynomial equation.
     //
-    let mut temperature = 0.0;
-    for i in 0..II.len() {
-        temperature += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let temperature: f64 = (0..II.len())
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     temperature
 }
 
 ///
-/// Computes the temperature with respect to pressure and enthalpy (backward equation) 
+/// Computes the temperature with respect to pressure and enthalpy (backward equation)
 /// for the sub-region 2c of IAPWS97.
 ///
 /// - Arguments:
@@ -710,30 +740,43 @@ pub fn temperature_ph_region2b(pressure: f64, enthalpy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature in K.
-/// 
+///
 pub fn temperature_ph_region2c(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
     //
     const II: [i32; 23] = [
-        -7, -7, -6, -6, -5, -5, -2, -2, -1, -1, 0, 0, 1, 1, 2,
-        6, 6, 6, 6, 6, 6, 6, 6
+        -7, -7, -6, -6, -5, -5, -2, -2, -1, -1, 0, 0, 1, 1, 2, 6, 6, 6, 6, 6, 6, 6, 6,
     ];
 
     const JJ: [i32; 23] = [
-        0, 4, 0, 2, 0, 2, 0, 1, 0, 2, 0, 1, 4, 8, 4, 0, 1, 4,
-        10, 12, 16, 20, 22
+        0, 4, 0, 2, 0, 2, 0, 1, 0, 2, 0, 1, 4, 8, 4, 0, 1, 4, 10, 12, 16, 20, 22,
     ];
 
     const NN: [f64; 23] = [
-        -3236839855524.2, 7326335090218.1, 358250899454.47,
-        -583401318515.9, -10783068217.47, 20825544563.171,
-        610747.83564516, 859777.2253558, -25745.72360417,
-        31081.088422714, 1208.2315865936, 482.19755109255,
-        3.7966001272486, -10.842984880077, -0.04536417267666,
-        1.4559115658698e-13, 1.126159740723e-12, -1.7804982240686e-11,
-        1.2324579690832e-07, -1.1606921130984e-06, 2.7846367088554e-05,
-        -5.9270038474176e-04, 1.2918582991878e-03
+        -3236839855524.2,
+        7326335090218.1,
+        358250899454.47,
+        -583401318515.9,
+        -10783068217.47,
+        20825544563.171,
+        610747.83564516,
+        859777.2253558,
+        -25745.72360417,
+        31081.088422714,
+        1208.2315865936,
+        482.19755109255,
+        3.7966001272486,
+        -10.842984880077,
+        -0.04536417267666,
+        1.4559115658698e-13,
+        1.126159740723e-12,
+        -1.7804982240686e-11,
+        1.2324579690832e-07,
+        -1.1606921130984e-06,
+        2.7846367088554e-05,
+        -5.9270038474176e-04,
+        1.2918582991878e-03,
     ];
     //
     // Constants.
@@ -750,10 +793,9 @@ pub fn temperature_ph_region2c(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Calculate temperature using the polynomial equation.
     //
-    let mut temperature = 0.0;
-    for i in 0..II.len() {
-        temperature += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let temperature: f64 = (0..II.len())
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     temperature
 }
@@ -854,10 +896,9 @@ pub fn temperature_ps_region2a(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_2_PS_PSTAR;
     let sigma = entropy / REGION_2_PS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..46 {
-        sum += NN[i] * pi.powf(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..46)
+        .map(|i| NN[i] * pi.powf(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     sum
 }
@@ -953,10 +994,9 @@ pub fn temperature_ps_region2b(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_2_PS_PSTAR;
     let sigma = B - entropy / REGION_2_PS_SSTAR;
 
-    let mut sum = 0.0;
-    for i in 0..44 {
-        sum += NN[i] * pi.powi(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..44)
+        .map(|i| NN[i] * pi.powi(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     sum
 }
@@ -1036,10 +1076,9 @@ pub fn temperature_ps_region2c(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_2_PS_PSTAR;
     let sigma = B - entropy / REGION_2_PS_SSTAR;
 
-    let mut sum = 0.0;
-    for i in 0..30 {
-        sum += NN[i] * pi.powi(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..30)
+        .map(|i| NN[i] * pi.powi(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     sum
 }
@@ -1125,10 +1164,9 @@ pub fn pressure_hs_region2a(enthalpy: f64, entropy: f64) -> f64 {
     let eta = enthalpy / REGION_2A_PHS_HSTAR - A;
     let sigma = entropy / REGION_2A_PHS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..29 {
-        sum += NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..29)
+        .map(|i| NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     REGION_2A_PHS_PSTAR * sum.powi(4)
 }
@@ -1219,10 +1257,9 @@ pub fn pressure_hs_region2b(enthalpy: f64, entropy: f64) -> f64 {
     let eta = enthalpy / REGION_2B_PHS_HSTAR - A;
     let sigma = entropy / REGION_2B_PHS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..33 {
-        sum += NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..33)
+        .map(|i| NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     REGION_2B_PHS_PSTAR * sum.powi(4)
 }
@@ -1311,10 +1348,9 @@ pub fn pressure_hs_region2c(enthalpy: f64, entropy: f64) -> f64 {
     let eta = enthalpy / REGION_2C_PHS_HSTAR - A;
     let sigma = entropy / REGION_2C_PHS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..31 {
-        sum += NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..31)
+        .map(|i| NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     REGION_2C_PHS_PSTAR * sum.powi(4)
 }

@@ -14,17 +14,17 @@
 //! This module defines the version of the Steam Polynomials library
 
 ///
-/// Major version number
+/// Major version number.
 ///
-pub const MAJOR_VERSION: i32 = 1;
+pub const MAJOR_VERSION: i32 = 2;
 ///
-/// Minor version number
+/// Minor version number.
 ///
 pub const MINOR_VERSION: i32 = 0;
 ///
-/// Build number
+/// Bug fix number
 ///
-pub const BUILD: i32 = 2;
+pub const BUGFIX_VERSION: i32 = 0;
 ///
 /// Version status
 ///
@@ -35,6 +35,6 @@ pub const CODE_STATUS: &str = "release";
 pub fn version_string() -> String {
     format!(
         "{}.{}.{}-{}",
-        MAJOR_VERSION, MINOR_VERSION, BUILD, CODE_STATUS
+        MAJOR_VERSION, MINOR_VERSION, BUGFIX_VERSION, CODE_STATUS
     )
 }

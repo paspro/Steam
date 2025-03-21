@@ -37,7 +37,7 @@ const J: [i32; 34] = [
 ];
 
 ///
-/// Constant coefficients "n".
+/// Constant coefficients "N".
 ///
 const N: [f64; 34] = [
     0.14632971213167e0,
@@ -96,7 +96,7 @@ const REGION_1_TSTAR: f64 = 1386.0;
 /// - Returns:
 ///   - The dimensionless specific Gibbs free energy.
 ///
-fn gam(pi: f64, tau: f64) -> f64 {
+fn gibbs_nondim(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -108,10 +108,9 @@ fn gam(pi: f64, tau: f64) -> f64 {
     let pia = A - pi;
     let taub = tau - B;
 
-    let mut sum = 0.0;
-    for i in 0..34 {
-        sum += N[i] * pia.powi(I[i]) * taub.powi(J[i]);
-    }
+    let sum: f64 = (0..34)
+        .map(|i| N[i] * pia.powi(I[i]) * taub.powi(J[i]))
+        .sum();
 
     sum
 }
@@ -127,7 +126,7 @@ fn gam(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(pi).
 ///
-fn gampi(pi: f64, tau: f64) -> f64 {
+fn gibbs_grad_pi(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -139,12 +138,10 @@ fn gampi(pi: f64, tau: f64) -> f64 {
     let pia = A - pi;
     let taub = tau - B;
 
-    let mut sum = 0.0;
-    for i in 0..34 {
-        if I[i] > 0 {
-            sum += -N[i] * I[i] as f64 * pia.powi(I[i] - 1) * taub.powi(J[i]);
-        }
-    }
+    let sum: f64 = (0..34)
+        .filter(|&i| I[i] > 0)
+        .map(|i| -N[i] * I[i] as f64 * pia.powi(I[i] - 1) * taub.powi(J[i]))
+        .sum();
 
     sum
 }
@@ -160,7 +157,7 @@ fn gampi(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(pi)2.
 ///
-fn gampipi(pi: f64, tau: f64) -> f64 {
+fn gibbs_grad2_pi(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -172,16 +169,10 @@ fn gampipi(pi: f64, tau: f64) -> f64 {
     let pia = A - pi;
     let taub = tau - B;
 
-    let mut sum = 0.0;
-    for i in 0..34 {
-        if I[i] > 1 {
-            sum += N[i]
-                * I[i] as f64
-                * (I[i] - 1) as f64
-                * pia.powi(I[i] - 2)
-                * taub.powi(J[i]);
-        }
-    }
+    let sum: f64 = (0..34)
+        .filter(|&i| I[i] > 1)
+        .map(|i| N[i] * I[i] as f64 * (I[i] - 1) as f64 * pia.powi(I[i] - 2) * taub.powi(J[i]))
+        .sum();
 
     sum
 }
@@ -197,7 +188,7 @@ fn gampipi(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(tau).
 ///
-fn gamtau(pi: f64, tau: f64) -> f64 {
+fn gibbs_grad_tau(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -209,12 +200,10 @@ fn gamtau(pi: f64, tau: f64) -> f64 {
     let pia = A - pi;
     let taub = tau - B;
 
-    let mut sum = 0.0;
-    for i in 0..34 {
-        if J[i] != 0 {
-            sum += N[i] * pia.powi(I[i]) * J[i] as f64 * taub.powi(J[i] - 1);
-        }
-    }
+    let sum: f64 = (0..34)
+        .filter(|&i| J[i] != 0)
+        .map(|i| N[i] * pia.powi(I[i]) * J[i] as f64 * taub.powi(J[i] - 1))
+        .sum();
 
     sum
 }
@@ -230,7 +219,7 @@ fn gamtau(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(tau)2.
 ///
-fn gamtautau(pi: f64, tau: f64) -> f64 {
+fn gibbs_grad2_tau(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -242,16 +231,10 @@ fn gamtautau(pi: f64, tau: f64) -> f64 {
     let pia = A - pi;
     let taub = tau - B;
 
-    let mut sum = 0.0;
-    for i in 0..34 {
-        if J[i] > 1 || J[i] < 0 {
-            sum += N[i]
-                * pia.powi(I[i])
-                * J[i] as f64
-                * (J[i] - 1) as f64
-                * taub.powi(J[i] - 2);
-        }
-    }
+    let sum: f64 = (0..34)
+        .filter(|&i| J[i] > 1 || J[i] < 0)
+        .map(|i| N[i] * pia.powi(I[i]) * J[i] as f64 * (J[i] - 1) as f64 * taub.powi(J[i] - 2))
+        .sum();
 
     sum
 }
@@ -267,7 +250,7 @@ fn gamtautau(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(pi)d(tau).
 ///
-fn gampitau(pi: f64, tau: f64) -> f64 {
+fn gibbs_grad2_pi_tau(pi: f64, tau: f64) -> f64 {
     //
     // Constants.
     //
@@ -279,16 +262,10 @@ fn gampitau(pi: f64, tau: f64) -> f64 {
     let pia = A - pi;
     let taub = tau - B;
 
-    let mut sum = 0.0;
-    for i in 0..34 {
-        if I[i] > 0 && J[i] != 0 {
-            sum += -N[i]
-                * I[i] as f64
-                * pia.powi(I[i] - 1)
-                * J[i] as f64
-                * taub.powi(J[i] - 1);
-        }
-    }
+    let sum: f64 = (0..34)
+        .filter(|&i| I[i] > 0 && J[i] != 0)
+        .map(|i| -N[i] * I[i] as f64 * pia.powi(I[i] - 1) * J[i] as f64 * taub.powi(J[i] - 1))
+        .sum();
 
     sum
 }
@@ -313,7 +290,7 @@ pub fn specific_internal_energy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific internal energy.
     //
-    IAPWS97_R * temperature * (tau * gamtau(pi, tau) - pi * gampi(pi, tau))
+    IAPWS97_R * temperature * (tau * gibbs_grad_tau(pi, tau) - pi * gibbs_grad_pi(pi, tau))
 }
 
 ///
@@ -336,7 +313,7 @@ pub fn specific_volume(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific volume.
     //
-    IAPWS97_R * temperature * pi * gampi(pi, tau) / (pressure * MEGA)
+    IAPWS97_R * temperature * pi * gibbs_grad_pi(pi, tau) / (pressure * MEGA)
 }
 
 ///
@@ -359,7 +336,7 @@ pub fn specific_entropy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific entropy.
     //
-    IAPWS97_R * (tau * gamtau(pi, tau) - gam(pi, tau))
+    IAPWS97_R * (tau * gibbs_grad_tau(pi, tau) - gibbs_nondim(pi, tau))
 }
 
 ///
@@ -382,7 +359,7 @@ pub fn specific_enthalpy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific enthalpy.
     //
-    IAPWS97_R * temperature * tau * gamtau(pi, tau)
+    IAPWS97_R * temperature * tau * gibbs_grad_tau(pi, tau)
 }
 
 ///
@@ -405,13 +382,13 @@ pub fn speed_of_sound(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the speed of sound.
     //
-    let gp = gampi(pi, tau);
+    let gp = gibbs_grad_pi(pi, tau);
     let res1 = IAPWS97_R * temperature;
-    let res2 = (gp - tau * gampitau(pi, tau)).powi(2);
-    let res3 = tau * tau * gamtautau(pi, tau);
+    let res2 = (gp - tau * gibbs_grad2_pi_tau(pi, tau)).powi(2);
+    let res3 = tau * tau * gibbs_grad2_tau(pi, tau);
     let res4 = res2 / res3;
 
-    gp * (res1 / (res4 - gampipi(pi, tau))).sqrt()
+    gp * (res1 / (res4 - gibbs_grad2_pi(pi, tau))).sqrt()
 }
 
 ///
@@ -434,7 +411,7 @@ pub fn specific_isobaric_heat_capacity(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific isobaric heat capacity.
     //
-    -IAPWS97_R * tau * tau * gamtautau(pi, tau)
+    -IAPWS97_R * tau * tau * gibbs_grad2_tau(pi, tau)
 }
 
 ///
@@ -457,10 +434,10 @@ pub fn specific_isochoric_heat_capacity(pressure: f64, temperature: f64) -> f64 
     //
     // Compute the specific isochoric heat capacity.
     //
-    let res1 = -tau * tau * gamtautau(pi, tau);
-    let res2 = (gampi(pi, tau) - tau * gampitau(pi, tau)).powi(2);
+    let res1 = -tau * tau * gibbs_grad2_tau(pi, tau);
+    let res2 = (gibbs_grad_pi(pi, tau) - tau * gibbs_grad2_pi_tau(pi, tau)).powi(2);
 
-    IAPWS97_R * (res1 + res2 / gampipi(pi, tau))
+    IAPWS97_R * (res1 + res2 / gibbs_grad2_pi(pi, tau))
 }
 
 ///
@@ -502,7 +479,7 @@ pub fn specific_gibbs_free_energy(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific Gibbs free energy.
     //
-    IAPWS97_R * temperature * gam(pi, tau)
+    IAPWS97_R * temperature * gibbs_nondim(pi, tau)
 }
 
 ///
@@ -569,10 +546,9 @@ pub fn temperature_ph(pressure: f64, enthalpy: f64) -> f64 {
     let pi = pressure / REGION_1_TPH_PSTAR;
     let e1 = ONE + (enthalpy / REGION_1_TPH_HSTAR);
 
-    let mut sum = 0.0;
-    for i in 0..20 {
-        sum += NN[i] * pi.powi(II[i]) * e1.powi(JJ[i]);
-    }
+    let sum: f64 = (0..20)
+        .map(|i| NN[i] * pi.powi(II[i]) * e1.powi(JJ[i]))
+        .sum();
 
     REGION_1_TPH_TSTAR * sum
 }
@@ -642,10 +618,9 @@ pub fn pressure_hs(enthalpy: f64, entropy: f64) -> f64 {
     let eta = enthalpy / REGION_1_PHS_HSTAR + A;
     let sigma = entropy / REGION_1_PHS_SSTAR + A;
 
-    let mut sum = 0.0;
-    for i in 0..19 {
-        sum += NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]);
-    }
+    let sum: f64 = (0..19)
+        .map(|i| NN[i] * eta.powi(II[i]) * sigma.powi(JJ[i]))
+        .sum();
 
     REGION_1_PHS_PSTAR * sum
 }

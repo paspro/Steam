@@ -16,9 +16,9 @@
 //! Formulation 1997 for the Thermodynamic Properties of Water and Steam,
 //! August 2007 (IAPWS-IF97)
 
-///
-/// Unit Multipliers
-///
+//
+// Unit Multipliers.
+//
 pub const TERA: f64 = 1.0e12;
 pub const GIGA: f64 = 1.0e9;
 pub const MEGA: f64 = 1.0e6;
@@ -29,16 +29,16 @@ pub const DECI: f64 = 1.0e-1;
 pub const CENTI: f64 = 1.0e-2;
 pub const MILLI: f64 = 1.0e-3;
 pub const MICRO: f64 = 1.0e-6;
-///
-/// Base units used by the steam polynomials
-///
+//
+// Base units used by the steam polynomials.
+//
 pub const KELVIN: f64 = 1.0;
 pub const KG: f64 = 1.0;
 pub const METER: f64 = 1.0;
 pub const SECOND: f64 = 1.0;
-///
-/// Composite units
-///
+// 
+// Composite units.
+// 
 pub const CM: f64 = CENTI * METER;
 pub const MM: f64 = MILLI * METER;
 pub const KM: f64 = KILO * METER;
@@ -67,9 +67,9 @@ pub const KJ_KG: f64 = KJ / KG;
 pub const KJ_KGK: f64 = KJ / KG / KELVIN;
 pub const KG_M3: f64 = KG / M3;
 pub const M3_KG: f64 = M3 / KG;
-///
-/// Imperial Units
-///
+//
+// Imperial Units.
+//
 pub const BTU: f64 = 1055.05585262 * JOULE;
 pub const RANKIN: f64 = 0.556 * KELVIN;
 pub const RPM: f64 = 1.0 / MINUTE;

@@ -25,7 +25,7 @@ use crate::steam_units::*;
 const J: [i32; 6] = [0, 1, -3, -2, -1, 2];
 
 ///
-/// Constant coefficients "n" for the ideal gas part.
+/// Constant coefficients "N" for the ideal gas part.
 ///
 const N: [f64; 6] = [
     -0.13179983674201e2,
@@ -37,17 +37,17 @@ const N: [f64; 6] = [
 ];
 
 ///
-/// Constant coefficients "Ir" for the ideal gas part.
+/// Constant coefficients "IR" for the ideal gas part.
 ///
 const IR: [i32; 6] = [1, 1, 1, 2, 2, 3];
 
 ///
-/// Constant coefficients "Jr" for the ideal gas part.
+/// Constant coefficients "JR" for the ideal gas part.
 ///
 const JR: [i32; 6] = [1, 2, 3, 3, 9, 7];
 
 ///
-/// Constant coefficients "nr" for the ideal gas part.
+/// Constant coefficients "NR" for the ideal gas part.
 ///
 const NR: [f64; 6] = [
     0.15736404855259e-2,
@@ -79,14 +79,11 @@ const REGION_5_TSTAR: f64 = 1000.0;
 /// - Returns:
 ///   - The dimensionless specific Gibbs free energy.
 ///
-fn gam0(pi: f64, tau: f64) -> f64 {
+fn gibbs_ideal(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        sum += N[i] * tau.powi(J[i]);
-    }
+    let sum: f64 = (0..6).map(|i| N[i] * tau.powi(J[i])).sum();
 
     pi.ln() + sum
 }
@@ -101,16 +98,14 @@ fn gam0(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(tau).
 ///
-fn gam0tau(tau: f64) -> f64 {
+fn gibbs_ideal_grad_tau(tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        if J[i] != 0 {
-            sum += N[i] * J[i] as f64 * tau.powi(J[i] - 1);
-        }
-    }
+    let sum: f64 = (0..6)
+        .filter(|&i| J[i] != 0)
+        .map(|i| N[i] * J[i] as f64 * tau.powi(J[i] - 1))
+        .sum();
 
     sum
 }
@@ -125,16 +120,14 @@ fn gam0tau(tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(tau)2.
 ///
-fn gam0tautau(tau: f64) -> f64 {
+fn gibbs_ideal_grad2_tau(tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        if J[i] != 0 && J[i] != 1 {
-            sum += N[i] * J[i] as f64 * (J[i] - 1) as f64 * tau.powi(J[i] - 2);
-        }
-    }
+    let sum: f64 = (0..6)
+        .filter(|&i| J[i] != 0 && J[i] != 1)
+        .map(|i| N[i] * J[i] as f64 * (J[i] - 1) as f64 * tau.powi(J[i] - 2))
+        .sum();
 
     sum
 }
@@ -150,14 +143,13 @@ fn gam0tautau(tau: f64) -> f64 {
 /// - Returns:
 ///   - The dimensionless specific Gibbs free energy.
 ///
-fn gamr(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        sum += NR[i] * pi.powi(IR[i]) * tau.powi(JR[i]);
-    }
+    let sum: f64 = (0..6)
+        .map(|i| NR[i] * pi.powi(IR[i]) * tau.powi(JR[i]))
+        .sum();
 
     sum
 }
@@ -173,14 +165,13 @@ fn gamr(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(pi).
 ///
-fn gamrpi(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad_pi(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        sum += NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * tau.powi(JR[i]);
-    }
+    let sum: f64 = (0..6)
+        .map(|i| NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * tau.powi(JR[i]))
+        .sum();
 
     sum
 }
@@ -196,16 +187,14 @@ fn gamrpi(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(pi)2.
 ///
-fn gamrpipi(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad2_pi(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        if IR[i] > 1 {
-            sum += NR[i] * IR[i] as f64 * (IR[i] - 1) as f64 * pi.powi(IR[i] - 2) * tau.powi(JR[i]);
-        }
-    }
+    let sum: f64 = (0..6)
+        .filter(|&i| IR[i] > 1)
+        .map(|i| NR[i] * IR[i] as f64 * (IR[i] - 1) as f64 * pi.powi(IR[i] - 2) * tau.powi(JR[i]))
+        .sum();
 
     sum
 }
@@ -221,14 +210,13 @@ fn gamrpipi(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(Gibbs)/d(tau).
 ///
-fn gamrtau(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad_tau(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        sum += NR[i] * pi.powi(IR[i]) * JR[i] as f64 * tau.powi(JR[i] - 1);
-    }
+    let sum: f64 = (0..6)
+        .map(|i| NR[i] * pi.powi(IR[i]) * JR[i] as f64 * tau.powi(JR[i] - 1))
+        .sum();
 
     sum
 }
@@ -244,16 +232,14 @@ fn gamrtau(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(tau)2.
 ///
-fn gamrtautau(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad2_tau(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        if JR[i] > 1 {
-            sum += NR[i] * pi.powi(IR[i]) * JR[i] as f64 * (JR[i] - 1) as f64 * tau.powi(JR[i] - 2);
-        }
-    }
+    let sum: f64 = (0..6)
+        .filter(|&i| JR[i] > 1)
+        .map(|i| NR[i] * pi.powi(IR[i]) * JR[i] as f64 * (JR[i] - 1) as f64 * tau.powi(JR[i] - 2))
+        .sum();
 
     sum
 }
@@ -270,14 +256,13 @@ fn gamrtautau(pi: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(Gibbs)/d(pi)d(tau).
 ///
-fn gamrpitau(pi: f64, tau: f64) -> f64 {
+fn gibbs_residual_grad2_pi_tau(pi: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..6 {
-        sum += NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * JR[i] as f64 * tau.powi(JR[i] - 1);
-    }
+    let sum: f64 = (0..6)
+        .map(|i| NR[i] * IR[i] as f64 * pi.powi(IR[i] - 1) * JR[i] as f64 * tau.powi(JR[i] - 1))
+        .sum();
 
     sum
 }
@@ -299,12 +284,11 @@ pub fn specific_internal_energy(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific internal energy.
     //
-    let gamtau = gam0tau(tau) + gamrtau(pi, tau);
-    IAPWS97_R * temperature * (tau * gamtau - ONE - pi * gamrpi(pi, tau))
+    let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
+    IAPWS97_R * temperature * (tau * gamtau - ONE - pi * gibbs_residual_grad_pi(pi, tau))
 }
 
 ///
@@ -324,11 +308,10 @@ pub fn specific_volume(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific volume.
     //
-    let res1 = ONE + gamrpi(pi, tau) * pi;
+    let res1 = ONE + gibbs_residual_grad_pi(pi, tau) * pi;
     IAPWS97_R * temperature * res1 / (pressure * MEGA)
 }
 
@@ -349,12 +332,11 @@ pub fn specific_entropy(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific entropy.
     //
-    let gam = gam0(pi, tau) + gamr(pi, tau);
-    let gamtau = gam0tau(tau) + gamrtau(pi, tau);
+    let gam = gibbs_ideal(pi, tau) + gibbs_residual(pi, tau);
+    let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
     IAPWS97_R * (tau * gamtau - gam)
 }
 
@@ -375,11 +357,10 @@ pub fn specific_enthalpy(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific enthalpy.
     //
-    let gamtau = gam0tau(tau) + gamrtau(pi, tau);
+    let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
     IAPWS97_R * temperature * tau * gamtau
 }
 
@@ -400,15 +381,14 @@ pub fn speed_of_sound(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the speed of sound.
     //
-    let gp = gamrpi(pi, tau);
+    let gp = gibbs_residual_grad_pi(pi, tau);
     let res1 = IAPWS97_R * temperature * (ONE + (TWO + pi * gp) * pi * gp);
-    let res2 = ONE - pi * pi * gamrpipi(pi, tau);
-    let res3 = (ONE + pi * gp - tau * pi * gamrpitau(pi, tau)).powi(2);
-    let res4 = tau * tau * (gam0tautau(tau) + gamrtautau(pi, tau));
+    let res2 = ONE - pi * pi * gibbs_residual_grad2_pi(pi, tau);
+    let res3 = (ONE + pi * gp - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau)).powi(2);
+    let res4 = tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau));
 
     (res1 / (res2 + res3 / res4)).sqrt()
 }
@@ -430,11 +410,10 @@ pub fn specific_isobaric_heat_capacity(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific isobaric heat capacity.
     //
-    -IAPWS97_R * tau * tau * (gam0tautau(tau) + gamrtautau(pi, tau))
+    -IAPWS97_R * tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau))
 }
 
 ///
@@ -454,13 +433,14 @@ pub fn specific_isochoric_heat_capacity(pressure: f64, temperature: f64) -> f64 
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific isochoric heat capacity.
     //
-    let res1 = -tau * tau * (gam0tautau(tau) + gamrtautau(pi, tau));
-    let res2 = (ONE + pi * gamrpi(pi, tau) - tau * pi * gamrpitau(pi, tau)).powi(2);
-    let res3 = ONE - pi * pi * gamrpipi(pi, tau);
+    let res1 = -tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau));
+    let res2 = (ONE + pi * gibbs_residual_grad_pi(pi, tau)
+        - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau))
+    .powi(2);
+    let res3 = ONE - pi * pi * gibbs_residual_grad2_pi(pi, tau);
 
     IAPWS97_R * (res1 - res2 / res3)
 }
@@ -501,9 +481,8 @@ pub fn specific_gibbs_free_energy(pressure: f64, temperature: f64) -> f64 {
     //
     let pi = pressure / REGION_5_PSTAR;
     let tau = REGION_5_TSTAR / temperature;
-
     //
     // Compute the specific Gibbs free energy.
     //
-    IAPWS97_R * temperature * (gam0(pi, tau) + gamr(pi, tau))
+    IAPWS97_R * temperature * (gibbs_ideal(pi, tau) + gibbs_residual(pi, tau))
 }

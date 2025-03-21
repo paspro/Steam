@@ -42,10 +42,7 @@ fn mu0(tau: f64) -> f64 {
     //
     // Compute the viscosity in the dilute-gas limit.
     //
-    let mut sum = 0.0;
-    for i in 0..4 {
-        sum += H[i] * tau.powi(I[i]);
-    }
+    let sum: f64 = (0..4).map(|i| H[i] * tau.powi(I[i])).sum();
 
     100.0 / (tau.sqrt() * sum)
 }
@@ -104,12 +101,10 @@ fn mu1(del: f64, tau: f64) -> f64 {
 
     for i in 0..6 {
         let tau1 = (tau - ONE).powi(i as i32);
-        for j in 0..7 {
-            if H[i][j] == 0.0 {
-                continue;
-            }
-            sum += H[i][j] * tau1 * (del - ONE).powi(j as i32);
-        }
+        sum += (0..7)
+            .filter(|&j| H[i][j] != 0.0)
+            .map(|j| H[i][j] * tau1 * (del - ONE).powi(j as i32))
+            .sum::<f64>();
     }
 
     (del * sum).exp()

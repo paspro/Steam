@@ -15,13 +15,10 @@
 //! conductivity of steam according to the release on the IAPWS Formulation
 //! 2011 for the Thermal Conductivity of Ordinary Water Substance
 //! (September 2011)
-//!
-//! @author Panos Asproulis
-//! @date 2014
-//! @copyright Panos Asproulis (2014-2016). All Rights Reserved.
 
 use crate::steam_constants::*;
 
+///
 /// This function computes the thermal conductivity of steam as a function
 /// of density and temperature.
 ///
@@ -82,8 +79,8 @@ pub fn thermal_conductivity(density: f64, temperature: f64) -> f64 {
     //
     // Calculate first term with polynomial of tbar.
     //
-    for k in 0..4 {
-        lam += A[k] * tpow;
+    for a in A.iter() {
+        lam += a * tpow;
         tpow *= tbar;
     }
     //

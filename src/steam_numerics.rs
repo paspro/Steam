@@ -34,6 +34,7 @@ use crate::steam_constants::*;
 /// - Returns:
 ///   - The value of "x0" when f(x0) is known.
 ///
+#[allow(clippy::too_many_arguments)]
 pub fn function_inverter(
     f: &dyn Fn(f64) -> f64,
     f0: f64,
@@ -49,14 +50,12 @@ pub fn function_inverter(
         eprintln!("The order of interpolation must be a positive integer.");
         eprintln!();
     }
-
     if logging {
         println!();
         println!("=========================================");
         println!("Function f(x) Inverter Algorithm for x");
         println!("=========================================");
     }
-
     ///
     /// The solution context for the function inverter.
     ///
@@ -86,7 +85,9 @@ pub fn function_inverter(
         ///
         cache: Vec<Vec<f64>>,
     }
-
+    //
+    // Implement the solution context.
+    //
     impl<'a> SolutionContext<'a> {
         ///
         /// Create a new solution context.
@@ -127,7 +128,6 @@ pub fn function_inverter(
                 cache,
             }
         }
-
         ///
         /// Compute the maximum value for the interpolation.
         ///
@@ -146,7 +146,6 @@ pub fn function_inverter(
                 self.n_order
             }
         }
-
         ///
         /// Compute the solution for the function inverter.
         ///
@@ -249,6 +248,7 @@ pub fn function_inverter(
 /// - Returns:
 ///   - The value of "x0" when f(x0,y0) is known.
 ///
+#[allow(clippy::too_many_arguments)]
 pub fn function_inverter_x(
     f: &dyn Fn(f64, f64) -> f64,
     f0: f64,
@@ -265,14 +265,12 @@ pub fn function_inverter_x(
         eprintln!("The order of interpolation must be a positive integer.");
         eprintln!();
     }
-
     if logging {
         println!();
         println!("=========================================");
         println!("Function f(x,y0) Inverter Algorithm for x");
         println!("=========================================");
     }
-
     ///
     /// The solution context for the function inverter.
     ///
@@ -306,7 +304,6 @@ pub fn function_inverter_x(
         ///
         cache: Vec<Vec<f64>>,
     }
-
     //
     // Implement the solution context.
     //
@@ -353,7 +350,6 @@ pub fn function_inverter_x(
                 cache,
             }
         }
-
         ///
         /// Compute the maximum value for the interpolation.
         ///
@@ -372,7 +368,6 @@ pub fn function_inverter_x(
                 self.n_order
             }
         }
-
         ///
         /// Compute the solution for the function inverter.
         ///
@@ -476,6 +471,7 @@ pub fn function_inverter_x(
 /// - Returns:
 ///   - The value of "y0" when f(x0,y0) is known.
 ///
+#[allow(clippy::too_many_arguments)]
 pub fn function_inverter_y(
     f: &dyn Fn(f64, f64) -> f64,
     f0: f64,
@@ -492,14 +488,12 @@ pub fn function_inverter_y(
         eprintln!("The order of interpolation must be a positive integer.");
         eprintln!();
     }
-
     if logging {
         println!();
         println!("=========================================");
         println!("Function f(x0,y) Inverter Algorithm for y");
         println!("=========================================");
     }
-
     ///
     /// The solution context for the function inverter.
     ///
@@ -533,7 +527,6 @@ pub fn function_inverter_y(
         ///
         cache: Vec<Vec<f64>>,
     }
-
     //
     // Implement the solution context.
     //
@@ -542,13 +535,13 @@ pub fn function_inverter_y(
         /// Create a new solution context.
         ///
         /// - Arguments:
-        ///  - `f`: The function to invert.
-        /// - `f0`: The value of f0 = f(x0,y0).
-        /// - `x0`: The value x0.
-        /// - `guess1`: A guess for the value of y0.
-        /// - `guess2`: A second guess for the value of y0.
-        /// - `n_order`: The interpolation order used by the method.
-        /// - `max_iterations`: The maximum number of allowed iterations.
+        ///   - `f`: The function to invert.
+        ///   - `f0`: The value of f0 = f(x0,y0).
+        ///   - `x0`: The value x0.
+        ///   - `guess1`: A guess for the value of y0.
+        ///   - `guess2`: A second guess for the value of y0.
+        ///   - `n_order`: The interpolation order used by the method.
+        ///   - `max_iterations`: The maximum number of allowed iterations.
         ///
         fn new(
             f: &'a dyn Fn(f64, f64) -> f64,
@@ -577,7 +570,6 @@ pub fn function_inverter_y(
                 cache,
             }
         }
-
         ///
         /// Compute the maximum value for the interpolation.
         ///
@@ -596,7 +588,6 @@ pub fn function_inverter_y(
                 self.n_order
             }
         }
-
         ///
         /// Compute the solution for the function inverter.
         ///

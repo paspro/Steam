@@ -44,6 +44,7 @@ use crate::steam_numerics::interpolate_bilinear;
 ///     - `val`: The 2D vector with the values of the property the supplied polynomial
 ///              function computes
 ///
+#[allow(clippy::too_many_arguments)]
 pub fn generate_table(
     poly: &dyn Fn(f64, f64) -> f64,
     xmin: f64,
@@ -56,7 +57,7 @@ pub fn generate_table(
     logging: bool,
 ) -> (Vec<f64>, Vec<f64>, Vec<Vec<f64>>) {
     //
-    // Compute the number of points to use for the table given the initial dx, dy values
+    // Compute the number of points to use for the table given the initial dx, dy values.
     //
     let imax = ((xmax - xmin) / dx).ceil() as usize + 1;
     let jmax = ((ymax - ymin) / dy).ceil() as usize + 1;
@@ -75,7 +76,7 @@ pub fn generate_table(
         println!();
     }
     //
-    // Generate the fine table
+    // Generate the fine table.
     //
     let mut x_fine = vec![0.0; imax];
     let mut y_fine = vec![0.0; jmax];
@@ -83,7 +84,7 @@ pub fn generate_table(
     let mut i_used = vec![true; imax];
     let mut j_used = vec![true; jmax];
     //
-    // Fill the fine table with values
+    // Fill the fine table with values.
     //
     for i in 0..imax {
         x_fine[i] = xmin + (i as f64) * dx;
@@ -93,7 +94,6 @@ pub fn generate_table(
         y_fine[j] = ymin + (j as f64) * dy;
     }
 
-    // We can use nested loops or make this parallel with rayon if needed
     for i in 0..imax {
         for j in 0..jmax {
             val_fine[i][j] = poly(x_fine[i], y_fine[j]);
@@ -123,15 +123,15 @@ pub fn generate_table(
                 for jk in 0..=2 {
                     let yk = yp[0] + 0.5 * (jk as f64) * dy;
                     //
-                    // Compute the accurate value of the property
+                    // Compute the accurate value of the property.
                     //
                     let prop_real = poly(xk, yk);
                     //
-                    // Compute the interpolated value of the property
+                    // Compute the interpolated value of the property.
                     //
                     let prop_int = interpolate_bilinear(&xp, &yp, &up, xk, yk);
                     //
-                    // Estimate the error and check it
+                    // Estimate the error and check it.
                     //
                     let error_estimate = 100.0 * (prop_int - prop_real).abs() / prop_real.abs();
 
@@ -162,49 +162,49 @@ pub fn generate_table(
     //
     // Check the i and j lines alternatively to see
     // if they can be removed and still have an interpolation
-    // error within the acceptable limit
+    // error within the acceptable limit.
     //
     if logging {
         println!("Performing table optimisation...");
     }
     //
     // Start with the initial i and j lines that
-    // can be checked for removal
+    // can be checked for removal.
     //
     let mut icheck: usize = 2;
     let mut jcheck: usize = 2;
     let mut check_i = true;
     let mut check_j = true;
     //
-    // Check the i and j lines for removal
+    // Check the i and j lines for removal.
     //
     while check_i || check_j {
         //
-        // Check the i-line for removal
+        // Check the i-line for removal.
         //
         if check_i {
             //
-            // Find the previous non-deleted i-line
+            // Find the previous non-deleted i-line.
             //
             let mut icheck_m1 = icheck - 1;
             while !i_used[icheck_m1] {
                 icheck_m1 -= 1;
             }
             //
-            // Find the next non-deleted i-line
+            // Find the next non-deleted i-line.
             //
             let mut icheck_p1 = icheck + 1;
             while icheck_p1 < imax && !i_used[icheck_p1] {
                 icheck_p1 += 1;
             }
             //
-            // Set the xp values
+            // Set the xp values.
             //
             let xp = [x_fine[icheck_m1], x_fine[icheck_p1]];
             let inum = ((xp[1] - xp[0]) / dx) as usize;
             //
             // Iterate the j-lines and find pairs of
-            // non-deleted successive lines
+            // non-deleted successive lines.
             //
             let mut j_p1: usize = 1;
             let mut can_remove_line = true;
@@ -212,13 +212,13 @@ pub fn generate_table(
             'row_check: while can_remove_line && j_p1 < jmax {
                 let j = j_p1;
                 //
-                // If this j-line has been deleted move to the next one
+                // If this j-line has been deleted move to the next one.
                 //
                 if !j_used[j] {
                     continue;
                 }
                 //
-                // Find the next non-deleted j-line
+                // Find the next non-deleted j-line.
                 //
                 j_p1 = j + 1;
                 while j_p1 < jmax && !j_used[j_p1] {
@@ -230,7 +230,7 @@ pub fn generate_table(
                 }
                 //
                 // Check the interpolation errors for the
-                // interval (icheck-1, j) -> (icheck+1, j+1)
+                // interval (icheck-1, j) -> (icheck+1, j+1).
                 //
                 let yp = [y_fine[j], y_fine[j_p1]];
                 let jnum = ((yp[1] - yp[0]) / dy) as usize;
@@ -245,15 +245,15 @@ pub fn generate_table(
                     for j in 0..=jnum {
                         let yk = yp[0] + (j as f64) * dy;
                         //
-                        // Compute the accurate value of the property
+                        // Compute the accurate value of the property.
                         //
                         let prop_real = poly(xk, yk);
                         //
-                        // Compute the interpolated value of the property
+                        // Compute the interpolated value of the property.
                         //
                         let prop_int = interpolate_bilinear(&xp, &yp, &up, xk, yk);
                         //
-                        // Estimate the error and check it
+                        // Estimate the error and check it.
                         //
                         let error_estimate = 100.0 * (prop_int - prop_real).abs() / prop_real.abs();
 
@@ -265,14 +265,14 @@ pub fn generate_table(
                 }
             }
             //
-            // If the line can be removed then mark it as such
+            // If the line can be removed then mark it as such.
             //
             if can_remove_line {
                 i_used[icheck] = false;
             }
         }
         //
-        // Check the j-line for removal
+        // Check the j-line for removal.
         //
         if check_j {
             //
@@ -283,20 +283,20 @@ pub fn generate_table(
                 jcheck_m1 -= 1;
             }
             //
-            // Find the next non-deleted j-line
+            // Find the next non-deleted j-line.
             //
             let mut jcheck_p1 = jcheck + 1;
             while jcheck_p1 < jmax && !j_used[jcheck_p1] {
                 jcheck_p1 += 1;
             }
             //
-            // Set the yp values
+            // Set the yp values.
             //
             let yp = [y_fine[jcheck_m1], y_fine[jcheck_p1]];
             let jnum = ((yp[1] - yp[0]) / dy) as usize;
             //
             // Iterate the i-lines and find pairs of
-            // non-deleted successive lines
+            // non-deleted successive lines.
             //
             let mut i_p1: usize = 1;
             let mut can_remove_line = true;
@@ -304,13 +304,13 @@ pub fn generate_table(
             'column_check: while can_remove_line && i_p1 < imax {
                 let i = i_p1;
                 //
-                // If this i-line has been deleted move to the next one
+                // If this i-line has been deleted move to the next one.
                 //
                 if !i_used[i] {
                     continue;
                 }
                 //
-                // Find the next non-deleted i-line
+                // Find the next non-deleted i-line.
                 //
                 i_p1 = i + 1;
                 while i_p1 < imax && !i_used[i_p1] {
@@ -322,7 +322,7 @@ pub fn generate_table(
                 }
                 //
                 // Check the interpolation errors for the
-                // interval (i, jcheck-1) -> (i+1, jcheck+1)
+                // interval (i, jcheck-1) -> (i+1, jcheck+1).
                 //
                 let xp = [x_fine[i], x_fine[i_p1]];
                 let inum = ((xp[1] - xp[0]) / dx) as usize;
@@ -337,15 +337,15 @@ pub fn generate_table(
                     for jdx in 0..=jnum {
                         let yk = yp[0] + (jdx as f64) * dy;
                         //
-                        // Compute the accurate value of the property
+                        // Compute the accurate value of the property.
                         //
                         let prop_real = poly(xk, yk);
                         //
-                        // Compute the interpolated value of the property
+                        // Compute the interpolated value of the property.
                         //
                         let prop_int = interpolate_bilinear(&xp, &yp, &up, xk, yk);
                         //
-                        // Estimate the error and check it
+                        // Estimate the error and check it.
                         //
                         let error_estimate = 100.0 * (prop_int - prop_real).abs() / prop_real.abs();
 
@@ -357,7 +357,7 @@ pub fn generate_table(
                 }
             }
             //
-            // If the line can be removed then mark it as such
+            // If the line can be removed then mark it as such.
             //
             if can_remove_line {
                 j_used[jcheck] = false;
@@ -365,7 +365,7 @@ pub fn generate_table(
         }
         //
         // Move on to the next i and j lines to check for removal
-        // that have not been already removed
+        // that have not been already removed.
         //
         check_i = false;
         for i in (icheck + 1)..(imax - 1) {
@@ -410,7 +410,7 @@ pub fn generate_table(
         println!();
     }
     //
-    // Construct the table data
+    // Construct the table data.
     //
     let mut x = Vec::with_capacity(imax_new);
     let mut y = Vec::with_capacity(jmax_new);

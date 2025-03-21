@@ -36,7 +36,7 @@ const J: [i32; 39] = [
 ];
 
 ///
-/// Constant coefficients "n".
+/// Constant coefficients "Ν".
 ///
 const N: [f64; 39] = [
     -0.15732845290239e2,
@@ -81,7 +81,7 @@ const N: [f64; 39] = [
 ];
 
 ///
-/// Constant coefficient "n1".
+/// Constant coefficient "Ν1".
 ///
 const N1: f64 = 0.10658070028513e1;
 
@@ -105,14 +105,13 @@ const REGION_3_TSTAR: f64 = IAPWS97_TCRIT;
 /// # Returns:
 ///   - The dimensionless specific Helmholtz free energy.
 ///
-fn phi(delta: f64, tau: f64) -> f64 {
+fn helmholtz_nondim(delta: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..39 {
-        sum += N[i] * delta.powi(I[i]) * tau.powi(J[i]);
-    }
+    let sum: f64 = (0..39)
+        .map(|i| N[i] * delta.powi(I[i]) * tau.powi(J[i]))
+        .sum();
 
     N1 * delta.ln() + sum
 }
@@ -128,16 +127,14 @@ fn phi(delta: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(phi)/d(delta).
 ///
-fn phidelta(delta: f64, tau: f64) -> f64 {
+fn helmholtz_grad_delta(delta: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..39 {
-        if I[i] > 0 {
-            sum += N[i] * I[i] as f64 * delta.powi(I[i] - 1) * tau.powi(J[i]);
-        }
-    }
+    let sum: f64 = (0..39)
+        .filter(|&i| I[i] > 0)
+        .map(|i| N[i] * I[i] as f64 * delta.powi(I[i] - 1) * tau.powi(J[i]))
+        .sum();
 
     N1 / delta + sum
 }
@@ -153,16 +150,14 @@ fn phidelta(delta: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(phi)/d(delta)2.
 ///
-fn phideltadelta(delta: f64, tau: f64) -> f64 {
+fn helmholtz_grad2_delta(delta: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..39 {
-        if I[i] > 1 {
-            sum += N[i] * I[i] as f64 * (I[i] - 1) as f64 * delta.powi(I[i] - 2) * tau.powi(J[i]);
-        }
-    }
+    let sum: f64 = (0..39)
+        .filter(|&i| I[i] > 1)
+        .map(|i| N[i] * I[i] as f64 * (I[i] - 1) as f64 * delta.powi(I[i] - 2) * tau.powi(J[i]))
+        .sum();
 
     -N1 / (delta * delta) + sum
 }
@@ -178,16 +173,14 @@ fn phideltadelta(delta: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d(phi)/d(tau).
 ///
-fn phitau(delta: f64, tau: f64) -> f64 {
+fn helmholtz_grad_tau(delta: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..39 {
-        if J[i] != 0 {
-            sum += N[i] * delta.powi(I[i]) * J[i] as f64 * tau.powi(J[i] - 1);
-        }
-    }
+    let sum: f64 = (0..39)
+        .filter(|&i| J[i] != 0)
+        .map(|i| N[i] * delta.powi(I[i]) * J[i] as f64 * tau.powi(J[i] - 1))
+        .sum();
 
     sum
 }
@@ -203,16 +196,14 @@ fn phitau(delta: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(phi)/d(tau)2.
 ///
-fn phitautau(delta: f64, tau: f64) -> f64 {
+fn helmholtz_grad2_tau(delta: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..39 {
-        if J[i] > 1 || J[i] < 0 {
-            sum += N[i] * delta.powi(I[i]) * J[i] as f64 * (J[i] - 1) as f64 * tau.powi(J[i] - 2);
-        }
-    }
+    let sum: f64 = (0..39)
+        .filter(|&i| J[i] > 1 || J[i] < 0)
+        .map(|i| N[i] * delta.powi(I[i]) * J[i] as f64 * (J[i] - 1) as f64 * tau.powi(J[i] - 2))
+        .sum();
 
     sum
 }
@@ -228,16 +219,14 @@ fn phitautau(delta: f64, tau: f64) -> f64 {
 /// - Returns:
 ///   - The derivative d2(phi)/d(delta)d(tau).
 ///
-fn phideltatau(delta: f64, tau: f64) -> f64 {
+fn helmholtz_grad2_delta_tau(delta: f64, tau: f64) -> f64 {
     //
     // Polynomial expression.
     //
-    let mut sum = 0.0;
-    for i in 0..39 {
-        if I[i] > 0 && J[i] != 0 {
-            sum += N[i] * I[i] as f64 * delta.powi(I[i] - 1) * J[i] as f64 * tau.powi(J[i] - 1);
-        }
-    }
+    let sum: f64 = (0..39)
+        .filter(|&i| I[i] > 0 && J[i] != 0)
+        .map(|i| N[i] * I[i] as f64 * delta.powi(I[i] - 1) * J[i] as f64 * tau.powi(J[i] - 1))
+        .sum();
 
     sum
 }
@@ -258,11 +247,10 @@ pub fn pressure(density: f64, temperature: f64) -> f64 {
     //
     let delta = density / REGION_3_RHOSTAR;
     let tau = REGION_3_TSTAR / temperature;
-
     //
     // Compute pressure.
     //
-    IAPWS97_R * density * temperature * delta * phidelta(delta, tau) * 1.0e-6
+    IAPWS97_R * density * temperature * delta * helmholtz_grad_delta(delta, tau) * 1.0e-6
 }
 
 ///
@@ -275,7 +263,7 @@ pub fn pressure(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific internal energy [J/Kg].
-/// 
+///
 pub fn specific_internal_energy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -285,7 +273,7 @@ pub fn specific_internal_energy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the specific internal energy.
     //
-    IAPWS97_R * temperature * tau * phitau(delta, tau)
+    IAPWS97_R * temperature * tau * helmholtz_grad_tau(delta, tau)
 }
 
 ///
@@ -298,7 +286,7 @@ pub fn specific_internal_energy(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific entropy [J/Kg.K].
-/// 
+///
 pub fn specific_entropy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -308,7 +296,7 @@ pub fn specific_entropy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the specific entropy.
     //
-    IAPWS97_R * (tau * phitau(delta, tau) - phi(delta, tau))
+    IAPWS97_R * (tau * helmholtz_grad_tau(delta, tau) - helmholtz_nondim(delta, tau))
 }
 
 ///
@@ -321,7 +309,7 @@ pub fn specific_entropy(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific enthalpy [J/Kg].
-/// 
+///
 pub fn specific_enthalpy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -331,7 +319,9 @@ pub fn specific_enthalpy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the specific enthalpy.
     //
-    IAPWS97_R * temperature * (tau * phitau(delta, tau) + delta * phidelta(delta, tau))
+    IAPWS97_R
+        * temperature
+        * (tau * helmholtz_grad_tau(delta, tau) + delta * helmholtz_grad_delta(delta, tau))
 }
 
 ///
@@ -344,7 +334,7 @@ pub fn specific_enthalpy(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific isobaric heat capacity [J/Kg.K].
-/// 
+///
 pub fn specific_isobaric_heat_capacity(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -354,9 +344,10 @@ pub fn specific_isobaric_heat_capacity(density: f64, temperature: f64) -> f64 {
     //
     // Compute the specific isobaric heat capacity.
     //
-    let res1 = -tau * tau * phitautau(delta, tau);
-    let res2 = delta * (phidelta(delta, tau) - tau * phideltatau(delta, tau)).powi(2);
-    let res3 = 2.0 * phidelta(delta, tau) + delta * phideltadelta(delta, tau);
+    let res1 = -tau * tau * helmholtz_grad2_tau(delta, tau);
+    let res2 = delta
+        * (helmholtz_grad_delta(delta, tau) - tau * helmholtz_grad2_delta_tau(delta, tau)).powi(2);
+    let res3 = 2.0 * helmholtz_grad_delta(delta, tau) + delta * helmholtz_grad2_delta(delta, tau);
 
     IAPWS97_R * (res1 + res2 / res3)
 }
@@ -371,7 +362,7 @@ pub fn specific_isobaric_heat_capacity(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific isochoric heat capacity [J/Kg.K].
-/// 
+///
 pub fn specific_isochoric_heat_capacity(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -381,7 +372,7 @@ pub fn specific_isochoric_heat_capacity(density: f64, temperature: f64) -> f64 {
     //
     // Compute the specific isochoric heat capacity.
     //
-    -IAPWS97_R * tau * tau * phitautau(delta, tau)
+    -IAPWS97_R * tau * tau * helmholtz_grad2_tau(delta, tau)
 }
 
 ///
@@ -394,7 +385,7 @@ pub fn specific_isochoric_heat_capacity(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The ratio of specific heats.
-/// 
+///
 pub fn ratio_of_specific_heats(density: f64, temperature: f64) -> f64 {
     //
     // Compute the ratio of specific heats.
@@ -413,7 +404,7 @@ pub fn ratio_of_specific_heats(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The speed of sound [m/sec].
-/// 
+///
 pub fn speed_of_sound(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -423,9 +414,12 @@ pub fn speed_of_sound(density: f64, temperature: f64) -> f64 {
     //
     // Compute the speed of sound.
     //
-    let res1 = 2.0 * delta * phidelta(delta, tau) + delta * delta * phideltadelta(delta, tau);
-    let res2 = (delta * phidelta(delta, tau) - delta * tau * phideltatau(delta, tau)).powi(2);
-    let res3 = tau * tau * phitautau(delta, tau);
+    let res1 = 2.0 * delta * helmholtz_grad_delta(delta, tau)
+        + delta * delta * helmholtz_grad2_delta(delta, tau);
+    let res2 = (delta * helmholtz_grad_delta(delta, tau)
+        - delta * tau * helmholtz_grad2_delta_tau(delta, tau))
+    .powi(2);
+    let res3 = tau * tau * helmholtz_grad2_tau(delta, tau);
 
     (IAPWS97_R * temperature * (res1 - res2 / res3)).sqrt()
 }
@@ -440,7 +434,7 @@ pub fn speed_of_sound(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific Helmoltz free energy [J/kg].
-/// 
+///
 pub fn specific_helmoltz_free_energy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the dimensionless parameters delta and tau.
@@ -450,7 +444,7 @@ pub fn specific_helmoltz_free_energy(density: f64, temperature: f64) -> f64 {
     //
     // Compute the specific Helmoltz free energy.
     //
-    IAPWS97_R * temperature * phi(delta, tau)
+    IAPWS97_R * temperature * helmholtz_nondim(delta, tau)
 }
 
 ///
@@ -463,7 +457,7 @@ pub fn specific_helmoltz_free_energy(density: f64, temperature: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature [K].
-/// 
+///
 pub fn temperature_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -537,10 +531,9 @@ pub fn temperature_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     let pi = pressure / REGION_3A_PH_PSTAR + A;
     let eta = enthalpy / REGION_3A_PH_HSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..31 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..31)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3A_PH_TSTAR * sum
 }
@@ -555,7 +548,7 @@ pub fn temperature_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature [K].
-/// 
+///
 pub fn temperature_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -631,10 +624,9 @@ pub fn temperature_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     let pi = pressure / REGION_3B_PH_PSTAR + A;
     let eta = enthalpy / REGION_3B_PH_HSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..33 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..33)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3B_PH_TSTAR * sum
 }
@@ -649,7 +641,7 @@ pub fn temperature_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific volume [m3/Kg].
-/// 
+///
 pub fn specific_volume_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -724,10 +716,9 @@ pub fn specific_volume_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
     let pi = pressure / REGION_3A_PH_PSTAR + A;
     let eta = enthalpy / REGION_3A_PH_HSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..32 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..32)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3A_PH_VSTAR * sum
 }
@@ -742,7 +733,7 @@ pub fn specific_volume_ph_region3a(pressure: f64, enthalpy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific volume [m3/Kg].
-/// 
+///
 pub fn specific_volume_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -814,10 +805,9 @@ pub fn specific_volume_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
     let pi = pressure / REGION_3B_PH_PSTAR + A;
     let eta = enthalpy / REGION_3B_PH_HSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..30 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..30)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3B_PH_VSTAR * sum
 }
@@ -832,7 +822,7 @@ pub fn specific_volume_ph_region3b(pressure: f64, enthalpy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature [K].
-/// 
+///
 pub fn temperature_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -908,10 +898,9 @@ pub fn temperature_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_3A_PS_PSTAR + A;
     let eta = entropy / REGION_3A_PS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..33 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..33)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3A_PS_TSTAR * sum
 }
@@ -926,9 +915,11 @@ pub fn temperature_ps_region3a(pressure: f64, entropy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The temperature [K].
-/// 
+///
 pub fn temperature_ps_region3b(pressure: f64, entropy: f64) -> f64 {
-    // Constant polynomial coefficients
+    //
+    // Constant polynomial coefficients.
+    //
     const II: [i32; 28] = [
         -12, -12, -12, -12, -8, -8, -8, -6, -6, -6, -5, -5, -5, -5, -5, -4, -3, -3, -2, 0, 2, 3, 4,
         5, 6, 8, 12, 14,
@@ -994,10 +985,9 @@ pub fn temperature_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_3B_PS_PSTAR + A;
     let eta = entropy / REGION_3B_PS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..28 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..28)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3B_PS_TSTAR * sum
 }
@@ -1012,7 +1002,7 @@ pub fn temperature_ps_region3b(pressure: f64, entropy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific volume [m3/Kg].
-/// 
+///
 pub fn specific_volume_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -1082,10 +1072,9 @@ pub fn specific_volume_ps_region3a(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_3A_PS_PSTAR + A;
     let eta = entropy / REGION_3A_PS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..28 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..28)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3A_PS_VSTAR * sum
 }
@@ -1100,7 +1089,7 @@ pub fn specific_volume_ps_region3a(pressure: f64, entropy: f64) -> f64 {
 ///
 /// - Returns:
 ///   - The specific volume [m3/Kg].
-/// 
+///
 pub fn specific_volume_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
@@ -1174,10 +1163,9 @@ pub fn specific_volume_ps_region3b(pressure: f64, entropy: f64) -> f64 {
     let pi = pressure / REGION_3B_PS_PSTAR + A;
     let eta = entropy / REGION_3B_PS_SSTAR - B;
 
-    let mut sum = 0.0;
-    for i in 0..31 {
-        sum += NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]);
-    }
+    let sum: f64 = (0..31)
+        .map(|i| NN[i] * pi.powi(II[i]) * eta.powi(JJ[i]))
+        .sum();
 
     REGION_3B_PS_VSTAR * sum
 }

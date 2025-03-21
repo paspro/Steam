@@ -39,7 +39,7 @@ use crate::steam_region3::{
 };
 
 ///
-/// Constant coefficients "n".
+/// Constant coefficients "N".
 ///
 const N: [f64; 10] = [
     0.11670521452767e4,
