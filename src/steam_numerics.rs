@@ -13,8 +13,6 @@
 //!
 //! This module provides numerical utilities for the steam calculations.
 
-use crate::steam_constants::*;
-
 ///
 /// This function reverses a generic equation f(x) by computing the value
 /// of "x0" when the value of the equation f(x0) is known with the use of
@@ -80,10 +78,6 @@ pub fn function_inverter(
         /// The interpolation order used by the method.
         ///
         n_order: i32,
-        ///
-        /// The cache for the solution.
-        ///
-        cache: Vec<Vec<f64>>,
     }
     //
     // Implement the solution context.
@@ -98,7 +92,6 @@ pub fn function_inverter(
         ///   - `guess1`: A guess for the value of x0.
         ///   - `guess2`: A second guess for the value of x0.
         ///   - `n_order`: The interpolation order used by the method.
-        ///   - `max_iterations`: The maximum number of allowed iterations.
         ///
         /// - Returns:
         ///   - The solution context.
@@ -109,23 +102,13 @@ pub fn function_inverter(
             guess1: f64,
             guess2: f64,
             n_order: i32,
-            max_iterations: i32,
         ) -> Self {
-            //
-            // Initialize cache with None values.
-            //
-            let mut cache = Vec::new();
-            for _ in 0..(max_iterations + 1) {
-                let row = vec![f64::NAN; (n_order + 1) as usize];
-                cache.push(row);
-            }
             Self {
                 f,
                 f0,
                 guess1,
                 guess2,
                 n_order,
-                cache,
             }
         }
         ///
@@ -157,14 +140,7 @@ pub fn function_inverter(
         ///   - The solution for the function inverter.
         ///
         fn solution(&mut self, p: i32, i: i32) -> f64 {
-            //
-            // Check cache first.
-            //
-            if p >= 0 && i >= 0 && !self.cache[p as usize][i as usize].is_nan() {
-                return self.cache[p as usize][i as usize];
-            }
-
-            let result = if p == -1 {
+            if p == -1 {
                 self.guess1
             } else if p == 0 {
                 self.guess2
@@ -186,19 +162,12 @@ pub fn function_inverter(
                 let x3 = self.solution(p, i - 1);
                 let x4 = self.solution(p - i - 2, self.imax(p - i - 2));
                 x3 + (x2 - x3) * (x1 - x3) / (x1 + x2 - x3 - x4)
-            };
-            //
-            // Store in cache if possible.
-            //
-            if p >= 0 && i >= 0 {
-                self.cache[p as usize][i as usize] = result;
             }
 
-            result
         }
     }
 
-    let mut context = SolutionContext::new(f, f0, guess1, guess2, n_order, max_iterations);
+    let mut context = SolutionContext::new(f, f0, guess1, guess2, n_order);
     let mut s_old = guess2;
 
     for iter in (n_order + 1)..=max_iterations {
@@ -299,10 +268,6 @@ pub fn function_inverter_x(
         /// The interpolation order used by the method.
         ///
         n_order: i32,
-        ///
-        /// The cache for the solution.
-        ///
-        cache: Vec<Vec<f64>>,
     }
     //
     // Implement the solution context.
@@ -318,7 +283,6 @@ pub fn function_inverter_x(
         ///   - `guess1`: A guess for the value of x0.
         ///   - `guess2`: A second guess for the value of x0.
         ///   - `n_order`: The interpolation order used by the method.
-        ///   - `max_iterations`: The maximum number of allowed iterations.
         ///
         /// - Returns:
         ///   - The solution context.
@@ -330,24 +294,14 @@ pub fn function_inverter_x(
             guess1: f64,
             guess2: f64,
             n_order: i32,
-            max_iterations: i32,
         ) -> Self {
-            //
-            // Initialize cache.
-            //
-            let mut cache = Vec::new();
-            for _ in 0..(max_iterations + 1) {
-                let row = vec![f64::NAN; (n_order + 1) as usize];
-                cache.push(row);
-            }
-            Self {
+             Self {
                 f,
                 f0,
                 y0,
                 guess1,
                 guess2,
                 n_order,
-                cache,
             }
         }
         ///
@@ -379,14 +333,7 @@ pub fn function_inverter_x(
         ///   - The solution for the function inverter.
         ///
         fn solution(&mut self, p: i32, i: i32) -> f64 {
-            //
-            // Check cache first.
-            //
-            if p >= 0 && i >= 0 && !self.cache[p as usize][i as usize].is_nan() {
-                return self.cache[p as usize][i as usize];
-            }
-
-            let result = if p == -1 {
+            if p == -1 {
                 self.guess1
             } else if p == 0 {
                 self.guess2
@@ -408,20 +355,11 @@ pub fn function_inverter_x(
                 let x3 = self.solution(p, i - 1);
                 let x4 = self.solution(p - i - 2, self.imax(p - i - 2));
                 x3 + (x2 - x3) * (x1 - x3) / (x1 + x2 - x3 - x4)
-            };
-
-            //
-            // Store in cache if possible.
-            //
-            if p >= 0 && i >= 0 {
-                self.cache[p as usize][i as usize] = result;
             }
-
-            result
         }
     }
 
-    let mut context = SolutionContext::new(f, f0, y0, guess1, guess2, n_order, max_iterations);
+    let mut context = SolutionContext::new(f, f0, y0, guess1, guess2, n_order);
     let mut s_old = guess2;
 
     for iter in (n_order + 1)..=max_iterations {
@@ -522,10 +460,6 @@ pub fn function_inverter_y(
         /// The interpolation order used by the method.
         ///
         n_order: i32,
-        ///
-        /// The cache for the solution.
-        ///
-        cache: Vec<Vec<f64>>,
     }
     //
     // Implement the solution context.
@@ -541,7 +475,6 @@ pub fn function_inverter_y(
         ///   - `guess1`: A guess for the value of y0.
         ///   - `guess2`: A second guess for the value of y0.
         ///   - `n_order`: The interpolation order used by the method.
-        ///   - `max_iterations`: The maximum number of allowed iterations.
         ///
         fn new(
             f: &'a dyn Fn(f64, f64) -> f64,
@@ -550,24 +483,14 @@ pub fn function_inverter_y(
             guess1: f64,
             guess2: f64,
             n_order: i32,
-            max_iterations: i32,
         ) -> Self {
-            //
-            // Initialize cache.
-            //
-            let mut cache = Vec::new();
-            for _ in 0..(max_iterations + 1) {
-                let row = vec![f64::NAN; (n_order + 1) as usize];
-                cache.push(row);
-            }
-            Self {
+             Self {
                 f,
                 f0,
                 x0,
                 guess1,
                 guess2,
                 n_order,
-                cache,
             }
         }
         ///
@@ -599,14 +522,7 @@ pub fn function_inverter_y(
         ///   - The solution for the function inverter.
         ///
         fn solution(&mut self, p: i32, i: i32) -> f64 {
-            //
-            // Check cache first.
-            //
-            if p >= 0 && i >= 0 && !self.cache[p as usize][i as usize].is_nan() {
-                return self.cache[p as usize][i as usize];
-            }
-
-            let result = if p == -1 {
+            if p == -1 {
                 self.guess1
             } else if p == 0 {
                 self.guess2
@@ -628,19 +544,11 @@ pub fn function_inverter_y(
                 let y3 = self.solution(p, i - 1);
                 let y4 = self.solution(p - i - 2, self.imax(p - i - 2));
                 y3 + (y2 - y3) * (y1 - y3) / (y1 + y2 - y3 - y4)
-            };
-            //
-            // Store in cache if possible.
-            //
-            if p >= 0 && i >= 0 {
-                self.cache[p as usize][i as usize] = result;
             }
-
-            result
         }
     }
 
-    let mut context = SolutionContext::new(f, f0, x0, guess1, guess2, n_order, max_iterations);
+    let mut context = SolutionContext::new(f, f0, x0, guess1, guess2, n_order);
     let mut s_old = guess2;
 
     for iter in (n_order + 1)..=max_iterations {
@@ -701,8 +609,8 @@ pub fn interpolate_cubic(x: &[f64; 2], u: &[f64; 2], uprime: &[f64; 2], xi: f64)
     let coeff = [
         u[0],
         uprime[0],
-        THREE * du / dx2 - (uprime[1] + TWO * uprime[0]) / dx,
-        -TWO * du / dx3 + (uprime[1] + uprime[0]) / dx2,
+        3.0 * du / dx2 - (uprime[1] + 2.0 * uprime[0]) / dx,
+        -2.0 * du / dx3 + (uprime[1] + uprime[0]) / dx2,
     ];
     //
     // Perform the interpolation.
@@ -751,7 +659,7 @@ pub fn interpolate_cubic_numerical(x: &[f64; 4], u: &[f64; 4], xi: f64) -> f64 {
 
 ///
 /// This function performs a piecewise bilinear interpolation in order to
-/// compute the value of a property that is a function of two parameters.
+/// compute the value of a property that is a function of 2.0 parameters.
 /// The interpolation function has the form:
 ///
 /// s(x,y) = SUMn(SUMm(Cmnjk*(x-xj)^m*(y-yk)^n), where SUMm is over m = 0, 1,
@@ -796,7 +704,7 @@ pub fn interpolate_bilinear(
 
 ///
 /// This function performs a bicubic interpolation in order to
-/// compute the value of a property that is a function of two parameters.
+/// compute the value of a property that is a function of 2.0 parameters.
 ///
 /// - Arguments:
 ///   - `x`: The vector with the x-values (dim=4).
@@ -861,7 +769,7 @@ pub fn binary_search_vector(vec: &[f64], value: f64, imin: i32, imax: i32) -> i3
 
 ///
 /// This function implements a binary search algorithm in order to locate
-/// a value in a two dimensional array. If the exact value does not exist
+/// a value in a 2.0 dimensional array. If the exact value does not exist
 /// it will return the closest smaller value available in the table.
 ///
 /// - Arguments:
