@@ -108,7 +108,7 @@ pub fn saturation_pressure(temperature: f64) -> f64 {
     let a = theta2 + N[0] * theta + N[1];
     let b = N[2] * theta2 + N[3] * theta + N[4];
     let c = N[5] * theta2 + N[6] * theta + N[7];
-    let expr = TWO * c / (-b + (b * b - FOUR * a * c).sqrt());
+    let expr = 2.0 * c / (-b + (b * b - 4.0 * a * c).sqrt());
 
     REGION_4_PSTAR * expr.powi(4)
 }
@@ -129,17 +129,17 @@ pub fn saturation_pressure_gradient(temperature: f64) -> f64 {
     //
     let beta = (saturation_pressure(temperature) / REGION_4_PSTAR).powf(QUARTER);
     let theta = temperature / REGION_4_TSTAR + N[8] / (temperature / REGION_4_TSTAR - N[9]);
-    let xbeta = (TWO * beta + N[2]) * theta * theta
-        + (TWO * beta * N[0] + N[3]) * theta
-        + TWO * N[1] * beta
+    let xbeta = (2.0 * beta + N[2]) * theta * theta
+        + (2.0 * beta * N[0] + N[3]) * theta
+        + 2.0 * N[1] * beta
         + N[4];
-    let xtheta = (TWO * theta + N[0]) * beta * beta
-        + (TWO * N[2] * theta + N[3]) * beta
-        + TWO * N[5] * theta
+    let xtheta = (2.0 * theta + N[0]) * beta * beta
+        + (2.0 * N[2] * theta + N[3]) * beta
+        + 2.0 * N[5] * theta
         + N[6];
-    let dthetadt = (ONE - N[8] / (temperature / REGION_4_TSTAR - N[9]).powi(2)) / REGION_4_TSTAR;
+    let dthetadt = (1.0 - N[8] / (temperature / REGION_4_TSTAR - N[9]).powi(2)) / REGION_4_TSTAR;
     let dbetadtheta = -xtheta / xbeta;
-    let dpdbeta = FOUR * beta.powi(3) * REGION_4_PSTAR;
+    let dpdbeta = 4.0 * beta.powi(3) * REGION_4_PSTAR;
 
     dpdbeta * dbetadtheta * dthetadt
 }
@@ -164,9 +164,9 @@ pub fn saturation_temperature(pressure: f64) -> f64 {
     let e = beta2 + N[2] * beta + N[5];
     let f = N[0] * beta2 + N[3] * beta + N[6];
     let g = N[1] * beta2 + N[4] * beta + N[7];
-    let d = TWO * g / (-f - (f * f - FOUR * e * g).sqrt());
+    let d = 2.0 * g / (-f - (f * f - 4.0 * e * g).sqrt());
 
-    REGION_4_TSTAR * HALF * (N[9] + d - ((N[9] + d).powi(2) - FOUR * (N[8] + N[9] * d)).sqrt())
+    REGION_4_TSTAR * HALF * (N[9] + d - ((N[9] + d).powi(2) - 4.0 * (N[8] + N[9] * d)).sqrt())
 }
 
 ///
@@ -183,14 +183,14 @@ pub fn saturation_water_density(temperature: f64) -> f64 {
     //
     // Compute the saturation water density.
     //
-    let tau = ONE - temperature / IAPWS97_TCRIT;
-    let tau_1_3 = tau.powf(ONETHIRD);
+    let tau = 1.0 - temperature / IAPWS97_TCRIT;
+    let tau_1_3 = tau.powf(ONE_THIRD);
     let tau_2_3 = tau_1_3 * tau_1_3;
     let tau_5_3 = tau * tau_2_3;
     let tau_16_3 = tau_5_3 * tau_5_3 * tau_5_3 * tau_1_3;
     let tau_43_3 = tau_16_3 * tau_16_3 * tau_5_3 * tau_5_3 * tau_1_3;
     let tau_110_3 = tau_43_3 * tau_43_3 * tau_16_3 * tau_5_3 * tau;
-    let delta = ONE
+    let delta = 1.0
         + K[0] * tau_1_3
         + K[1] * tau_2_3
         + K[2] * tau_5_3
@@ -215,8 +215,8 @@ pub fn saturation_steam_density(temperature: f64) -> f64 {
     //
     // Compute the saturation steam density.
     //
-    let tau = ONE - temperature / IAPWS97_TCRIT;
-    let tau_1_6 = tau.powf(ONESIXTH);
+    let tau = 1.0 - temperature / IAPWS97_TCRIT;
+    let tau_1_6 = tau.powf(ONE_SIXTH);
     let tau_2_6 = tau_1_6 * tau_1_6;
     let tau_4_6 = tau_2_6 * tau_2_6;
     let tau_8_6 = tau_4_6 * tau_4_6;
@@ -281,8 +281,8 @@ pub fn specific_volume(temperature: f64, quality: f64) -> f64 {
         (v1(psat, temperature), v2(psat, temperature))
     } else {
         (
-            ONE / saturation_water_density(temperature),
-            ONE / saturation_steam_density(temperature),
+            1.0 / saturation_water_density(temperature),
+            1.0 / saturation_steam_density(temperature),
         )
     };
 

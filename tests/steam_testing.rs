@@ -197,7 +197,7 @@ fn test_region2() {
         let value = ss.get_specific_isobaric_heat_capacity();
         let error = (value - cp_real[i]).abs() / cp_real[i].abs();
         println!("Error in specific isobaric heat capacity = {}", error);
-       assert!(error <= 1e-2);
+        assert!(error <= 1e-2);
 
         let (t_ph, t_ps, p_hs) = if in2a {
             (
@@ -547,7 +547,6 @@ fn test_cubic_interpolation() {
 
         let error: f64 = 100.0 * (p_int - p_real).abs() / p_real;
         assert!(error <= 1e-2);
-
         println!("Polynomial Pressure    = {} [MPa]", p_real);
 
         println!("Cubic with Exact Gradients:");

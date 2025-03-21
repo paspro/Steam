@@ -18,7 +18,6 @@
 //! @copyright Panos Asproulis (2014-2016). All Rights Reserved.
 
 use crate::steam_conductivity;
-use crate::steam_constants::{ONE, ZERO};
 use crate::steam_region1;
 use crate::steam_region2;
 use crate::steam_region3;
@@ -206,17 +205,16 @@ impl SteamState {
     ///   - The specific volume (m3/kg).
     ///
     pub fn get_specific_volume(&mut self) -> f64 {
-        if self.v > ZERO {
+        if self.v > 0.0 {
             return self.v;
         }
-
         self.v = match self.region {
             1 => steam_region1::specific_volume(self.pressure, self.temperature),
             2 => steam_region2::specific_volume(self.pressure, self.temperature),
-            3 => ONE / self.density,
+            3 => 1.0 / self.density,
             4 => steam_region4::specific_volume(self.temperature, self.quality),
             5 => steam_region5::specific_volume(self.pressure, self.temperature),
-            _ => ZERO,
+            _ => 0.0,
         };
 
         self.v
@@ -239,7 +237,7 @@ impl SteamState {
                 self.pressure = steam_region4::saturation_pressure(self.temperature);
                 self.pressure
             }
-            _ => ZERO,
+            _ => 0.0,
         }
     }
 
@@ -250,7 +248,7 @@ impl SteamState {
     ///   - The density (Kg/m3).
     ///
     pub fn get_density(&mut self) -> f64 {
-        ONE / self.get_specific_volume()
+        1.0 / self.get_specific_volume()
     }
 
     ///
@@ -270,17 +268,16 @@ impl SteamState {
     ///   - The specific internal energy (J/kg).
     ///
     pub fn get_specific_internal_energy(&mut self) -> f64 {
-        if self.u > ZERO {
+        if self.u > 0.0 {
             return self.u;
         }
-
         self.u = match self.region {
             1 => steam_region1::specific_internal_energy(self.pressure, self.temperature),
             2 => steam_region2::specific_internal_energy(self.pressure, self.temperature),
             3 => steam_region3::specific_internal_energy(self.density, self.temperature),
             4 => steam_region4::specific_internal_energy(self.temperature, self.quality),
             5 => steam_region5::specific_internal_energy(self.pressure, self.temperature),
-            _ => ZERO,
+            _ => 0.0,
         };
 
         self.u
@@ -293,17 +290,16 @@ impl SteamState {
     ///   - The specific enthalpy (J/kg).
     ///
     pub fn get_specific_enthalpy(&mut self) -> f64 {
-        if self.h > ZERO {
+        if self.h > 0.0 {
             return self.h;
         }
-
         self.h = match self.region {
             1 => steam_region1::specific_enthalpy(self.pressure, self.temperature),
             2 => steam_region2::specific_enthalpy(self.pressure, self.temperature),
             3 => steam_region3::specific_enthalpy(self.density, self.temperature),
             4 => steam_region4::specific_enthalpy(self.temperature, self.quality),
             5 => steam_region5::specific_enthalpy(self.pressure, self.temperature),
-            _ => ZERO,
+            _ => 0.0,
         };
 
         self.h
@@ -316,17 +312,16 @@ impl SteamState {
     ///   - The specific entropy (J/kg.K).
     ///
     pub fn get_specific_entropy(&mut self) -> f64 {
-        if self.s > ZERO {
+        if self.s > 0.0 {
             return self.s;
         }
-
         self.s = match self.region {
             1 => steam_region1::specific_entropy(self.pressure, self.temperature),
             2 => steam_region2::specific_entropy(self.pressure, self.temperature),
             3 => steam_region3::specific_entropy(self.density, self.temperature),
             4 => steam_region4::specific_entropy(self.temperature, self.quality),
             5 => steam_region5::specific_entropy(self.pressure, self.temperature),
-            _ => ZERO,
+            _ => 0.0,
         };
 
         self.s
@@ -339,17 +334,16 @@ impl SteamState {
     ///   - The specific isobaric heat capacity (J/kg.K).
     ///
     pub fn get_specific_isobaric_heat_capacity(&mut self) -> f64 {
-        if self.cp > ZERO {
+        if self.cp > 0.0 {
             return self.cp;
         }
-
         self.cp = match self.region {
             1 => steam_region1::specific_isobaric_heat_capacity(self.pressure, self.temperature),
             2 => steam_region2::specific_isobaric_heat_capacity(self.pressure, self.temperature),
             3 => steam_region3::specific_isobaric_heat_capacity(self.density, self.temperature),
             4 => steam_region4::specific_isobaric_heat_capacity(self.temperature, self.quality),
             5 => steam_region5::specific_isobaric_heat_capacity(self.pressure, self.temperature),
-            _ => ZERO,
+            _ => 0.0,
         };
 
         self.cp
@@ -362,17 +356,16 @@ impl SteamState {
     ///   - The specific isochoric heat capacity (J/kg.K).
     ///
     pub fn get_specific_isochoric_heat_capacity(&mut self) -> f64 {
-        if self.cv > ZERO {
+        if self.cv > 0.0 {
             return self.cv;
         }
-
         self.cv = match self.region {
             1 => steam_region1::specific_isochoric_heat_capacity(self.pressure, self.temperature),
             2 => steam_region2::specific_isochoric_heat_capacity(self.pressure, self.temperature),
             3 => steam_region3::specific_isochoric_heat_capacity(self.density, self.temperature),
             4 => steam_region4::specific_isochoric_heat_capacity(self.temperature, self.quality),
             5 => steam_region5::specific_isochoric_heat_capacity(self.pressure, self.temperature),
-            _ => ZERO,
+            _ => 0.0,
         };
 
         self.cv
@@ -398,7 +391,7 @@ impl SteamState {
     ///   - The viscosity (Pa.sec).
     ///
     pub fn get_viscosity(&mut self) -> f64 {
-        if self.mu > ZERO {
+        if self.mu > 0.0 {
             return self.mu;
         }
         self.mu = steam_viscosity::viscosity(self.get_density(), self.temperature);
@@ -412,7 +405,7 @@ impl SteamState {
     ///   - The thermal conductivity (W/K.m).
     ///
     pub fn get_thermal_conductivity(&mut self) -> f64 {
-        if self.tk > ZERO {
+        if self.tk > 0.0 {
             return self.tk;
         }
         self.tk = steam_conductivity::thermal_conductivity(self.get_density(), self.temperature);

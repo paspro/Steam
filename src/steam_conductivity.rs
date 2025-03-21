@@ -16,8 +16,6 @@
 //! 2011 for the Thermal Conductivity of Ordinary Water Substance
 //! (September 2011)
 
-use crate::steam_constants::*;
-
 ///
 /// This function computes the thermal conductivity of steam as a function
 /// of density and temperature.
@@ -75,7 +73,7 @@ pub fn thermal_conductivity(density: f64, temperature: f64) -> f64 {
 
     let troot = tbar.sqrt();
     let mut tpow = troot;
-    let mut lam = ZERO;
+    let mut lam = 0.0;
     //
     // Calculate first term with polynomial of tbar.
     //
@@ -91,12 +89,12 @@ pub fn thermal_conductivity(density: f64, temperature: f64) -> f64 {
     //
     // Calculate third term.
     //
-    let dtbar = (tbar - ONE).abs() + C[3];
-    let dtbarpow = dtbar.powf(THREE / FIVE);
-    let q = TWO + C[4] / dtbarpow;
+    let dtbar = (tbar - 1.0).abs() + C[3];
+    let dtbarpow = dtbar.powf(3.0 / 5.0);
+    let q = 2.0 + C[4] / dtbarpow;
 
-    let s = if tbar >= ONE {
-        ONE / dtbar
+    let s = if tbar >= 1.0 {
+        1.0 / dtbar
     } else {
         C[5] / dtbarpow
     };
@@ -104,8 +102,8 @@ pub fn thermal_conductivity(density: f64, temperature: f64) -> f64 {
     let rhobar18 = rhobar.powf(1.8);
     let rhobarq = rhobar.powf(q);
 
-    lam += (D[0] / tbar.powi(10) + D[1]) * rhobar18 * (C[0] * (ONE - rhobar * rhobar18)).exp()
-        + D[2] * s * rhobarq * ((q / (ONE + q)) * (ONE - rhobar * rhobarq)).exp()
+    lam += (D[0] / tbar.powi(10) + D[1]) * rhobar18 * (C[0] * (1.0 - rhobar * rhobar18)).exp()
+        + D[2] * s * rhobarq * ((q / (1.0 + q)) * (1.0 - rhobar * rhobarq)).exp()
         + D[3] * (C[1] * troot.powi(3) + C[2] / rhobar.powi(5)).exp();
 
     THCOND_KSTAR * lam

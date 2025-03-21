@@ -100,10 +100,10 @@ fn mu1(del: f64, tau: f64) -> f64 {
     let mut sum = 0.0;
 
     for i in 0..6 {
-        let tau1 = (tau - ONE).powi(i as i32);
+        let tau1 = (tau - 1.0).powi(i as i32);
         sum += (0..7)
             .filter(|&j| H[i][j] != 0.0)
-            .map(|j| H[i][j] * tau1 * (del - ONE).powi(j as i32))
+            .map(|j| H[i][j] * tau1 * (del - 1.0).powi(j as i32))
             .sum::<f64>();
     }
 

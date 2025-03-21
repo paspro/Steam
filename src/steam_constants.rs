@@ -17,30 +17,6 @@
 //! August 2007 (IAPWS-IF97)
 
 ///
-/// Zero constant (0.0).
-///
-pub const ZERO: f64 = 0.0;
-///
-/// One constant (1.0).
-///
-pub const ONE: f64 = 1.0;
-///
-/// Two constant (2.0).
-///
-pub const TWO: f64 = 2.0;
-///
-/// Three constant (3.0).
-///
-pub const THREE: f64 = 3.0;
-///
-/// Four constant (4.0).
-///
-pub const FOUR: f64 = 4.0;
-///
-/// Five constant (5.0).
-///
-pub const FIVE: f64 = 5.0;
-///
 /// One half constant (0.5).
 ///
 pub const HALF: f64 = 0.5;
@@ -51,15 +27,15 @@ pub const QUARTER: f64 = 0.25;
 ///
 /// One third constant (1.0 / 3.0).
 ///
-pub const ONETHIRD: f64 = 1.0 / 3.0;
+pub const ONE_THIRD: f64 = 1.0 / 3.0;
 ///
 /// One sixth constant (1.0 / 6.0).
 ///
-pub const ONESIXTH: f64 = 1.0 / 6.0;
+pub const ONE_SIXTH: f64 = 1.0 / 6.0;
 
 //-----------------------------------------------------------------------
 //
-// Steam Constants
+// Steam Constants.
 //
 //-----------------------------------------------------------------------
 

@@ -288,7 +288,7 @@ pub fn specific_internal_energy(pressure: f64, temperature: f64) -> f64 {
     // Compute the specific internal energy.
     //
     let gamtau = gibbs_ideal_grad_tau(tau) + gibbs_residual_grad_tau(pi, tau);
-    IAPWS97_R * temperature * (tau * gamtau - ONE - pi * gibbs_residual_grad_pi(pi, tau))
+    IAPWS97_R * temperature * (tau * gamtau - 1.0 - pi * gibbs_residual_grad_pi(pi, tau))
 }
 
 ///
@@ -311,7 +311,7 @@ pub fn specific_volume(pressure: f64, temperature: f64) -> f64 {
     //
     // Compute the specific volume.
     //
-    let res1 = ONE + gibbs_residual_grad_pi(pi, tau) * pi;
+    let res1 = 1.0 + gibbs_residual_grad_pi(pi, tau) * pi;
     IAPWS97_R * temperature * res1 / (pressure * MEGA)
 }
 
@@ -385,9 +385,9 @@ pub fn speed_of_sound(pressure: f64, temperature: f64) -> f64 {
     // Compute the speed of sound.
     //
     let gp = gibbs_residual_grad_pi(pi, tau);
-    let res1 = IAPWS97_R * temperature * (ONE + (TWO + pi * gp) * pi * gp);
-    let res2 = ONE - pi * pi * gibbs_residual_grad2_pi(pi, tau);
-    let res3 = (ONE + pi * gp - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau)).powi(2);
+    let res1 = IAPWS97_R * temperature * (1.0 + (2.0 + pi * gp) * pi * gp);
+    let res2 = 1.0 - pi * pi * gibbs_residual_grad2_pi(pi, tau);
+    let res3 = (1.0 + pi * gp - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau)).powi(2);
     let res4 = tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau));
 
     (res1 / (res2 + res3 / res4)).sqrt()
@@ -437,10 +437,10 @@ pub fn specific_isochoric_heat_capacity(pressure: f64, temperature: f64) -> f64 
     // Compute the specific isochoric heat capacity.
     //
     let res1 = -tau * tau * (gibbs_ideal_grad2_tau(tau) + gibbs_residual_grad2_tau(pi, tau));
-    let res2 = (ONE + pi * gibbs_residual_grad_pi(pi, tau)
+    let res2 = (1.0 + pi * gibbs_residual_grad_pi(pi, tau)
         - tau * pi * gibbs_residual_grad2_pi_tau(pi, tau))
     .powi(2);
-    let res3 = ONE - pi * pi * gibbs_residual_grad2_pi(pi, tau);
+    let res3 = 1.0 - pi * pi * gibbs_residual_grad2_pi(pi, tau);
 
     IAPWS97_R * (res1 - res2 / res3)
 }

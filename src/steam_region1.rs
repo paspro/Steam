@@ -544,7 +544,7 @@ pub fn temperature_ph(pressure: f64, enthalpy: f64) -> f64 {
     // Compute the temperature.
     //
     let pi = pressure / REGION_1_TPH_PSTAR;
-    let e1 = ONE + (enthalpy / REGION_1_TPH_HSTAR);
+    let e1 = 1.0 + (enthalpy / REGION_1_TPH_HSTAR);
 
     let sum: f64 = (0..20)
         .map(|i| NN[i] * pi.powi(II[i]) * e1.powi(JJ[i]))

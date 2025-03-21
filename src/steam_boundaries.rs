@@ -323,8 +323,8 @@ pub fn boundary34_pressure_h(enthalpy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
     //
-    const II: [usize; 14] = [0, 1, 1, 1, 1, 5, 7, 8, 14, 20, 22, 24, 28, 36];
-    const JJ: [usize; 14] = [0, 1, 3, 4, 36, 3, 0, 24, 16, 16, 3, 18, 8, 24];
+    const II: [i32; 14] = [0, 1, 1, 1, 1, 5, 7, 8, 14, 20, 22, 24, 28, 36];
+    const JJ: [i32; 14] = [0, 1, 3, 4, 36, 3, 0, 24, 16, 16, 3, 18, 8, 24];
     const NN: [f64; 14] = [
         0.600073641753024e0,
         -0.936203654849857e1,
@@ -358,10 +358,9 @@ pub fn boundary34_pressure_h(enthalpy: f64) -> f64 {
     let eta1 = eta - 1.020;
     let eta2 = eta - 0.608;
 
-    let mut sum = 0.0;
-    for i in 0..14 {
-        sum += NN[i] * eta1.powi(II[i] as i32) * eta2.powi(JJ[i] as i32);
-    }
+    let sum: f64 = (0..14)
+        .map(|i| NN[i] * eta1.powi(II[i]) * eta2.powi(JJ[i]))
+        .sum();
 
     REGION_3_4_PSTAR * sum
 }
@@ -390,8 +389,8 @@ pub fn boundary34_pressure_s(entropy: f64) -> f64 {
     //
     // Constant polynomial coefficients.
     //
-    const II: [usize; 10] = [0, 1, 1, 4, 12, 12, 16, 24, 28, 32];
-    const JJ: [usize; 10] = [0, 1, 32, 7, 4, 14, 36, 10, 0, 18];
+    const II: [i32; 10] = [0, 1, 1, 4, 12, 12, 16, 24, 28, 32];
+    const JJ: [i32; 10] = [0, 1, 32, 7, 4, 14, 36, 10, 0, 18];
     const NN: [f64; 10] = [
         0.639767553612785e0,
         -0.129727445396014e2,
@@ -421,10 +420,9 @@ pub fn boundary34_pressure_s(entropy: f64) -> f64 {
     let sigma1 = sigma - 1.030;
     let sigma2 = sigma - 0.699;
 
-    let mut sum = 0.0;
-    for i in 0..10 {
-        sum += NN[i] * sigma1.powi(II[i] as i32) * sigma2.powi(JJ[i] as i32);
-    }
+    let sum: f64 = (0..10)
+        .map(|i| NN[i] * sigma1.powi(II[i]) * sigma2.powi(JJ[i]))
+        .sum();
 
     REGION_3_4_PSTAR * sum
 }
