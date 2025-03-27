@@ -168,15 +168,14 @@ pub fn function_inverter(
     }
 
     let mut context = SolutionContext::new(f, f0, guess1, guess2, n_order);
-    let mut s_old = guess2;
+    let mut s = guess2;
 
     for iter in (n_order + 1)..=max_iterations {
         //
         // Compute the new value.
         //
-        let s = context.solution(iter, n_order);
-        let error = (s_old - s).abs() / s.abs();
-        s_old = s;
+        s = context.solution(iter, n_order);
+        let error = (f(s) - f0).abs();
 
         if logging {
             println!(" Iteration = {:<5} X = {:.5} Error = {:.5}", iter, s, error);
@@ -194,7 +193,7 @@ pub fn function_inverter(
         println!();
     }
 
-    s_old
+    s
 }
 
 ///
@@ -360,15 +359,14 @@ pub fn function_inverter_x(
     }
 
     let mut context = SolutionContext::new(f, f0, y0, guess1, guess2, n_order);
-    let mut s_old = guess2;
+    let mut s = guess2;
 
     for iter in (n_order + 1)..=max_iterations {
         //
         // Compute the new value.
         //
-        let s = context.solution(iter, n_order);
-        let error = (s_old - s).abs() / s.abs();
-        s_old = s;
+         s = context.solution(iter, n_order);
+        let error = (f(s, y0) - f0).abs();
 
         if logging {
             println!(" Iteration = {:<5} X = {:.5} Error = {:.5}", iter, s, error);
@@ -386,7 +384,7 @@ pub fn function_inverter_x(
         println!();
     }
 
-    s_old
+    s
 }
 
 ///
@@ -549,15 +547,14 @@ pub fn function_inverter_y(
     }
 
     let mut context = SolutionContext::new(f, f0, x0, guess1, guess2, n_order);
-    let mut s_old = guess2;
+    let mut s = guess2;
 
     for iter in (n_order + 1)..=max_iterations {
         //
         // Compute the new value.
         //
-        let s = context.solution(iter, n_order);
-        let error = (s_old - s).abs() / s.abs();
-        s_old = s;
+        s = context.solution(iter, n_order);
+        let error = (f(x0, s) - f0).abs();
 
         if logging {
             println!(" Iteration = {:<5} Y = {:.5} Error = {:.5}", iter, s, error);
@@ -575,7 +572,7 @@ pub fn function_inverter_y(
         println!();
     }
 
-    s_old
+    s
 }
 
 ///

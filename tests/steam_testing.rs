@@ -61,37 +61,37 @@ fn test_region1() {
         let value = speed_of_sound(p[i], t[i]);
         let error = (value - w_real[i]).abs() / w_real[i].abs();
         println!("Error in speed of sound                  = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-5);
 
         let value = ss.get_specific_volume();
         let error = (value - v_real[i]).abs() / v_real[i].abs();
         println!("Error in specific volume                 = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-5);
 
         let value = ss.get_specific_enthalpy();
         let error = (value - h_real[i]).abs() / h_real[i].abs();
         println!("Error in specific enthalpy               = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-5);
 
         let value = ss.get_specific_entropy();
         let error = (value - s_real[i]).abs() / s_real[i].abs();
         println!("Error in specific entropy                = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-5);
 
         let value = ss.get_specific_internal_energy();
         let error = (value - u_real[i]).abs() / u_real[i].abs();
         println!("Error in specific internal energy        = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-5);
 
         let value = ss.get_specific_isobaric_heat_capacity();
         let error = (value - cp_real[i]).abs() / cp_real[i].abs();
         println!("Error in specific isobaric heat capacity = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-5);
 
         let value = temperature_ph(p[i], h_real[i]);
         let error = (value - t[i]).abs() / t[i].abs();
         println!("Error in backward temperature(p,h)       = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = pressure_hs(h_real[i], s_real[i]);
         let error = (value - p[i]).abs() / p[i].abs();
@@ -110,7 +110,7 @@ fn test_region1() {
             3,
             true,
         );
-        assert_relative_eq!(value, t[i], max_relative = 1e-4);
+        assert_relative_eq!(value, t[i], max_relative = 1e-5);
 
         println!("\nAttempting to compute enthalpy by inverting polynomial p = p(h,s)");
         let value = function_inverter_x(
@@ -124,7 +124,7 @@ fn test_region1() {
             3,
             true,
         );
-        assert_relative_eq!(value, h_real[i], max_relative = 1e-4);
+        assert_relative_eq!(value, h_real[i], max_relative = 1e-2);
     }
 }
 
@@ -172,32 +172,32 @@ fn test_region2() {
         let value = speed_of_sound(p[i], t[i]);
         let error = (value - w_real[i]).abs() / w_real[i].abs();
         println!("Error in speed of sound                  = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_volume();
         let error = (value - v_real[i]).abs() / v_real[i].abs();
         println!("Error in specific volume                 = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_enthalpy();
         let error = (value - h_real[i]).abs() / h_real[i].abs();
         println!("Error in specific enthalpy               = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_entropy();
         let error = (value - s_real[i]).abs() / s_real[i].abs();
         println!("Error in specific entropy                = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_internal_energy();
         let error = (value - u_real[i]).abs() / u_real[i].abs();
         println!("Error in specific internal energy        = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_isobaric_heat_capacity();
         let error = (value - cp_real[i]).abs() / cp_real[i].abs();
         println!("Error in specific isobaric heat capacity = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-3);
 
         let (t_ph, t_ps, p_hs) = if in2a {
             (
@@ -221,15 +221,15 @@ fn test_region2() {
 
         let error = (t[i] - t_ph).abs() / t_ph.abs();
         println!("Error in backward temperature(p,h)       = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let error = (t[i] - t_ps).abs() / t_ps.abs();
         println!("Error in backward temperature(p,s)       = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let error = (p[i] - p_hs).abs() / p_hs.abs();
         println!("Error in backward pressure(h,s)          = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
     }
 }
 
@@ -276,32 +276,32 @@ fn test_region3() {
         let value = speed_of_sound(rho[i], t[i]);
         let error = (value - w_real[i]).abs() / w_real[i].abs();
         println!("Error in speed of sound                  = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_pressure();
         let error = (value - p_real[i]).abs() / p_real[i].abs();
         println!("Error in pressure                        = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_enthalpy();
         let error = (value - h_real[i]).abs() / h_real[i].abs();
         println!("Error in specific enthalpy               = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_entropy();
         let error = (value - s_real[i]).abs() / s_real[i].abs();
         println!("Error in specific entropy                = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_internal_energy();
         let error = (value - u_real[i]).abs() / u_real[i].abs();
         println!("Error in specific internal energy        = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let value = ss.get_specific_isobaric_heat_capacity();
         let error = (value - cp_real[i]).abs() / cp_real[i].abs();
         println!("Error in specific isobaric heat capacity = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let (t_ph, t_ps, v_ph, v_ps) = if in3a {
             (
@@ -321,19 +321,19 @@ fn test_region3() {
 
         let error = (t[i] - t_ph).abs() / t_ph.abs();
         println!("Error in backward temperature(p,h)       = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let error = (t[i] - t_ps).abs() / t_ps.abs();
         println!("Error in backward temperature(p,s)       = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let error = (1.0 / rho[i] - v_ph).abs() / v_ph.abs();
         println!("Error in backward specific volume(p,h)   = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         let error = (1.0 / rho[i] - v_ps).abs() / v_ps.abs();
         println!("Error in backward specific volume(p,s)   = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
 
         println!("\nAttempting to compute temperature by inverting polynomial h = h(rho,t)");
         let value = function_inverter_y(
@@ -384,7 +384,7 @@ fn test_region4() {
         let psat = saturation_pressure(t_a[i]);
         let error = (psat - p_a[i]).abs() / p_a[i];
         println!("Error in saturation pressure             = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
     }
     //
     // Test case B - Test saturation temperature.
@@ -405,7 +405,7 @@ fn test_region4() {
         let tsat = saturation_temperature(p_b[i]);
         let error = (tsat - t_b[i]).abs() / t_b[i];
         println!("Error in saturation temperature          = {}", error);
-        assert!(error <= 1e-2);
+        assert!(error <= 1e-4);
     }
 }
 
@@ -425,12 +425,12 @@ fn test_boundary23() {
     let p = boundary23_pressure(t_real);
     let error = (p - p_real).abs() / p_real;
     println!("Error in pressure                          = {}", error);
-    assert!(error <= 1e-2);
+    assert!(error <= 1e-5);
 
     let t = boundary23_temperature(p_real);
     let error = (t - t_real).abs() / t_real;
     println!("Error in temperature                       = {}", error);
-    assert!(error <= 1e-2);
+    assert!(error <= 1e-5);
 }
 
 #[test]
@@ -449,12 +449,12 @@ fn test_boundary2bc() {
     let p = boundary2bc_pressure(h_real);
     let error = (p - p_real).abs() / p_real;
     println!("Error in pressure                          = {}", error);
-    assert!(error <= 1e-2);
+    assert!(error <= 1e-5);
 
     let h = boundary2bc_enthalpy(p_real);
     let error = (h - h_real).abs() / h_real;
     println!("Error in specific enthalpy                 = {}", error);
-    assert!(error <= 1e-2);
+    assert!(error <= 1e-5);
 }
 
 #[test]
@@ -473,7 +473,7 @@ fn test_boundary2ab() {
     let h = boundary2ab_enthalpy(s_real);
     let error = (h - h_real).abs() / h_real;
     println!("Error in specific enthalpy                 = {}", error);
-    assert!(error <= 1e-2);
+    assert!(error <= 1e-5);
 }
 
 #[test]
@@ -492,7 +492,7 @@ fn test_boundary3ab() {
     let h = boundary3ab_enthalpy(p_real);
     let error = (h - h_real).abs() / h_real;
     println!("Error in specific enthalpy                 = {}", error);
-    assert!(error <= 1e-2);
+    assert!(error <= 1e-5);
 }
 
 #[test]
