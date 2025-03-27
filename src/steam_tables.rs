@@ -14,7 +14,7 @@
 //! This module contains functions capable of generating steam tables
 //! for thermodynamic properties at a specific level of accuracy.
 
-use crate::steam_numerics::interpolate_bilinear;
+use numerics::interpolate_bilinear;
 
 ///
 /// This function creates a table suitable for using in order to obtain

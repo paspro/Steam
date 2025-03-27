@@ -10,6 +10,7 @@ rust-version = "1.85"
 
 [dependencies]
 rayon = "1.5.1"
+numerics = {git = "https://github.com/paspro/numerics.git", version = "1.0.0"}
 
 [dev-dependencies]
 approx = "0.5.1"

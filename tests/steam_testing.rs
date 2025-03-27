@@ -16,13 +16,13 @@
 //! for the Thermodynamic Properties of Water and Steam, August 2007 (IAPWS-IF97)
 
 use steam::steam_constants::*;
-use steam::steam_numerics::*;
 use steam::steam_regions::*;
 use steam::steam_states::SteamState;
 
 use approx::assert_relative_eq;
 use rand::prelude::*;
 use rayon::prelude::*;
+use numerics::*;
 
 #[test]
 fn test_region1() {
@@ -107,8 +107,7 @@ fn test_region1() {
             600.0,
             1e-5,
             100,
-            3,
-            true,
+            3
         );
         assert_relative_eq!(value, t[i], max_relative = 1e-5);
 
@@ -121,8 +120,7 @@ fn test_region1() {
             1.0e7,
             1e-5,
             100,
-            3,
-            true,
+            3
         );
         assert_relative_eq!(value, h_real[i], max_relative = 1e-2);
     }
@@ -344,14 +342,13 @@ fn test_region3() {
             800.0,
             1e-5,
             100,
-            3,
-            true,
+            3
         );
         assert_relative_eq!(value, t[i], max_relative = 1e-4);
 
         println!("\nAttempting to compute density by inverting polynomial p = p(rho,t)");
         let value =
-            function_inverter_x(&pressure, p_real[i], t[i], 100.0, 600.0, 1e-5, 100, 3, true);
+            function_inverter_x(&pressure, p_real[i], t[i], 100.0, 600.0, 1e-5, 100, 3);
         assert_relative_eq!(value, rho[i], max_relative = 1e-4);
     }
 }
@@ -535,7 +532,7 @@ fn test_cubic_interpolation() {
         let t = tmin + (tmax - tmin) * rf;
 
         let iloc = (((t - tsat[0]) / dt) as usize).min(imax - 2);
-        let iloc_searched = binary_search_vector(&tsat, t, 0, imax as i32 - 1);
+        let iloc_searched = binary_search_vector(&tsat, &t, 0, imax - 1);
 
         let p_real = saturation_pressure(t);
         let p_int = interpolate_cubic(
@@ -646,8 +643,8 @@ fn test_bilinear_interpolation() {
         let iloc = (((pp - p[0]) / dp) as usize).min(imax - 2);
         let jloc = (((tt - t[0]) / dt) as usize).min(jmax - 2);
 
-        let iloc_searched = binary_search_vector(&p, pp, 0, imax as i32 - 1);
-        let jloc_searched = binary_search_vector(&t, tt, 0, jmax as i32 - 1);
+        let iloc_searched = binary_search_vector(&p, &pp, 0, imax - 1);
+        let jloc_searched = binary_search_vector(&t, &tt, 0, jmax - 1);
 
         let p_points = [p[iloc], p[iloc + 1]];
         let t_points = [t[jloc], t[jloc + 1]];
@@ -735,8 +732,8 @@ fn test_table_generation() {
 
         let h_real = specific_enthalpy(xp, yp);
 
-        let iloc = binary_search_vector(&x, xp, 0, (imax - 1) as i32);
-        let jloc = binary_search_vector(&y, yp, 0, (jmax - 1) as i32);
+        let iloc = binary_search_vector(&x, &xp, 0, imax - 1);
+        let jloc = binary_search_vector(&y, &yp, 0, jmax - 1);
         //
         // Create arrays for the interpolation.
         //

@@ -88,6 +88,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "numerics"
+version = "1.0.0"
+source = "git+https://github.com/paspro/numerics.git#fdc4de7d3d2cf2dd57a0b48826f1acb9c6429d21"
+dependencies = [
+ "num-traits",
+]
+
+[[package]]
 name = "ppv-lite86"
 version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -175,6 +183,7 @@ name = "steam"
 version = "2.0.0"
 dependencies = [
  "approx",
+ "numerics",
  "rand",
  "rayon",
 ]
