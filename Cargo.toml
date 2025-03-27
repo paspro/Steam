@@ -1,6 +1,6 @@
 [package]
 name = "steam"
-version = "2.0.0"
+version = "2.0.3"
 edition = "2024"
 description = "Implementation of the polynomials which compute the thermodynamic properties of steam"
 keywords = ["steam"]
